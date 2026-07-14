@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import heroImage from "@/assets/hero-power.jpg";
 import solDepot from "@/assets/sol-depot.jpg";
 import solCharge from "@/assets/sol-charge.jpg";
@@ -90,9 +90,13 @@ function Index() {
           <Logo />
           <nav className="hidden items-center gap-10 md:flex">
             {navItems.map((item) => (
-              <a key={item} href="#" className="text-sm text-white/85 transition-colors hover:text-white">
+              <Link
+                key={item}
+                to={item === "Platform" ? "/platform" : "/"}
+                className="text-sm text-white/85 transition-colors hover:text-white"
+              >
                 {item}
-              </a>
+              </Link>
             ))}
           </nav>
           <a
