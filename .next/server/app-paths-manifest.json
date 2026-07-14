@@ -1,8 +1,3 @@
 {
-  "/contact/page": "app/contact/page.js",
-  "/careers/page": "app/careers/page.js",
-  "/team/page": "app/team/page.js",
-  "/products/page": "app/products/page.js",
-  "/solutions/page": "app/solutions/page.js",
-  "/resources/page": "app/resources/page.js"
+  "/products/page": "app/products/page.js"
 }
