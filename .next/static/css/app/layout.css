@@ -5514,7 +5514,8 @@ button {
 
 .Footer_tagline__EtMBR {
   font-size: 13px;
-  color: var(--primary-color);
+  color: var(--text-color);
+  opacity: 0.8;
   line-height: 1.8;
   font-family: var(--font-secondary);
 }
@@ -5535,7 +5536,7 @@ button {
   font-family: var(--font-primary);
   font-size: 12px;
   font-weight: 700;
-  color: var(--primary-color);
+  color: var(--text-color);
   margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -5544,14 +5545,14 @@ button {
 .Footer_linkGroup__3skIZ a {
   font-family: var(--font-secondary);
   font-size: 13px;
-  color: var(--primary-color);
-  opacity: 0.75;
+  color: var(--text-color);
+  opacity: 0.6;
   transition: opacity 0.2s ease, color 0.2s ease;
 }
 
 .Footer_linkGroup__3skIZ a:hover {
   opacity: 1;
-  color: #ffffff;
+  color: var(--primary-color);
 }
 
 /* ─── Bottom bar ───────────────────────────────────────────────────────────── */
@@ -5565,8 +5566,8 @@ button {
 .Footer_copyright__j5CNb {
   font-family: var(--font-secondary);
   font-size: 12px;
-  color: var(--primary-color);
-  opacity: 0.8;
+  color: var(--text-color);
+  opacity: 0.6;
 }
 
 .Footer_legal__gVqLl {
@@ -5577,14 +5578,14 @@ button {
 .Footer_legal__gVqLl a {
   font-family: var(--font-secondary);
   font-size: 12px;
-  color: var(--primary-color);
-  opacity: 0.8;
+  color: var(--text-color);
+  opacity: 0.6;
   transition: opacity 0.2s ease, color 0.2s ease;
 }
 
 .Footer_legal__gVqLl a:hover {
   opacity: 1;
-  color: #ffffff;
+  color: var(--primary-color);
 }
 
 /* ─── Responsive ───────────────────────────────────────────────────────────── */

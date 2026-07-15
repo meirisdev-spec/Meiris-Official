@@ -73,7 +73,7 @@ export default function Solutions() {
             <div
               key={i}
               className={styles.card}
-              style={{ backgroundImage: `url(https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80)` }} // random placeholder
+              style={{ backgroundImage: `url(${sol.image})` }}
             >
               <div className={styles.cardOverlay} />
               <div className={styles.cardBody}>
