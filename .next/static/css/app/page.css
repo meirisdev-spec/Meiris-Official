@@ -3,7 +3,7 @@
   \**********************************************************************************************************************************************************************************************************************************************************************************/
 /* ─── Section ──────────────────────────────────────────────────────────────── */
 .Contact_contactSection__OpsSK {
-  min-height: 100vh;
+  height: 868px;
   display: flex;
   align-items: center;
   padding: 100px 20px;
@@ -43,17 +43,17 @@
 }
 
 .Contact_title__oZryR {
-  font-family: var(--font-secondary);
-  font-size: 32px;
-  font-weight: 400;
+  font-family: var(--font-primary);
+  font-size: 48px;
+  font-weight: 700;
   color: #111;
   margin-bottom: 16px;
-  line-height: 1.25;
+  line-height: 60px;
 }
 
 .Contact_description__uIcMA {
   font-family: var(--font-secondary);
-  font-size: 14px;
+  font-size: 16px;
   color: #555;
   margin-bottom: 40px;
   line-height: 1.65;
@@ -328,11 +328,11 @@
   \*************************************************************************************************************************************************************************************************************************************************************************************/
 /* ─── Section ──────────────────────────────────────────────────────────────── */
 .LatestNews_newsSection__eygLk {
-  min-height: 100vh;
+  height: 666px;
   display: flex;
   align-items: center;
-  padding: 100px 20px;
-  background-color: #ebebeb;
+  padding: 100px 0;
+  background-color: #FFFFFF;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.75s ease-out, transform 0.75s ease-out;
@@ -344,9 +344,10 @@
 }
 
 .LatestNews_container__etRQC {
-  max-width: 1400px;
+  max-width: 1582px;
   margin: 0 auto;
   width: 100%;
+  padding: 0 20px;
 }
 
 /* ─── Header ───────────────────────────────────────────────────────────────── */
@@ -359,15 +360,18 @@
 
 .LatestNews_title__B3_Zq {
   font-family: var(--font-primary);
-  font-size: 40px;
+  font-size: 48px;
   font-weight: 700;
-  color: #111111;
+  line-height: 60px;
+  color: #101828;
 }
 
 .LatestNews_viewAll__JyWKm {
   font-family: var(--font-secondary);
-  font-size: 13px;
-  color: #555;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #6A7282;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -383,7 +387,7 @@
 .LatestNews_newsGrid__VE7iL {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 39px;
 }
 
 /* ─── Card ─────────────────────────────────────────────────────────────────── */
@@ -401,9 +405,9 @@
 
 .LatestNews_imageWrapper__bCu7c {
   width: 100%;
-  height: 210px;
+  height: 280px;
   overflow: hidden;
-  margin-bottom: 18px;
+  margin-bottom: 25px;
 }
 
 .LatestNews_image___zLbi {
@@ -426,12 +430,12 @@
 
 .LatestNews_newsTitle__IS9Fv {
   font-family: var(--font-secondary);
-  font-size: 15px;
-  font-weight: 600;
-  color: #1a1a1a;
-  line-height: 1.55;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 25px;
+  color: #101828;
   flex-grow: 1;
-  margin-bottom: 20px;
+  margin-bottom: 23px;
 }
 
 .LatestNews_meta__uViU5 {
@@ -442,16 +446,19 @@
 
 .LatestNews_date__18B1R {
   font-family: var(--font-secondary);
-  font-size: 11px;
-  color: #888;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #99A1AF;
   letter-spacing: 0.3px;
 }
 
 .LatestNews_readMore__vD0vy {
   font-family: var(--font-secondary);
-  font-size: 12px;
-  font-weight: 700;
-  color: #222;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #0A2463;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -475,10 +482,9 @@
   \************************************************************************************************************************************************************************************************************************************************************************************/
 /* ─── Section ──────────────────────────────────────────────────────────────── */
 .Solutions_solutions__dLybc {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 120px 20px;
+  height: 916px;
+  display: block;
+  padding: 86px 40px 0;
   background-color: var(--bg-color);
   opacity: 0;
   transition: opacity 0.8s ease-out;
@@ -489,20 +495,21 @@
 }
 
 .Solutions_container__iix_e {
-  max-width: 1400px;
+  max-width: 1716px;
   margin: 0 auto;
   width: 100%;
 }
 
 /* ─── Header ───────────────────────────────────────────────────────────────── */
 .Solutions_header__ID3SS {
-  margin-bottom: 60px;
+  margin-bottom: 148px;
 }
 
 .Solutions_title__RgNvO {
   font-family: var(--font-primary);
-  font-size: 40px;
+  font-size: 48px;
   font-weight: 700;
+  line-height: 60px;
   color: var(--text-color);
   margin-bottom: 14px;
 }
@@ -517,18 +524,19 @@
 /* ─── Cards grid ────────── */
 .Solutions_cardsGrid__7QZoJ {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(5, 255.19px);
+  justify-content: center;
+  gap: 70px;
   width: 100%;
 }
 
 /* ─── Card ─────────────────────────────────────────────────────────────── */
 .Solutions_card__Ly3pj {
   position: relative;
-  height: 360px;
+  height: 420px;
   background-size: cover;
   background-position: center;
-  border-radius: 6px;
+  border-radius: 0px;
   overflow: hidden;
   cursor: pointer;
 
@@ -556,22 +564,18 @@
 .Solutions_cardOverlay__S7tzr {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.92) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.05) 100%
-  );
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(0, 0, 0, 0.2) 100%);
   transition: background 0.35s ease;
 }
 
 .Solutions_card__Ly3pj:hover .Solutions_cardOverlay__S7tzr {
-  background: linear-gradient(
-    to top,
-    rgba(0, 30, 20, 0.96) 0%,
-    rgba(0, 100, 60, 0.35) 55%,
-    rgba(0, 0, 0, 0.05) 100%
-  );
+  background: linear-gradient(to top,
+      rgba(0, 30, 20, 0.96) 0%,
+      rgba(0, 100, 60, 0.35) 55%,
+      rgba(0, 0, 0, 0.05) 100%);
 }
 
 /* ─── Text body ─────────────────────────────────────────────────────────────── */
@@ -589,10 +593,10 @@
 
 .Solutions_cardTitle__sRwIU {
   font-family: var(--font-primary);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   color: #ffffff;
-  line-height: 1.3;
+  line-height: 22px;
 }
 
 .Solutions_cardDesc__JO9jC {
@@ -615,11 +619,12 @@
 }
 
 .Solutions_cardCta__xTcXF {
-  font-family: var(--font-primary);
+  font-family: var(--font-secondary);
   font-size: 12px;
-  font-weight: 600;
-  color: var(--primary-color);
+  font-weight: 400;
+  color: #00D384;
   letter-spacing: 0.3px;
+  line-height: 16px;
   opacity: 0;
   transform: translateY(4px);
   transition: opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s;
@@ -632,11 +637,12 @@
 
 /* ─── Responsive ─────────────────────────────────────────────────────────────── */
 
-/* Large monitors */
-@media (min-width: 1600px) {
-  .Solutions_card__Ly3pj { height: 420px; }
-  .Solutions_cardsGrid__7QZoJ { gap: 48px; }
+@media (max-width: 1024px) {
+  .Solutions_cardsGrid__7QZoJ {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
+
 
 /* Tablets landscape (1024–1280px) */
 @media (max-width: 1280px) {
@@ -657,6 +663,8 @@
   .Solutions_cardsGrid__7QZoJ {
     grid-template-columns: 1fr;
   }
-  .Solutions_card__Ly3pj { height: 260px; }
-}
 
+  .Solutions_card__Ly3pj {
+    height: 260px;
+  }
+}

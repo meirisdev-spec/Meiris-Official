@@ -63,9 +63,6 @@ export default function Solutions() {
 
         <div className={styles.header}>
           <h2 className={styles.title}>Our Solutions</h2>
-          <p className={styles.subtitle}>
-            Vertically integrated power platforms for every electrification environment.
-          </p>
         </div>
 
         <div className={styles.cardsGrid}>
@@ -79,7 +76,7 @@ export default function Solutions() {
               <div className={styles.cardBody}>
                 <h3 className={styles.cardTitle}>{sol.title}</h3>
                 <p className={styles.cardDesc}>{sol.description}</p>
-                <span className={styles.cardCta}>Learn more →</span>
+                <span className={styles.cardCta}>Explore</span>
               </div>
             </div>
           ))}

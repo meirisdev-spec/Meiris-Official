@@ -240,37 +240,7 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black">
-        <div className="h-[2px] w-full bg-[#00E573]" />
-        <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-10 px-8 py-16 md:grid-cols-4">
-          <div>
-            <Logo small />
-            <p className="mt-6 max-w-xs text-xs leading-relaxed text-white/60">
-              Precision Engineering for a Sustainable Future. Global headquarters in Zurich,
-              manufacturing in Munich.
-            </p>
-          </div>
-          {[
-            { title: "PLATFORM", links: ["Technology", "Architecture", "Roadmap"] },
-            { title: "RESOURCES", links: ["Whitepapers", "Documentation", "Case Studies"] },
-            { title: "CONNECT", links: ["LinkedIn", "Contact Support", "Investor Relations"] },
-          ].map((col) => (
-            <div key={col.title}>
-              <h4 className="text-[10px] font-semibold tracking-[0.2em] text-white/60">{col.title}</h4>
-              <ul className="mt-5 space-y-3">
-                {col.links.map((l) => (
-                  <li key={l}>
-                    <a href="#" className="text-sm text-white/85 hover:text-white">
-                      {l}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </footer>
+
     </div>
   );
 }
