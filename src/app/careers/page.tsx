@@ -88,28 +88,7 @@ const jobs = [
 export default function CareersPage() {
   return (
     <div className="relative min-h-screen bg-white text-black selection:bg-[#00E573] selection:text-black">
-      {/* Header (Black) */}
-      <header className="sticky top-0 z-50 w-full border-b border-[#00E573] bg-black">
-        <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-8">
-          <Logo />
-          <nav className="hidden md:flex items-center gap-8 text-[11px] font-medium tracking-wide text-white/70">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.to}
-                className="hover:text-white transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <Link href="/contact">
-            <button className="bg-white px-5 py-2 text-[11px] font-bold tracking-wide text-black transition-colors hover:bg-white/90 rounded-sm">
-              Get in touch
-            </button>
-          </Link>
-        </div>
-      </header>
+      
 
       {/* Hero Section */}
       <section className="bg-white pt-24 pb-32">

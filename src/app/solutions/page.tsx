@@ -68,28 +68,7 @@ function Marker({ num, top, left, labelOnTop = true }: { num: number; top: strin
 export default function SolutionsPage() {
   return (
     <div className="relative min-h-screen bg-black text-white selection:bg-[#00E573] selection:text-black overflow-x-hidden">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b-[3px] border-[#00E573] bg-black">
-        <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-8">
-          <Logo />
-          <nav className="hidden md:flex items-center gap-8 text-[11px] font-medium tracking-wide text-white/70">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.to}
-                className={`hover:text-white transition-colors ${item.label === "Solutions" ? "text-white" : ""}`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <Link href="/contact">
-            <button className="bg-white px-5 py-2 text-[11px] font-bold tracking-wide text-black transition-colors hover:bg-white/90 rounded-sm">
-              Get in touch
-            </button>
-          </Link>
-        </div>
-      </header>
+      
 
       {/* Hero Section */}
       <section className="relative flex flex-col md:flex-row min-h-[85vh] bg-[#0c0c0c] w-full">
@@ -300,37 +279,7 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      {/* Mega Footer */}
-      <footer className="bg-black text-white pt-24">
-        <div className="h-[2px] w-full bg-[#00E573]" />
-        <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-10 px-8 py-16 md:grid-cols-4">
-          <div>
-            <Logo small />
-            <p className="mt-6 max-w-xs text-xs leading-relaxed text-white/60">
-              Precision Engineering for a Sustainable Future. Global headquarters in Zurich,
-              manufacturing in Munich.
-            </p>
-          </div>
-          {[
-            { title: "PLATFORM", links: ["Technology", "Architecture", "Roadmap"] },
-            { title: "RESOURCES", links: ["Whitepapers", "Documentation", "Case Studies"] },
-            { title: "CONNECT", links: ["LinkedIn", "Contact Support", "Investor Relations"] },
-          ].map((col) => (
-            <div key={col.title}>
-              <h4 className="text-[10px] font-semibold tracking-[0.2em] text-white/60">{col.title}</h4>
-              <ul className="mt-5 space-y-3">
-                {col.links.map((l) => (
-                  <li key={l}>
-                    <a href="#" className="text-sm text-white/85 hover:text-white transition-colors">
-                      {l}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </footer>
+      
     </div>
   );
 }
