@@ -108,26 +108,42 @@
 
 /* ─── Dropdown panel ─────────────────────────────────────────────────────────── */
 .dropdownPanel {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 5px); /* small visual gap */
   left: 50%;
-  transform: translateX(-50%);
-  background-color: #111111;
-  min-width: 200px;
+  transform: translateX(-50%) translateY(10px);
+  background-color: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  min-width: 230px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-top: 2px solid var(--primary-color);
-  border-radius: 0 0 6px 6px;
-  overflow: hidden;
+  border-radius: 6px;
+  overflow: visible; /* so the bridge works */
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
-  /* Composite layer */
-  will-change: opacity, transform;
+    0 12px 32px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+  z-index: 100;
+}
+
+/* Invisible bridge so the mouse doesn't fall off during the gap */
+.dropdownPanel::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: transparent;
 }
 
 .dropdown:hover .dropdownPanel {
-  display: block;
-  animation: dropIn 0.18s ease-out;
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* Each item */
@@ -136,10 +152,10 @@
   font-family: var(--font-primary);
   font-size: 13.5px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.72);
-  padding: 12px 20px;
-  transition: background 0.15s ease, color 0.15s ease;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.75);
+  padding: 14px 22px;
+  transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   white-space: nowrap;
 }
 
@@ -148,9 +164,9 @@
 }
 
 .dropdownItem:hover {
-  background-color: rgba(0, 211, 132, 0.09);
-  color: var(--primary-color);
-  padding-left: 24px; /* subtle indent on hover */
+  background-color: rgba(0, 211, 132, 0.15);
+  color: #ffffff;
+  padding-left: 28px; /* subtle indent on hover */
 }
 
 /* ─── CTA button ─────────────────────────────────────────────────────────────── */
@@ -201,11 +217,7 @@
   will-change: width;
 }
 
-/* ─── Drop-in animation ──────────────────────────────────────────────────────── */
-@keyframes dropIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
+/* Animations handled via transitions on .dropdownPanel */
 
 /* ─── Responsive ─────────────────────────────────────────────────────────────── */
 @media (max-width: 1280px) {
