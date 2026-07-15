@@ -176,7 +176,7 @@
 
 .contactBtn {
   /* Match screenshot exactly: light fill, dark text */
-  font-family: var(--font-button);
+  font-family: var(--font-primary);
   font-weight: 700;
   font-size: 13px;
   background-color: rgba(240, 240, 240, 0.92);
