@@ -44,7 +44,7 @@ export default function PlatformParallax({ platformModule }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // ── Interpolation helpers ─────────────────────────────────────────
+  // ΓöÇΓöÇ Interpolation helpers ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
   function lerp(start: number, end: number): number {
     if (progress <= start) return 0;
     if (progress >= end) return 1;
@@ -56,19 +56,19 @@ export default function PlatformParallax({ platformModule }: Props) {
     return outS + t * (outE - outS);
   }
 
-  // ── Section animation values ──────────────────────────────────────
+  // ── Section animation values ──────────────────────────────────────────
 
   // S1 (0 → 0.2)
-  const s1Op = 1 - lerp(0.14, 0.2);
+  const s1Op = 1 - lerp(0.16, 0.19);
   const s1Y = rng(0, 0.2, 0, -60);
-  const s1ChipOp = lerp(0, 0.06) * (1 - lerp(0.14, 0.2));
+  const s1ChipOp = lerp(0, 0.06) * (1 - lerp(0.16, 0.19));
   const s1ChipX = rng(0, 0.06, 80, 0);
 
   // S2 (0.2 → 0.4)
-  const s2In = lerp(0.18, 0.22);
-  const s2Out = 1 - lerp(0.36, 0.42);
+  const s2In = lerp(0.20, 0.23);
+  const s2Out = 1 - lerp(0.36, 0.39);
   const s2Op = Math.min(s2In, s2Out);
-  const s2Y = rng(0.18, 0.22, 50, 0) + rng(0.36, 0.42, 0, -50);
+  const s2Y = rng(0.20, 0.23, 50, 0) + rng(0.36, 0.39, 0, -50);
   const s2Title = lerp(0.20, 0.23);
   const s2Sub = lerp(0.22, 0.25);
   const s2Body = lerp(0.24, 0.27);
@@ -76,11 +76,11 @@ export default function PlatformParallax({ platformModule }: Props) {
   const s2Net = lerp(0.22, 0.26);
 
   // S3 (0.4 → 0.6)
-  const s3In = lerp(0.38, 0.42);
-  const s3Out = 1 - lerp(0.56, 0.62);
+  const s3In = lerp(0.40, 0.43);
+  const s3Out = 1 - lerp(0.57, 0.59);
   const s3Op = Math.min(s3In, s3Out);
   const s3BoxW = rng(0.40, 0.46, 0, 38);
-  const s3BoxOp = Math.min(lerp(0.40, 0.43), 1 - lerp(0.57, 0.62));
+  const s3BoxOp = Math.min(lerp(0.40, 0.43), 1 - lerp(0.57, 0.59));
   const s3Diag = lerp(0.44, 0.48);
   const s3C1Op = lerp(0.48, 0.51);
   const s3C1Y = rng(0.48, 0.51, 30, 0);
@@ -90,14 +90,14 @@ export default function PlatformParallax({ platformModule }: Props) {
   const s3C3Y = rng(0.52, 0.55, 30, 0);
 
   // S4 (0.6 → 0.8)
-  const s4In = lerp(0.58, 0.62);
-  const s4Out = 1 - lerp(0.76, 0.82);
+  const s4In = lerp(0.60, 0.63);
+  const s4Out = 1 - lerp(0.77, 0.79);
   const s4Op = Math.min(s4In, s4Out);
-  const s4Y = rng(0.58, 0.62, 50, 0);
+  const s4Y = rng(0.60, 0.63, 50, 0);
   const s4Scale = rng(0.60, 0.78, 0.92, 1.06);
 
   // S5 (0.8 → 1.0)
-  const s5Op = lerp(0.78, 0.82);
+  const s5Op = lerp(0.80, 0.83);
   const s5TitleOp = lerp(0.80, 0.83);
   const s5TitleY = rng(0.80, 0.83, 30, 0);
   const s5C1Op = lerp(0.83, 0.86);
@@ -133,13 +133,12 @@ export default function PlatformParallax({ platformModule }: Props) {
             style={{
               position: "absolute", inset: 0,
               display: "flex", alignItems: "center", justifyContent: "center",
-              padding: "0 clamp(2rem, 5vw, 5rem)",
               opacity: s1Op,
               transform: `translateY(${s1Y}px)`,
               willChange: "opacity, transform",
             }}
           >
-            <div className="mx-auto grid w-full max-w-[1300px] grid-cols-1 items-center gap-20 md:grid-cols-[1.2fr_1fr]">
+            <div className="mx-auto grid w-full max-w-[1240px] grid-cols-1 items-center gap-12 px-8 sm:px-10 md:grid-cols-[1.15fr_1fr] md:gap-16 lg:px-12">
               <div>
                 <h1 className="text-[clamp(3rem,6vw,5.5rem)] font-bold leading-[1.02] tracking-[-0.03em] text-white">
                   Intelligent<br />Power<br />Conversion.
@@ -167,13 +166,12 @@ export default function PlatformParallax({ platformModule }: Props) {
             style={{
               position: "absolute", inset: 0,
               display: "flex", alignItems: "center", justifyContent: "center",
-              padding: "0 clamp(2rem, 5vw, 5rem)",
               opacity: s2Op,
               transform: `translateY(${s2Y}px)`,
               willChange: "opacity, transform",
             }}
           >
-            <div className="mx-auto grid w-full max-w-[1300px] grid-cols-1 items-center gap-20 md:grid-cols-[1.1fr_1fr]">
+            <div className="mx-auto grid w-full max-w-[1240px] grid-cols-1 items-center gap-12 px-8 sm:px-10 md:grid-cols-[1.1fr_1fr] md:gap-14 lg:px-12">
               <div>
                 <h2
                   className="text-[clamp(2.25rem,4.5vw,3.25rem)] font-bold leading-[1.08] tracking-[-0.02em] text-white"
@@ -220,12 +218,11 @@ export default function PlatformParallax({ platformModule }: Props) {
             style={{
               position: "absolute", inset: 0,
               display: "flex", alignItems: "center", justifyContent: "center",
-              padding: "3rem 2rem",
               opacity: s3Op,
               willChange: "opacity",
             }}
           >
-            <div className="mx-auto w-full max-w-[1200px] h-full flex flex-col justify-center relative">
+            <div className="mx-auto w-full max-w-[1180px] h-full flex flex-col justify-center relative px-6 sm:px-8 py-8 lg:px-10">
               <div
                 className="absolute top-0 bottom-0 left-0 rounded-[2rem] rounded-br-none z-0"
                 style={{ width: `${s3BoxW}%`, opacity: s3BoxOp, background: "#e6e6e6" }}
@@ -271,7 +268,7 @@ export default function PlatformParallax({ platformModule }: Props) {
               <div className="w-full bg-[#e6e6e6] md:w-1/2 h-full" />
               <div className="hidden w-1/2 bg-black md:block h-full" />
             </div>
-            <div className="relative z-10 mx-auto grid w-full max-w-[1200px] grid-cols-1 md:grid-cols-2" style={{ transform: `translateY(${s4Y}px)` }}>
+            <div className="relative z-10 mx-auto grid w-full max-w-[1180px] grid-cols-1 md:grid-cols-2 px-6 sm:px-8 lg:px-10" style={{ transform: `translateY(${s4Y}px)` }}>
               <div className="px-8 py-12 md:py-24 md:pr-16 lg:pr-24 text-black">
                 <h2 className="text-[clamp(2.5rem,4vw,3.75rem)] font-bold leading-[1.05] tracking-tight">
                   Power<br />conversion,<br />rethought at<br />the silicon level
@@ -295,8 +292,8 @@ export default function PlatformParallax({ platformModule }: Props) {
           </div>
 
           {/* ── SECTION 5 ───────────────────────────────────── */}
-          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 2rem", opacity: s5Op, willChange: "opacity" }}>
-            <div className="mx-auto w-full max-w-[1200px]">
+          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", opacity: s5Op, willChange: "opacity" }}>
+            <div className="mx-auto w-full max-w-[1180px] px-8 sm:px-10 lg:px-12">
               <h2 className="max-w-3xl text-[clamp(2.5rem,4vw,3.5rem)] font-bold leading-[1.05] tracking-tight text-white" style={{ opacity: s5TitleOp, transform: `translateY(${s5TitleY}px)` }}>
                 The firmware makes the platform<br />what it is.
               </h2>

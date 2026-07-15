@@ -23,7 +23,7 @@ const mockNews = [
     title: "MEIRIS Joins National EV Mission as Technology Partner for Public Infrastructure Rollout",
     date: "28 May 2025",
     link: "#",
-    image: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80"
   }
 ];
 

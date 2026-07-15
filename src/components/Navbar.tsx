@@ -44,8 +44,8 @@ export default function Navbar() {
             <Image
               src="/logos/Meiris-Logo.png"
               alt="MEIRIS — Intelligent Power Conversion"
-              width={130}
-              height={45}
+              width={173}
+              height={60}
               priority
               className={styles.logoImage}
             />
