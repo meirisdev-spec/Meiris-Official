@@ -1,0 +1,175 @@
+/* ─── Section ──────────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding-top: 68px;
+  /* offset for fixed navbar height */
+  /* Isolate from surrounding paint */
+  isolation: isolate;
+  contain: layout;
+}
+
+/* ─── Background image ─────────────────────────────────────────────────────── */
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.videoBackground {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Pointer-events off so it can never be interacted with */
+  pointer-events: none;
+  user-select: none;
+  /* Force GPU compositing for smooth playback */
+  will-change: transform;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.65) 100%);
+}
+
+/* ─── Content — centered ──────────────────────────────────────────────────────────── */
+.content {
+  position: relative;
+  z-index: 1;
+  width: min(1400px, 95vw);
+  padding: 0 20px;
+  animation: fadeUp 1s ease-out forwards;
+}
+
+.title {
+  font-family: var(--font-primary);
+  /*
+   * 6vw at 1020px = 61px  → "The power conversion" (≈ 650px) fits in 95vw container
+   * 6vw at 1440px = 86px  → hits clamp max of 92px, still fits
+   */
+  font-size: clamp(44px, 6vw, 120px);
+  font-weight: 700;
+  line-height: 1.0;
+  margin-bottom: 28px;
+  color: var(--text-color);
+  white-space: normal;
+}
+
+.highlight {
+  color: var(--primary-color);
+}
+
+.description {
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 44px;
+  line-height: 1.65;
+  /*
+   * 170-char text / 2 lines = 85 chars/line
+   * At 15px Hanken Grotesk ≈ 7.8px/char avg → 85 * 7.8 = 663px needed
+   */
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ─── Buttons ──────────────────────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--font-button);
+  font-weight: 700;
+  font-size: 12px;
+  padding: 14px 30px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.28s ease;
+  border: none;
+}
+
+.btnPrimary {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #000000;
+}
+
+.btnPrimary:hover {
+  background-color: var(--primary-color);
+  color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 211, 132, 0.35);
+}
+
+.btnSecondary {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+}
+
+.btnSecondary:hover {
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ─── Animation ────────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Responsive ───────────────────────────────────────────────────────────── */
+
+/* Large monitors (1600px+) */
+@media (min-width: 1600px) {
+  .description {
+    font-size: 18px;
+    max-width: 100%;
+  }
+}
+
+/* Small desktops / large tablets (1024–1280px) */
+@media (max-width: 1280px) {
+  /* font-size handled by clamp() */
+}
+
+/* Tablets (768–1024px) */
+@media (max-width: 1024px) {
+  .content {
+    width: 90vw;
+  }
+}
+
+/* Small tablets (max 768px) */
+@media (max-width: 768px) {
+  .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}

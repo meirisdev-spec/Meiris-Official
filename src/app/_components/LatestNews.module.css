@@ -1,0 +1,143 @@
+/* ─── Section ──────────────────────────────────────────────────────────────── */
+.newsSection {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 100px 20px;
+  background-color: #ebebeb;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.75s ease-out, transform 0.75s ease-out;
+}
+
+.newsSection.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ─── Header ───────────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 50px;
+}
+
+.title {
+  font-family: var(--font-primary);
+  font-size: 40px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.viewAll {
+  font-family: var(--font-secondary);
+  font-size: 13px;
+  color: #555;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.viewAll:hover {
+  color: #00D384;
+}
+
+/* ─── News grid ─────────────────────────────────────────────────────────────── */
+.newsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* ─── Card ─────────────────────────────────────────────────────────────────── */
+.newsCard {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.newsCard:hover {
+  transform: translateY(-4px);
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 210px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.newsCard:hover .image {
+  transform: scale(1.04);
+}
+
+/* ─── Card content ──────────────────────────────────────────────────────────── */
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.newsTitle {
+  font-family: var(--font-secondary);
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.55;
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date {
+  font-family: var(--font-secondary);
+  font-size: 11px;
+  color: #888;
+  letter-spacing: 0.3px;
+}
+
+.readMore {
+  font-family: var(--font-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  color: #222;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+
+.readMore:hover {
+  color: #00D384;
+}
+
+/* ─── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .newsGrid {
+    grid-template-columns: 1fr;
+  }
+}
