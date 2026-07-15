@@ -1,7 +1,7 @@
 .footer {
   background-color: var(--bg-color);
   padding: 70px 20px 30px;
-  border-top: 8px solid var(--primary-color);
+  border-top: 1px solid var(--primary-color);
 }
 
 .container {
