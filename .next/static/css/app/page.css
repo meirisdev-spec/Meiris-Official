@@ -209,6 +209,8 @@
   font-size: clamp(44px, 6vw, 120px);
   font-weight: 700;
   line-height: 1.0;
+  letter-spacing: -0.06em;
+  /* tighten the letter spacing for a premium look */
   margin-bottom: 28px;
   color: var(--text-color);
   white-space: normal;

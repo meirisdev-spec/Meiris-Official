@@ -42,7 +42,7 @@ export default function Solutions() {
           if (entry.isIntersecting) {
             // Fade in the section container
             sectionRef.current?.classList.add(styles.sectionVisible);
-            
+
             // Fade in cards sequentially
             cardEls.forEach((card, i) => {
               setTimeout(() => card.classList.add(styles.cardVisible), i * 150);
@@ -73,7 +73,7 @@ export default function Solutions() {
             <div
               key={i}
               className={styles.card}
-              style={{ backgroundImage: `url(${sol.image})` }}
+              style={{ backgroundImage: `url(https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80)` }} // random placeholder
             >
               <div className={styles.cardOverlay} />
               <div className={styles.cardBody}>
