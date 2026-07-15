@@ -64,7 +64,7 @@ export default function Navbar() {
               </svg>
             </span>
             <div className={styles.dropdownPanel}>
-              <Link href="/products/meiris-charge" className={styles.dropdownItem}>MEIRIS Charge</Link>
+              <Link href="/products" className={styles.dropdownItem}>MEIRIS Charge</Link>
             </div>
           </li>
 
@@ -76,11 +76,11 @@ export default function Navbar() {
               </svg>
             </span>
             <div className={styles.dropdownPanel}>
-              <Link href="/solutions/depot-infrastructure" className={styles.dropdownItem}>Depot Infrastructure</Link>
-              <Link href="/solutions/charge-point-operators" className={styles.dropdownItem}>Charge Point Operators</Link>
-              <Link href="/solutions/hospitality-workplace" className={styles.dropdownItem}>Hospitality &amp; Workplace</Link>
-              <Link href="/solutions/residential" className={styles.dropdownItem}>Residential</Link>
-              <Link href="/solutions/custom" className={styles.dropdownItem}>Custom Solutions</Link>
+              <Link href="/solutions" className={styles.dropdownItem}>Depot Infrastructure</Link>
+              <Link href="/solutions" className={styles.dropdownItem}>Charge Point Operators</Link>
+              <Link href="/solutions" className={styles.dropdownItem}>Hospitality &amp; Workplace</Link>
+              <Link href="/solutions" className={styles.dropdownItem}>Residential</Link>
+              <Link href="/solutions" className={styles.dropdownItem}>Custom Solutions</Link>
             </div>
           </li>
 
@@ -92,9 +92,9 @@ export default function Navbar() {
               </svg>
             </span>
             <div className={styles.dropdownPanel}>
-              <Link href="/insights/blogs" className={styles.dropdownItem}>Blogs</Link>
-              <Link href="/insights/press-release" className={styles.dropdownItem}>Press Release</Link>
-              <Link href="/insights/announcements" className={styles.dropdownItem}>Announcements</Link>
+              <Link href="/insights" className={styles.dropdownItem}>Blogs</Link>
+              <Link href="/insights" className={styles.dropdownItem}>Press Release</Link>
+              <Link href="/insights" className={styles.dropdownItem}>Announcements</Link>
             </div>
           </li>
 
@@ -106,17 +106,19 @@ export default function Navbar() {
               </svg>
             </span>
             <div className={styles.dropdownPanel}>
-              <Link href="/company/about" className={styles.dropdownItem}>About Us</Link>
-              <Link href="/company/team" className={styles.dropdownItem}>Team</Link>
-              <Link href="/company/career" className={styles.dropdownItem}>Career</Link>
-              <Link href="/company/contact" className={styles.dropdownItem}>Contact Us</Link>
+              <Link href="/about" className={styles.dropdownItem}>About Us</Link>
+              <Link href="/team" className={styles.dropdownItem}>Team</Link>
+              <Link href="/careers" className={styles.dropdownItem}>Career</Link>
+              <Link href="/contact" className={styles.dropdownItem}>Contact Us</Link>
             </div>
           </li>
         </ul>
 
         {/* CTA */}
         <div className={styles.actions}>
-          <button className={styles.contactBtn}>Get in touch</button>
+          <Link href="/contact">
+            <button className={styles.contactBtn}>Get in touch</button>
+          </Link>
         </div>
       </div>
 
