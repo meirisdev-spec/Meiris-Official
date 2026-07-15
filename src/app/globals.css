@@ -154,4 +154,17 @@
 }
 
 
+/* ─── Design tokens (Required by Navbar/Footer) ─────────────────────────────────────────────────────────── */
+:root {
+  --primary-color: #00D384;
+  --bg-color:      #000000;
+  --text-color:    #FFFFFF;
 
+  --font-primary:   var(--font-dm-sans), sans-serif;
+  --font-secondary: var(--font-hanken-grotesk), sans-serif;
+  --font-button:    var(--font-jetbrains-mono), monospace;
+
+  /* Fluid container widths */
+  --container-max:  1440px;
+  --container-pad:  clamp(20px, 4vw, 60px);
+}
