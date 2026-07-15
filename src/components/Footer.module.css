@@ -1,0 +1,115 @@
+.footer {
+  background-color: var(--bg-color);
+  padding: 70px 20px 30px;
+  border-top: 8px solid var(--primary-color);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgba(0, 211, 132, 0.15);
+}
+
+.brandInfo {
+  max-width: 320px;
+}
+
+.logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 24px;
+}
+
+.tagline {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  font-family: var(--font-secondary);
+}
+
+/* ─── Links grid ───────────────────────────────────────────────────────────── */
+.linksGrid {
+  display: flex;
+  gap: 80px;
+}
+
+.linkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.linkGroup h4 {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.linkGroup a {
+  font-family: var(--font-secondary);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.linkGroup a:hover {
+  color: #ffffff;
+}
+
+/* ─── Bottom bar ───────────────────────────────────────────────────────────── */
+.bottomBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+}
+
+.copyright {
+  font-family: var(--font-secondary);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.legal {
+  display: flex;
+  gap: 24px;
+}
+
+.legal a {
+  font-family: var(--font-secondary);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.2s ease;
+}
+
+.legal a:hover {
+  color: #ffffff;
+}
+
+/* ─── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .topSection {
+    flex-direction: column;
+  }
+  .linksGrid {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .bottomBar {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}
