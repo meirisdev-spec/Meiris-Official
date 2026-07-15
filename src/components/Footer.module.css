@@ -30,7 +30,7 @@
 
 .tagline {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--primary-color);
   line-height: 1.8;
   font-family: var(--font-secondary);
 }
@@ -51,7 +51,7 @@
   font-family: var(--font-primary);
   font-size: 12px;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--primary-color);
   margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -60,11 +60,13 @@
 .linkGroup a {
   font-family: var(--font-secondary);
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--primary-color);
+  opacity: 0.75;
   transition: opacity 0.2s ease, color 0.2s ease;
 }
 
 .linkGroup a:hover {
+  opacity: 1;
   color: #ffffff;
 }
 
@@ -79,7 +81,8 @@
 .copyright {
   font-family: var(--font-secondary);
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--primary-color);
+  opacity: 0.8;
 }
 
 .legal {
@@ -90,11 +93,13 @@
 .legal a {
   font-family: var(--font-secondary);
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-  transition: color 0.2s ease;
+  color: var(--primary-color);
+  opacity: 0.8;
+  transition: opacity 0.2s ease, color 0.2s ease;
 }
 
 .legal a:hover {
+  opacity: 1;
   color: #ffffff;
 }
 
@@ -103,10 +108,12 @@
   .topSection {
     flex-direction: column;
   }
+
   .linksGrid {
     flex-direction: column;
     gap: 40px;
   }
+
   .bottomBar {
     flex-direction: column;
     gap: 16px;

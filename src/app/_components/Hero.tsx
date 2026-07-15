@@ -28,23 +28,14 @@ export default function Hero() {
 
   return (
     <section className={styles.hero}>
-      {/* Background video */}
+      {/* Background image placeholder */}
       <div className={styles.background}>
-        <video
-          ref={videoRef}
+        <img
+          src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80"
+          alt="Hero background placeholder"
           className={styles.videoBackground}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          disablePictureInPicture
-          disableRemotePlayback
-          poster="/images/Depot.png"
           aria-hidden="true"
-        >
-          <source src="/videos/Home Page.mp4" type="video/mp4" />
-        </video>
+        />
         <div className={styles.overlay} />
       </div>
 

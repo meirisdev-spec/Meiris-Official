@@ -1391,10 +1391,6 @@
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 2px;
   }
-  .border-b-\[3px\] {
-    border-bottom-style: var(--tw-border-style);
-    border-bottom-width: 3px;
-  }
   .border-l {
     border-left-style: var(--tw-border-style);
     border-left-width: 1px;
@@ -2156,6 +2152,10 @@
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
+  }
+  .tracking-\[-0\.04em\] {
+    --tw-tracking: -0.04em;
+    letter-spacing: -0.04em;
   }
   .tracking-\[0\.2em\] {
     --tw-tracking: 0.2em;
@@ -5518,7 +5518,7 @@ button {
 
 .Footer_tagline__EtMBR {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--primary-color);
   line-height: 1.8;
   font-family: var(--font-secondary);
 }
@@ -5539,7 +5539,7 @@ button {
   font-family: var(--font-primary);
   font-size: 12px;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--primary-color);
   margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -5548,11 +5548,13 @@ button {
 .Footer_linkGroup__3skIZ a {
   font-family: var(--font-secondary);
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--primary-color);
+  opacity: 0.75;
   transition: opacity 0.2s ease, color 0.2s ease;
 }
 
 .Footer_linkGroup__3skIZ a:hover {
+  opacity: 1;
   color: #ffffff;
 }
 
@@ -5567,7 +5569,8 @@ button {
 .Footer_copyright__j5CNb {
   font-family: var(--font-secondary);
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--primary-color);
+  opacity: 0.8;
 }
 
 .Footer_legal__gVqLl {
@@ -5578,11 +5581,13 @@ button {
 .Footer_legal__gVqLl a {
   font-family: var(--font-secondary);
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-  transition: color 0.2s ease;
+  color: var(--primary-color);
+  opacity: 0.8;
+  transition: opacity 0.2s ease, color 0.2s ease;
 }
 
 .Footer_legal__gVqLl a:hover {
+  opacity: 1;
   color: #ffffff;
 }
 
@@ -5591,17 +5596,18 @@ button {
   .Footer_topSection__GlfG1 {
     flex-direction: column;
   }
+
   .Footer_linksGrid__AIy78 {
     flex-direction: column;
     gap: 40px;
   }
+
   .Footer_bottomBar__TdDhH {
     flex-direction: column;
     gap: 16px;
     text-align: center;
   }
 }
-
 /*!****************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/Navbar.module.css ***!
   \****************************************************************************************************************************************************************************************************************************************************************************/
