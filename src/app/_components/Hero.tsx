@@ -55,6 +55,9 @@ export default function Hero() {
           platform <span className={styles.highlight}>global</span><br />
           <span className={styles.highlight}>electrification</span> needs
         </h1>
+      </div>
+
+      <div className={styles.bottomContent}>
         <p className={styles.description}>
           From fleet depots to residential grids, our vertically integrated architecture delivers<br />
           precision control and unmatched efficiency across every electrification touchpoint.
