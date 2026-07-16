@@ -176,7 +176,7 @@ export default function ProductsPage() {
       {/* Products Grid */}
       <section 
         ref={productsRef}
-        className="flex flex-col justify-center min-h-screen bg-[#111111] py-24 transition duration-1000 ease-out opacity-0 translate-y-10 px-8 md:px-16"
+        className="flex flex-col justify-center bg-[#111111] pt-24 pb-16 transition duration-1000 ease-out opacity-0 translate-y-10 px-8 md:px-16"
       >
         <div className="mx-auto w-full max-w-[1400px]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -320,13 +320,13 @@ export default function ProductsPage() {
       {/* Everything After Delivery (Services Grid) */}
       <section 
         ref={servicesRef}
-        className="flex flex-col justify-center min-h-screen bg-[#111111] pb-32 pt-24 opacity-0 translate-y-10 transition duration-1000 ease-out"
+        className="flex flex-col justify-center bg-[#111111] pb-24 pt-8 opacity-0 translate-y-10 transition duration-1000 ease-out px-8 md:px-16"
       >
-        <div className="mx-auto max-w-[1400px] px-8 md:px-16 w-full">
+        <div className="mx-auto w-full max-w-[1400px]">
           <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold tracking-tight text-white mb-12">
             Everything after delivery.
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 group/grid items-start animate-on-scroll opacity-0 translate-y-10 transition duration-700 ease-out">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll opacity-0 translate-y-10 transition duration-700 ease-out">
             {[
               {
                 title: 'Pan-India Service Support',
@@ -351,25 +351,19 @@ export default function ProductsPage() {
             ].map((service, i) => (
               <div 
                 key={i} 
-                className="group/tile relative bg-white border border-black/10 hover:border-[#00E573] p-8 cursor-default transition-all duration-300 ease-in-out flex flex-col overflow-hidden h-[130px] hover:h-[280px] opacity-100 group-hover/grid:opacity-50 hover:!opacity-100 shadow-sm hover:shadow-md"
+                className="bg-[#EAEAEA] p-10 flex flex-col h-full min-h-[300px]"
               >
-                <h3 className="text-[15px] font-bold text-black leading-tight">{service.title}</h3>
-                <p className="mt-3 text-[12px] text-black/70 leading-relaxed line-clamp-1 group-hover/tile:line-clamp-none transition-all duration-300 ease-in-out">
+                <h3 className="text-[14px] md:text-[15px] font-bold text-black leading-tight">{service.title}</h3>
+                <p className="mt-4 text-[12px] md:text-[13px] text-black/60 leading-relaxed">
                   {service.description}
                 </p>
-                
-                <div className="mt-auto pt-6 flex flex-col gap-5 opacity-0 group-hover/tile:opacity-100 transition-opacity duration-300 ease-in-out delay-75">
-                  {service.badge && (
-                    <div>
-                      <span className="inline-block bg-[#00E573]/10 text-[#00E573] border border-[#00E573]/20 text-[10px] font-bold px-3 py-1.5 rounded-sm uppercase tracking-wide">
-                        {service.badge}
-                      </span>
-                    </div>
-                  )}
-                  <button className="text-black text-[12px] font-bold tracking-wide text-left hover:text-[#00E573] transition-colors flex items-center gap-2 w-max">
-                    Learn more <span>→</span>
-                  </button>
-                </div>
+                {service.badge && (
+                  <div className="mt-auto pt-6">
+                    <span className="inline-block bg-[#00E573]/20 text-[#00a854] text-[10px] md:text-[11px] font-bold px-3 py-1.5 rounded-sm">
+                      {service.badge}
+                    </span>
+                  </div>
+                )}
               </div>
             ))}
           </div>
