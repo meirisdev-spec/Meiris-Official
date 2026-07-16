@@ -200,6 +200,19 @@
   animation: Hero_fadeUp__HOrEh 1s ease-out forwards;
 }
 
+.Hero_bottomContent__oFxuZ {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: min(1400px, 95vw);
+  padding: 0 20px;
+  animation: Hero_fadeUp__HOrEh 1s ease-out forwards;
+  z-index: 1;
+  text-align: center;
+}
+
 .Hero_title__WsC2S {
   font-family: var(--font-primary);
   /*
@@ -211,7 +224,7 @@
   line-height: 1.0;
   letter-spacing: -0.06em;
   /* tighten the letter spacing for a premium look */
-  margin-bottom: 28px;
+  margin: 0;
   color: var(--text-color);
   white-space: normal;
 }
