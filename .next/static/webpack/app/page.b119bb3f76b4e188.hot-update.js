@@ -1,0 +1,21 @@
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+self["webpackHotUpdate_N_E"]("app/page",{
+
+/***/ "(app-pages-browser)/./src/app/_components/LatestNews.module.css":
+/*!***************************************************!*\
+  !*** ./src/app/_components/LatestNews.module.css ***!
+  \***************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval(__webpack_require__.ts("// extracted by mini-css-extract-plugin\nmodule.exports = {\"newsSection\":\"LatestNews_newsSection__eygLk\",\"visible\":\"LatestNews_visible__0Erh3\",\"container\":\"LatestNews_container__etRQC\",\"header\":\"LatestNews_header__hbBQh\",\"title\":\"LatestNews_title__B3_Zq\",\"viewAll\":\"LatestNews_viewAll__JyWKm\",\"newsGrid\":\"LatestNews_newsGrid__VE7iL\",\"newsCard\":\"LatestNews_newsCard__lIMW7\",\"imageWrapper\":\"LatestNews_imageWrapper__bCu7c\",\"image\":\"LatestNews_image___zLbi\",\"content\":\"LatestNews_content__5qmek\",\"newsTitle\":\"LatestNews_newsTitle__IS9Fv\",\"meta\":\"LatestNews_meta__uViU5\",\"date\":\"LatestNews_date__18B1R\",\"readMore\":\"LatestNews_readMore__vD0vy\"};\n    if(true) {\n      // 1784298180723\n      var cssReload = __webpack_require__(/*! ./node_modules/next/dist/compiled/mini-css-extract-plugin/hmr/hotModuleReplacement.js */ \"(app-pages-browser)/./node_modules/next/dist/compiled/mini-css-extract-plugin/hmr/hotModuleReplacement.js\")(module.id, {\"publicPath\":\"/_next/\",\"esModule\":false,\"locals\":true});\n      module.hot.dispose(cssReload);\n      \n    }\n  \nmodule.exports.__checksum = \"bff74dd40225\"\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwcC1wYWdlcy1icm93c2VyKS8uL3NyYy9hcHAvX2NvbXBvbmVudHMvTGF0ZXN0TmV3cy5tb2R1bGUuY3NzIiwibWFwcGluZ3MiOiJBQUFBO0FBQ0Esa0JBQWtCO0FBQ2xCLE9BQU8sSUFBVTtBQUNqQjtBQUNBLHNCQUFzQixtQkFBTyxDQUFDLHdNQUFtSSxjQUFjLHNEQUFzRDtBQUNyTyxNQUFNLFVBQVU7QUFDaEI7QUFDQTtBQUNBO0FBQ0EseUJBQXlCIiwic291cmNlcyI6WyJEOlxcTWVpcmlzLU9mZmljaWFsLVdlYnNpdGVcXHBpeGVsLXBlcmZlY3QtY29weVxcc3JjXFxhcHBcXF9jb21wb25lbnRzXFxMYXRlc3ROZXdzLm1vZHVsZS5jc3MiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gZXh0cmFjdGVkIGJ5IG1pbmktY3NzLWV4dHJhY3QtcGx1Z2luXG5tb2R1bGUuZXhwb3J0cyA9IHtcIm5ld3NTZWN0aW9uXCI6XCJMYXRlc3ROZXdzX25ld3NTZWN0aW9uX19leWdMa1wiLFwidmlzaWJsZVwiOlwiTGF0ZXN0TmV3c192aXNpYmxlX18wRXJoM1wiLFwiY29udGFpbmVyXCI6XCJMYXRlc3ROZXdzX2NvbnRhaW5lcl9fZXRSUUNcIixcImhlYWRlclwiOlwiTGF0ZXN0TmV3c19oZWFkZXJfX2hiQlFoXCIsXCJ0aXRsZVwiOlwiTGF0ZXN0TmV3c190aXRsZV9fQjNfWnFcIixcInZpZXdBbGxcIjpcIkxhdGVzdE5ld3Nfdmlld0FsbF9fSnlXS21cIixcIm5ld3NHcmlkXCI6XCJMYXRlc3ROZXdzX25ld3NHcmlkX19WRTdpTFwiLFwibmV3c0NhcmRcIjpcIkxhdGVzdE5ld3NfbmV3c0NhcmRfX2xJTVc3XCIsXCJpbWFnZVdyYXBwZXJcIjpcIkxhdGVzdE5ld3NfaW1hZ2VXcmFwcGVyX19iQ3U3Y1wiLFwiaW1hZ2VcIjpcIkxhdGVzdE5ld3NfaW1hZ2VfX196TGJpXCIsXCJjb250ZW50XCI6XCJMYXRlc3ROZXdzX2NvbnRlbnRfXzVxbWVrXCIsXCJuZXdzVGl0bGVcIjpcIkxhdGVzdE5ld3NfbmV3c1RpdGxlX19JUzlGdlwiLFwibWV0YVwiOlwiTGF0ZXN0TmV3c19tZXRhX191VmlVNVwiLFwiZGF0ZVwiOlwiTGF0ZXN0TmV3c19kYXRlX18xOEIxUlwiLFwicmVhZE1vcmVcIjpcIkxhdGVzdE5ld3NfcmVhZE1vcmVfX3ZEMHZ5XCJ9O1xuICAgIGlmKG1vZHVsZS5ob3QpIHtcbiAgICAgIC8vIDE3ODQyOTgxODA3MjNcbiAgICAgIHZhciBjc3NSZWxvYWQgPSByZXF1aXJlKFwiRDovTWVpcmlzLU9mZmljaWFsLVdlYnNpdGUvcGl4ZWwtcGVyZmVjdC1jb3B5L25vZGVfbW9kdWxlcy9uZXh0L2Rpc3QvY29tcGlsZWQvbWluaS1jc3MtZXh0cmFjdC1wbHVnaW4vaG1yL2hvdE1vZHVsZVJlcGxhY2VtZW50LmpzXCIpKG1vZHVsZS5pZCwge1wicHVibGljUGF0aFwiOlwiL19uZXh0L1wiLFwiZXNNb2R1bGVcIjpmYWxzZSxcImxvY2Fsc1wiOnRydWV9KTtcbiAgICAgIG1vZHVsZS5ob3QuZGlzcG9zZShjc3NSZWxvYWQpO1xuICAgICAgXG4gICAgfVxuICBcbm1vZHVsZS5leHBvcnRzLl9fY2hlY2tzdW0gPSBcImJmZjc0ZGQ0MDIyNVwiXG4iXSwibmFtZXMiOltdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(app-pages-browser)/./src/app/_components/LatestNews.module.css\n"));
+
+/***/ })
+
+});

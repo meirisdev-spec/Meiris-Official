@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Navbar.module.css';
@@ -8,7 +9,19 @@ export default function Navbar() {
   // Use a ref for the progress bar — direct DOM mutation avoids React re-renders
   // on every scroll tick, which was causing the stepping/lag
   const progressBarRef = useRef<HTMLDivElement>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const pathname = usePathname();
   let rafId: number | null = null;
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setActiveDropdown(null);
+  }, [pathname]);
+
+  const toggleDropdown = (name: string) => {
+    setActiveDropdown(activeDropdown === name ? null : name);
+  };
 
   useEffect(() => {
     const bar = progressBarRef.current;
@@ -53,10 +66,11 @@ export default function Navbar() {
         </div>
 
         {/* Nav links */}
-        <ul className={styles.navLinks}>
+        <ul className={`${styles.navLinks} ${isMenuOpen ? styles.active : ''}`}>
+          <li><Link href="/">Home</Link></li>
           <li><Link href="/platform">Platform</Link></li>
 
-          <li className={styles.dropdown}>
+          <li className={`${styles.dropdown} ${activeDropdown === 'products' ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown('products')}>
             <span className={styles.dropdownTrigger}>
               Products
               <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +82,7 @@ export default function Navbar() {
             </div>
           </li>
 
-          <li className={styles.dropdown}>
+          <li className={`${styles.dropdown} ${activeDropdown === 'solutions' ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown('solutions')}>
             <span className={styles.dropdownTrigger}>
               Solutions
               <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +98,7 @@ export default function Navbar() {
             </div>
           </li>
 
-          <li className={styles.dropdown}>
+          <li className={`${styles.dropdown} ${activeDropdown === 'insights' ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown('insights')}>
             <span className={styles.dropdownTrigger}>
               Insights
               <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
@@ -95,10 +109,11 @@ export default function Navbar() {
               <Link href="/insights" className={styles.dropdownItem}>Blogs</Link>
               <Link href="/insights" className={styles.dropdownItem}>Press Release</Link>
               <Link href="/insights" className={styles.dropdownItem}>Announcements</Link>
+              <Link href="/resources" className={styles.dropdownItem}>Resources</Link>
             </div>
           </li>
 
-          <li className={styles.dropdown}>
+          <li className={`${styles.dropdown} ${activeDropdown === 'about' ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown('about')}>
             <span className={styles.dropdownTrigger}>
               About
               <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
@@ -112,13 +127,35 @@ export default function Navbar() {
               <Link href="/contact" className={styles.dropdownItem}>Contact Us</Link>
             </div>
           </li>
+          
+          <li className={styles.mobileCta}>
+            <Link href="/contact">
+              <button className={styles.contactBtn}>Get in touch</button>
+            </Link>
+          </li>
         </ul>
 
         {/* CTA */}
         <div className={styles.actions}>
-          <Link href="/contact">
+          <Link href="/contact" className={styles.contactBtnWrapper}>
             <button className={styles.contactBtn}>Get in touch</button>
           </Link>
+          <button className={styles.hamburger} onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.hamburgerIcon}>
+              {isMenuOpen ? (
+                <>
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </>
+              ) : (
+                <>
+                  <line x1="3" y1="12" x2="21" y2="12" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <line x1="3" y1="18" x2="21" y2="18" />
+                </>
+              )}
+            </svg>
+          </button>
         </div>
       </div>
 
