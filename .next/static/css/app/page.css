@@ -3,7 +3,8 @@
   \**********************************************************************************************************************************************************************************************************************************************************************************/
 /* ─── Section ──────────────────────────────────────────────────────────────── */
 .Contact_contactSection__OpsSK {
-  height: 868px;
+  min-height: 868px;
+  height: auto;
   display: flex;
   align-items: center;
   padding: 100px 20px;
@@ -135,12 +136,26 @@
 
 /* ─── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
+  .Contact_contactSection__OpsSK {
+    padding: 60px 20px;
+    min-height: auto;
+  }
+
   .Contact_contactBox__Vqt0N {
     flex-direction: column;
   }
 
   .Contact_inputGroup__FMg1h {
     flex-direction: column;
+  }
+
+  .Contact_textContent__5zBYe {
+    padding: 40px 24px;
+  }
+
+  .Contact_title__oZryR {
+    font-size: 36px;
+    line-height: 44px;
   }
 }
 /*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
@@ -195,7 +210,9 @@
 .Hero_content__VVnoI {
   position: relative;
   z-index: 1;
-  width: min(1400px, 95vw);
+  width: 95vw;
+  max-width: 2400px;
+  margin: 0 auto;
   padding: 0 20px;
   animation: Hero_fadeUp__HOrEh 1s ease-out forwards;
 }
@@ -206,7 +223,8 @@
   left: 0;
   right: 0;
   margin-inline: auto;
-  width: min(1400px, 95vw);
+  width: 95vw;
+  max-width: 2400px;
   padding: 0 20px;
   animation: Hero_fadeUp__HOrEh 1s ease-out forwards;
   z-index: 1;
@@ -219,7 +237,7 @@
    * 6vw at 1020px = 61px  → "The power conversion" (≈ 650px) fits in 95vw container
    * 6vw at 1440px = 86px  → hits clamp max of 92px, still fits
    */
-  font-size: clamp(44px, 6vw, 120px);
+  font-size: clamp(44px, 6vw, 160px);
   font-weight: 700;
   line-height: 1.0;
   letter-spacing: -0.06em;
@@ -312,8 +330,17 @@
 /* Large monitors (1600px+) */
 @media (min-width: 1600px) {
   .Hero_description__FaH0M {
-    font-size: 18px;
-    max-width: 100%;
+    font-size: 20px;
+  }
+}
+
+/* 4K and Ultra Wide monitors */
+@media (min-width: 2560px) {
+  .Hero_title__WsC2S {
+    font-size: clamp(160px, 6vw, 220px);
+  }
+  .Hero_description__FaH0M {
+    font-size: 26px;
   }
 }
 
@@ -324,16 +351,43 @@
 
 /* Tablets (768–1024px) */
 @media (max-width: 1024px) {
+  .Hero_desktopBr__erRO2 {
+    display: none;
+  }
   .Hero_content__VVnoI {
     width: 90vw;
+  }
+  .Hero_title__WsC2S {
+    font-size: clamp(40px, 7vw, 64px);
+    letter-spacing: 0em;
+  }
+  .Hero_description__FaH0M {
+    font-size: 16px;
   }
 }
 
 /* Small tablets (max 768px) */
 @media (max-width: 768px) {
+  .Hero_title__WsC2S {
+    font-size: clamp(34px, 8vw, 44px);
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+  
+  .Hero_description__FaH0M {
+    font-size: 14px;
+    margin-bottom: 24px;
+    padding: 0 10px;
+  }
+
   .Hero_actions__HBa_E {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    padding: 0 16px;
+  }
+  
+  .Hero_btn__zPlWJ {
+    width: 100%;
   }
 }
 /*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
@@ -341,7 +395,8 @@
   \*************************************************************************************************************************************************************************************************************************************************************************************/
 /* ─── Section ──────────────────────────────────────────────────────────────── */
 .LatestNews_newsSection__eygLk {
-  height: 666px;
+  min-height: 666px;
+  height: auto;
   display: flex;
   align-items: center;
   padding: 100px 0;
@@ -484,9 +539,27 @@
 }
 
 /* ─── Responsive ───────────────────────────────────────────────────────────── */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+  .LatestNews_newsGrid__VE7iL {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
   .LatestNews_newsGrid__VE7iL {
     grid-template-columns: 1fr;
+  }
+  .LatestNews_newsSection__eygLk {
+    padding: 60px 0;
+  }
+  .LatestNews_header__hbBQh {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .LatestNews_title__B3_Zq {
+    font-size: 36px;
   }
 }
 
@@ -495,9 +568,9 @@
   \************************************************************************************************************************************************************************************************************************************************************************************/
 /* ─── Section ──────────────────────────────────────────────────────────────── */
 .Solutions_solutions__dLybc {
-  height: 916px;
-  display: block;
-  padding: 86px 40px 0;
+  min-height: 916px;
+  height: auto;
+  padding: 86px 40px 86px;
   background-color: var(--bg-color);
   opacity: 0;
   transition: opacity 0.8s ease-out;
@@ -537,9 +610,9 @@
 /* ─── Cards grid ────────── */
 .Solutions_cardsGrid__7QZoJ {
   display: grid;
-  grid-template-columns: repeat(5, 255.19px);
+  grid-template-columns: repeat(5, 1fr);
   justify-content: center;
-  gap: 70px;
+  gap: clamp(20px, 4vw, 70px);
   width: 100%;
 }
 
@@ -650,12 +723,11 @@
 
 /* ─── Responsive ─────────────────────────────────────────────────────────────── */
 
-@media (max-width: 1024px) {
+@media (max-width: 1400px) {
   .Solutions_cardsGrid__7QZoJ {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
-
 
 /* Tablets landscape (1024–1280px) */
 @media (max-width: 1280px) {
@@ -666,18 +738,71 @@
 
 /* Tablets portrait (768–1024px) */
 @media (max-width: 1024px) {
+  .Solutions_solutions__dLybc {
+    min-height: auto;
+    padding: 60px 40px;
+  }
   .Solutions_cardsGrid__7QZoJ {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    justify-content: flex-start;
+    scroll-padding-left: 40px;
+    scroll-padding-right: 40px;
+    margin: 0 -40px;
+    padding: 20px 40px; /* top/bottom padding for hover box-shadow */
+    width: calc(100% + 80px);
+    gap: 24px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .Solutions_cardsGrid__7QZoJ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .Solutions_card__Ly3pj {
+    flex: 0 0 45%; /* show roughly 2 cards and a peek of the 3rd */
+    scroll-snap-align: start;
+    height: 380px;
+  }
+
+  .Solutions_card__Ly3pj:last-child {
+    scroll-snap-align: end;
+  }
+  
+  /* Fix WebKit bug where right padding on flex scroll containers is ignored */
+  .Solutions_cardsGrid__7QZoJ::after {
+    content: "";
+    flex: 0 0 1px;
+    width: 1px;
   }
 }
 
 /* Small (< 768px) */
 @media (max-width: 768px) {
   .Solutions_cardsGrid__7QZoJ {
-    grid-template-columns: 1fr;
+    justify-content: flex-start;
+    scroll-padding-left: 20px;
+    scroll-padding-right: 20px;
+    margin: 0 -20px;
+    padding: 20px 20px;
+    width: calc(100% + 40px);
+    gap: 16px;
   }
-
+  .Solutions_solutions__dLybc {
+    min-height: auto;
+    padding: 60px 20px;
+  }
+  .Solutions_header__ID3SS {
+    margin-bottom: 40px;
+  }
+  .Solutions_title__RgNvO {
+    font-size: 36px;
+  }
   .Solutions_card__Ly3pj {
-    height: 260px;
+    flex: 0 0 82%; /* show 1 card and a 18% peek of the 2nd minus gap */
+    height: 340px;
   }
 }

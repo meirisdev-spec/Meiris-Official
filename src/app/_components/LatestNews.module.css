@@ -1,6 +1,7 @@
 /* ─── Section ──────────────────────────────────────────────────────────────── */
 .newsSection {
-  height: 666px;
+  min-height: 666px;
+  height: auto;
   display: flex;
   align-items: center;
   padding: 100px 0;
@@ -143,8 +144,26 @@
 }
 
 /* ─── Responsive ───────────────────────────────────────────────────────────── */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+  .newsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
   .newsGrid {
     grid-template-columns: 1fr;
+  }
+  .newsSection {
+    padding: 60px 0;
+  }
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .title {
+    font-size: 36px;
   }
 }
