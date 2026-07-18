@@ -104,7 +104,7 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
   const headingText = setupData?.setupHeading || "Recommended for your setup";
 
   return (
-    <section className="bg-white py-24 md:py-32 px-6 md:px-12 lg:px-24">
+    <section className="bg-white py-16 md:py-32 px-6 md:px-12 lg:px-24">
       <div className="max-w-[1440px] mx-auto w-full">
         {/* Header & Tabs */}
         <div className="mb-16 md:mb-24">
@@ -148,7 +148,7 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
                 </div>
               ))}
               <div className="md:col-span-2 mt-4">
-                <button type="button" className="bg-[#126b53] hover:bg-[#0f5a45] text-white px-6 py-3 rounded-md font-bold transition-colors">
+                <button type="button" className="bg-[#126b53] hover:bg-white hover:text-black text-white px-6 py-3 text-[13px] rounded-sm font-bold tracking-wide transition-all">
                   Talk to our expert
                 </button>
               </div>
