@@ -567,22 +567,22 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
     <div className="relative min-h-screen bg-black text-white selection:bg-[#00E573] selection:text-black overflow-x-hidden">
 
       {/* Hero Section */}
-      <section className="relative flex flex-col md:flex-row h-screen min-h-[700px] pt-[68px] bg-[#0c0c0c] w-full">
+      <section className="relative flex flex-col md:flex-row h-auto md:h-screen min-h-[100dvh] md:min-h-[700px] pt-[68px] bg-[#0c0c0c] w-full">
         {/* Left Content */}
-        <div className="w-full md:w-1/2 pl-8 md:pl-20 pr-8 md:pr-12 pb-20 pt-24 md:pt-[15vh] z-10 flex flex-col justify-start">
+        <div className="w-full md:w-1/2 px-6 md:pl-20 md:pr-12 pb-16 pt-20 md:pt-[15vh] z-10 flex flex-col justify-start md:justify-center">
           <h1 className="text-[clamp(2.5rem,4.5vw,4.5rem)] font-bold text-white leading-[1.05] tracking-tight mb-6 max-w-xl">
             {content.heroTitle}
           </h1>
-          <p className="text-[1.1rem] md:text-[1.25rem] text-white/80 max-w-xl mb-10 leading-relaxed font-[family-name:var(--font-secondary)]">
+          <p className="text-[15px] md:text-[16px] text-white/80 max-w-xl mb-10 leading-relaxed font-[family-name:var(--font-secondary)]">
             {content.heroSubtitle}
           </p>
           <div className="flex flex-wrap items-center gap-4">
-            <button className="bg-[#00E573] text-black px-6 py-3.5 text-[11px] font-bold tracking-wide transition-transform hover:-translate-y-0.5 rounded-sm">
+            <button className="bg-[#00E573] text-black px-6 py-3 text-[13px] font-bold tracking-wide transition-all hover:bg-white hover:-translate-y-0.5 rounded-sm">
               Talk to our expert
             </button>
-            <button className="border border-white/20 text-white px-6 py-3.5 text-[11px] font-bold tracking-wide flex items-center gap-2 hover:bg-white/5 transition-all rounded-sm hover:-translate-y-0.5">
+            <button className="border border-white/20 text-white px-6 py-3 text-[13px] font-bold tracking-wide flex items-center gap-2 hover:bg-white/5 transition-all rounded-sm hover:-translate-y-0.5">
               See how it works 
-              <span className="text-sm leading-none font-normal">→</span>
+              <span className="text-[14px] leading-none font-normal">→</span>
             </button>
           </div>
         </div>
@@ -596,7 +596,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
       {content.customSection2 ? (
         <CustomSection2 data={content.customSection2} />
       ) : (
-        <section className="bg-black py-32 px-8 md:px-20 border-t border-white/10 relative">
+        <section className="bg-black py-16 md:py-32 px-6 md:px-20 border-t border-white/10 relative">
           <div className="mx-auto max-w-[1200px]">
             <h2 className="text-[clamp(2rem,3.5vw,3rem)] font-bold text-white mb-16 max-w-4xl leading-[1.1] tracking-tight">
               {content.mapHeading || (
@@ -607,7 +607,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
               )}
             </h2>
             
-            <div className="w-full bg-white rounded-3xl relative aspect-[4/3] md:aspect-[16/9] max-h-[700px] overflow-hidden mb-10 shadow-2xl p-8">
+            <div className="w-full bg-white rounded-2xl md:rounded-3xl relative aspect-[4/3] md:aspect-[16/9] max-h-[700px] overflow-hidden mb-10 shadow-2xl p-4 md:p-8">
               {/* SVG Lines Connecting Markers */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none">
                 <line x1="20%" y1="35%" x2="40%" y2="50%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
@@ -650,7 +650,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
       )}
 
       {/* "One partner" Section */}
-      <section className="bg-[#171717] py-32 px-8 md:px-20 relative border-t border-white/5">
+      <section className="bg-[#171717] py-16 md:py-32 px-6 md:px-20 relative border-t border-white/5">
         <div className="mx-auto max-w-[1400px]">
           <h2 className="text-[clamp(2rem,3.5vw,3.2rem)] font-bold text-white mb-16 max-w-4xl leading-[1.05] tracking-tight">
             {content.sectionHeading}
@@ -672,7 +672,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
       <RecommendedSetup setupData={content} />
 
       {/* Uptime Section */}
-      <section className="bg-white py-32 px-8 md:px-20 relative border-t border-black/5">
+      <section className="bg-white py-16 md:py-32 px-6 md:px-20 relative border-t border-black/5">
         <div className="mx-auto max-w-[1000px]">
           <h2 className="text-[clamp(2rem,3vw,2.5rem)] font-bold text-black mb-16 text-center tracking-tight leading-tight">
             {content.benefitsHeading}
