@@ -46,8 +46,8 @@ export default function TeamPage() {
     <div className="relative min-h-screen bg-white text-black selection:bg-[#00E573] selection:text-black">
       
 
-      <main className="mx-auto max-w-[1200px] px-8 pt-24 pb-32">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-black uppercase mb-20">
+      <main className="mx-auto max-w-[1200px] px-6 md:px-8 lg:px-12 pt-36 md:pt-44 lg:pt-48 pb-12 md:pb-16 lg:pb-20">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-black mb-12 md:mb-20">
           CORE TEAM
         </h1>
 
@@ -66,11 +66,11 @@ export default function TeamPage() {
               <h3 className="text-xl md:text-2xl font-bold text-[#00E573] mb-3">
                 Founder & MD
               </h3>
-              <h2 className="text-4xl md:text-[2.75rem] font-bold text-black mb-6 tracking-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-black mb-6 tracking-tight">
                 Satish Shenoy
               </h2>
-              <p className="text-[15px] md:text-[17px] text-black/80 leading-relaxed font-medium">
-                3+ decades of leadership in consulting & financial services at Kotak & IL&FS. NIT & IIM-A Alumnus.
+              <p className="text-[14px] md:text-[15px] text-black/80 leading-loose font-medium text-justify">
+                With a rich experience of over three decades in consulting and financial services encompassing business consulting, investment banking, capital markets, M&A and financial distribution, Satish founded SIRI Electromotive to realize his dream of contributing to a greener planet through meaningful participation in the setting up of EV Charging infrastructure in India. Satish has depth of varied transaction experience in multiple sectors including, inter-alia, Technology, Infrastructure, Real Estate, Healthcare, Manufacturing and Financial Services. His experiential and intuitive understanding of India’s legal, regulatory and financial landscape provides a strong risk management orientation for SIRI. He is a proven leader, having successfully built and led strong business teams from large institutions to entrepreneurial organizations. He has previously worked at Kotak Mahindra and IL&FS in senior capacities. A NIT, Surathkal alumnus, he also has a PGDM from IIM Ahmedabad.
               </p>
             </div>
           </div>
@@ -82,11 +82,11 @@ export default function TeamPage() {
               <h3 className="text-xl md:text-2xl font-bold text-[#00E573] mb-3 leading-tight">
                 Co-founder & Director –<br />Technical
               </h3>
-              <h2 className="text-4xl md:text-[2.75rem] font-bold text-black mb-6 tracking-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-black mb-6 tracking-tight">
                 Sanath Kumar
               </h2>
-              <p className="text-[15px] md:text-[17px] text-black/80 leading-relaxed font-medium">
-                2+ decades in product development across sectors including EV chargers, power & energy, at IRIS Energy & Pantheon Technologies. VIT Alumnus.
+              <p className="text-[14px] md:text-[15px] text-black/80 leading-loose font-medium text-justify">
+                Sanath brings over twenty years of hands-on expertise across multiple domains including Research, Product Design & Development, Engineering, Simulation, Testing, Certification, Manufacturing, and Intellectual Property creation. A passionate innovator, his professional journey spans the entire R&D product lifecycle and New Product Introductions (NPI) in sectors such as AC & DC EV Chargers, Power & Energy, Lighting, Metering, Solar, Real-time Location Systems (RTLS), Industrial IoT, and Automation & Control. He has spearheaded the development of comprehensive IoT solutions for diverse applications including Industrial Plant Safety, Predictive Maintenance, Anomaly Detection of Industrial Assets, Smart Street Lighting, Smart Metering (AMR/AMI), Wireless Sensor Networks (WSN) for IoT, among others. With a track record of co-inventing four patents, Sanath is committed to driving continuing innovation in SIRI. Sanath has a Bachelor of Engineering (B.E) in Electronics and Communication (E&C) from Visvesvaraya Technological University (VTU) at Nitte, Karnataka, and a PG Diploma in Embedded Systems Design & Development from UTL Technologies Ltd, Bangalore, Karnataka.
               </p>
             </div>
 
