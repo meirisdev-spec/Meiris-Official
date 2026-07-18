@@ -4,7 +4,7 @@ export const GREEN = "oklch(0.78 0.19 155)";
 
 export function ChipGraphic() {
   return (
-    <svg viewBox="0 0 400 400" className="h-auto w-full max-w-[420px]" aria-hidden>
+    <svg viewBox="0 0 400 400" className="h-auto w-full max-w-[220px] md:max-w-[420px]" aria-hidden>
       <defs>
         <radialGradient id="glow" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor={GREEN} stopOpacity="0.8" />
@@ -62,7 +62,7 @@ export function NetworkGraphic() {
     [4, 5], [4, 7], [5, 6], [5, 8], [6, 9], [7, 8], [8, 9]
   ];
   return (
-    <svg viewBox="0 0 400 400" className="h-auto w-full max-w-[520px]" aria-hidden>
+    <svg viewBox="0 0 400 400" className="h-auto w-full max-w-[240px] md:max-w-[520px]" aria-hidden>
       <g stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" fill="none">
         {edges.map(([a, b], i) => (
           <line key={i} x1={nodes[a][0]} y1={nodes[a][1]} x2={nodes[b][0]} y2={nodes[b][1]} />
@@ -87,7 +87,7 @@ export function NetworkGraphic() {
 
 export function ThreeLayers() {
   return (
-    <svg viewBox="0 0 400 300" className="h-auto w-full max-w-[360px]" aria-hidden>
+    <svg viewBox="0 0 400 300" className="h-auto w-full max-w-[200px] md:max-w-[360px]" aria-hidden>
       <defs>
         <radialGradient id="greenGlow" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor={GREEN} stopOpacity="0.2" />
