@@ -76,27 +76,15 @@ export default function Navbar() {
               </svg>
             </span>
             <div className={styles.dropdownPanel}>
-              <Link href="/solutions" className={styles.dropdownItem}>Depot Infrastructure</Link>
-              <Link href="/solutions" className={styles.dropdownItem}>Charge Point Operators</Link>
-              <Link href="/solutions" className={styles.dropdownItem}>Hospitality &amp; Workplace</Link>
-              <Link href="/solutions" className={styles.dropdownItem}>Residential</Link>
-              <Link href="/solutions" className={styles.dropdownItem}>Custom Solutions</Link>
+              <Link href="/solutions/depot-infrastructure" className={styles.dropdownItem}>Depot Infrastructure</Link>
+              <Link href="/solutions/charge-point-operators" className={styles.dropdownItem}>Charge Point Operators</Link>
+              <Link href="/solutions/hospitality-workplace" className={styles.dropdownItem}>Hospitality &amp; Workplace</Link>
+              <Link href="/solutions/residential" className={styles.dropdownItem}>Residential</Link>
+              <Link href="/solutions/custom-solutions" className={styles.dropdownItem}>Custom Solutions</Link>
             </div>
           </li>
 
-          <li className={styles.dropdown}>
-            <span className={styles.dropdownTrigger}>
-              Insights
-              <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-              </svg>
-            </span>
-            <div className={styles.dropdownPanel}>
-              <Link href="/insights" className={styles.dropdownItem}>Blogs</Link>
-              <Link href="/insights" className={styles.dropdownItem}>Press Release</Link>
-              <Link href="/insights" className={styles.dropdownItem}>Announcements</Link>
-            </div>
-          </li>
+          <li><Link href="/insights">Insights</Link></li>
 
           <li className={styles.dropdown}>
             <span className={styles.dropdownTrigger}>
