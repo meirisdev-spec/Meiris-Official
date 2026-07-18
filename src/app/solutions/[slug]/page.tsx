@@ -559,8 +559,9 @@ const solutionsData: Record<string, any> = {
   }
 };
 
-export default function SolutionsPage({ params }: { params: { slug: string } }) {
-  const content = solutionsData[params?.slug] || solutionsData["default"];
+export default async function SolutionsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const content = solutionsData[resolvedParams?.slug] || solutionsData["default"];
 
   return (
     <div className="relative min-h-screen bg-black text-white selection:bg-[#00E573] selection:text-black overflow-x-hidden">

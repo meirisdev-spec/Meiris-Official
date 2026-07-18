@@ -1,4 +1,4 @@
-// File: D:\Meiris-Official-Website\pixel-perfect-copy\src\app\platform\page.tsx
+// File: C:\Users\USER\Desktop\projects\pixel-perfect-copy\src\app\platform\page.tsx
 import * as entry from '../../../../src/app/platform/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
