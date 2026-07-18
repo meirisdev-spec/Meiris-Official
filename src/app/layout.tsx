@@ -29,6 +29,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 
+import { LenisProvider } from "./LenisProvider";
+
 export default function RootLayout({
   children,
 }: {
@@ -37,9 +39,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable}`}>
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <LenisProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </LenisProvider>
       </body>
     </html>
   );

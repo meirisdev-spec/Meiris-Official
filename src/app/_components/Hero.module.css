@@ -47,7 +47,9 @@
 .content {
   position: relative;
   z-index: 1;
-  width: min(1400px, 95vw);
+  width: 95vw;
+  max-width: 2400px;
+  margin: 0 auto;
   padding: 0 20px;
   animation: fadeUp 1s ease-out forwards;
 }
@@ -58,7 +60,8 @@
   left: 0;
   right: 0;
   margin-inline: auto;
-  width: min(1400px, 95vw);
+  width: 95vw;
+  max-width: 2400px;
   padding: 0 20px;
   animation: fadeUp 1s ease-out forwards;
   z-index: 1;
@@ -71,7 +74,7 @@
    * 6vw at 1020px = 61px  → "The power conversion" (≈ 650px) fits in 95vw container
    * 6vw at 1440px = 86px  → hits clamp max of 92px, still fits
    */
-  font-size: clamp(44px, 6vw, 120px);
+  font-size: clamp(44px, 6vw, 160px);
   font-weight: 700;
   line-height: 1.0;
   letter-spacing: -0.06em;
@@ -164,8 +167,17 @@
 /* Large monitors (1600px+) */
 @media (min-width: 1600px) {
   .description {
-    font-size: 18px;
-    max-width: 100%;
+    font-size: 20px;
+  }
+}
+
+/* 4K and Ultra Wide monitors */
+@media (min-width: 2560px) {
+  .title {
+    font-size: clamp(160px, 6vw, 220px);
+  }
+  .description {
+    font-size: 26px;
   }
 }
 
@@ -176,15 +188,42 @@
 
 /* Tablets (768–1024px) */
 @media (max-width: 1024px) {
+  .desktopBr {
+    display: none;
+  }
   .content {
     width: 90vw;
+  }
+  .title {
+    font-size: clamp(40px, 7vw, 64px);
+    letter-spacing: 0em;
+  }
+  .description {
+    font-size: 16px;
   }
 }
 
 /* Small tablets (max 768px) */
 @media (max-width: 768px) {
+  .title {
+    font-size: clamp(34px, 8vw, 44px);
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+  
+  .description {
+    font-size: 14px;
+    margin-bottom: 24px;
+    padding: 0 10px;
+  }
+
   .actions {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    padding: 0 16px;
+  }
+  
+  .btn {
+    width: 100%;
   }
 }

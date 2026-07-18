@@ -1,8 +1,8 @@
 /* ─── Section ──────────────────────────────────────────────────────────────── */
 .solutions {
-  height: 916px;
-  display: block;
-  padding: 86px 40px 0;
+  min-height: 916px;
+  height: auto;
+  padding: 86px 40px 86px;
   background-color: var(--bg-color);
   opacity: 0;
   transition: opacity 0.8s ease-out;
@@ -42,9 +42,9 @@
 /* ─── Cards grid ────────── */
 .cardsGrid {
   display: grid;
-  grid-template-columns: repeat(5, 255.19px);
+  grid-template-columns: repeat(5, 1fr);
   justify-content: center;
-  gap: 70px;
+  gap: clamp(20px, 4vw, 70px);
   width: 100%;
 }
 
@@ -155,12 +155,11 @@
 
 /* ─── Responsive ─────────────────────────────────────────────────────────────── */
 
-@media (max-width: 1024px) {
+@media (max-width: 1400px) {
   .cardsGrid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
-
 
 /* Tablets landscape (1024–1280px) */
 @media (max-width: 1280px) {
@@ -171,18 +170,71 @@
 
 /* Tablets portrait (768–1024px) */
 @media (max-width: 1024px) {
+  .solutions {
+    min-height: auto;
+    padding: 60px 40px;
+  }
   .cardsGrid {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    justify-content: flex-start;
+    scroll-padding-left: 40px;
+    scroll-padding-right: 40px;
+    margin: 0 -40px;
+    padding: 20px 40px; /* top/bottom padding for hover box-shadow */
+    width: calc(100% + 80px);
+    gap: 24px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .cardsGrid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card {
+    flex: 0 0 45%; /* show roughly 2 cards and a peek of the 3rd */
+    scroll-snap-align: start;
+    height: 380px;
+  }
+
+  .card:last-child {
+    scroll-snap-align: end;
+  }
+  
+  /* Fix WebKit bug where right padding on flex scroll containers is ignored */
+  .cardsGrid::after {
+    content: "";
+    flex: 0 0 1px;
+    width: 1px;
   }
 }
 
 /* Small (< 768px) */
 @media (max-width: 768px) {
   .cardsGrid {
-    grid-template-columns: 1fr;
+    justify-content: flex-start;
+    scroll-padding-left: 20px;
+    scroll-padding-right: 20px;
+    margin: 0 -20px;
+    padding: 20px 20px;
+    width: calc(100% + 40px);
+    gap: 16px;
   }
-
+  .solutions {
+    min-height: auto;
+    padding: 60px 20px;
+  }
+  .header {
+    margin-bottom: 40px;
+  }
+  .title {
+    font-size: 36px;
+  }
   .card {
-    height: 260px;
+    flex: 0 0 82%; /* show 1 card and a 18% peek of the 2nd minus gap */
+    height: 340px;
   }
 }
