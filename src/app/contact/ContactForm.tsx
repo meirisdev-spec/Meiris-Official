@@ -24,10 +24,10 @@ export default function ContactForm() {
             key={cat}
             type="button"
             onClick={() => setInquiryType(cat)}
-            className={`cursor-pointer px-6 py-2.5 rounded-full text-xs font-semibold shadow-sm transition-all ${
+            className={`cursor-pointer px-6 py-2.5 rounded-full text-xs font-semibold shadow-sm transition-all duration-300 ${
               inquiryType === cat
-                ? "bg-[#00E573] text-white hover:scale-105"
-                : "bg-white text-black font-medium hover:shadow"
+                ? "bg-[#00E573] text-black shadow-[0_0_18px_rgba(0,211,132,0.35)] scale-105"
+                : "bg-white text-black font-medium hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] hover:-translate-y-0.5"
             }`}
           >
             {cat}
@@ -66,7 +66,7 @@ export default function ContactForm() {
           </div>
 
           <div className="flex justify-center pt-6">
-            <button type="submit" className="cursor-pointer bg-[#00E573] text-white px-8 py-3.5 rounded-full text-[12px] font-bold shadow-lg shadow-[#00E573]/20 hover:shadow-[#00E573]/40 transition-all flex items-center gap-2 hover:-translate-y-0.5 tracking-wide">
+            <button type="submit" className="cursor-pointer bg-[#0a0a0a] text-white px-8 py-4 rounded-full text-[12px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5 tracking-wide">
               SEND MESSAGE
               <span>→</span>
             </button>
