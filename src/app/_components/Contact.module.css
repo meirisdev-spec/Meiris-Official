@@ -1,6 +1,7 @@
 /* ─── Section ──────────────────────────────────────────────────────────────── */
 .contactSection {
-  height: 868px;
+  min-height: 868px;
+  height: auto;
   display: flex;
   align-items: center;
   padding: 100px 20px;
@@ -132,11 +133,25 @@
 
 /* ─── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
+  .contactSection {
+    padding: 60px 20px;
+    min-height: auto;
+  }
+
   .contactBox {
     flex-direction: column;
   }
 
   .inputGroup {
     flex-direction: column;
+  }
+
+  .textContent {
+    padding: 40px 24px;
+  }
+
+  .title {
+    font-size: 36px;
+    line-height: 44px;
   }
 }

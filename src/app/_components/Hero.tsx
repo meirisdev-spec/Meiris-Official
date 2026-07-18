@@ -51,15 +51,15 @@ export default function Hero() {
       {/* Content */}
       <div className={styles.content}>
         <h1 className={styles.title}>
-          The power conversion<br />
-          platform <span className={styles.highlight}>global</span><br />
+          The power conversion <br className={styles.desktopBr} />
+          platform <span className={styles.highlight}>global</span> <br className={styles.desktopBr} />
           <span className={styles.highlight}>electrification</span> needs
         </h1>
       </div>
 
       <div className={styles.bottomContent}>
         <p className={styles.description}>
-          From fleet depots to residential grids, our vertically integrated architecture delivers<br />
+          From fleet depots to residential grids, our vertically integrated architecture delivers <br className={styles.desktopBr} />
           precision control and unmatched efficiency across every electrification touchpoint.
         </p>
         <div className={styles.actions}>
