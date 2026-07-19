@@ -106,9 +106,7 @@ export default function Navbar() {
               </svg>
             </span>
             <div className={styles.dropdownPanel}>
-              <Link href="/insights" className={styles.dropdownItem}>Blogs</Link>
-              <Link href="/insights" className={styles.dropdownItem}>Press Release</Link>
-              <Link href="/insights" className={styles.dropdownItem}>Announcements</Link>
+              <Link href="/insights" className={styles.dropdownItem}>Press Releases &amp; Announcements</Link>
               <Link href="/resources" className={styles.dropdownItem}>Resources</Link>
             </div>
           </li>

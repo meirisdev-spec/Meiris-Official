@@ -1,44 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Insights — Meiris Intelligent Power Conversion",
   description: "A unified page with clear segmentation for Blogs, Press Releases and Announcements.",
 };
-
-const navItems = [
-  { label: "Platform", to: "/platform" },
-  { label: "Products", to: "/products" },
-  { label: "Solutions", to: "/solutions" },
-  { label: "Insights", to: "/insights" },
-  { label: "About", to: "/about" },
-];
-
-function Logo({ small = false }: { small?: boolean }) {
-  return (
-    <Link href="/" className="flex items-center gap-2 text-white">
-      <svg width={small ? 20 : 28} height={small ? 20 : 28} viewBox="0 0 40 40" fill="none" aria-hidden>
-        <circle cx="20" cy="20" r="2" fill="white" />
-        {Array.from({ length: 12 }).map((_, i) => {
-          const a = (i * Math.PI * 2) / 12;
-          return (
-            <line
-              key={i}
-              x1={20 + Math.cos(a) * 6}
-              y1={20 + Math.sin(a) * 6}
-              x2={20 + Math.cos(a) * 18}
-              y2={20 + Math.sin(a) * 18}
-              stroke="white"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          );
-        })}
-      </svg>
-      <span className={`${small ? "text-[10px]" : "text-xs"} font-semibold tracking-[0.25em]`}>MEIRIS</span>
-    </Link>
-  );
-}
 
 const cards = Array(6).fill({
   tag1: "PRESS",
@@ -51,102 +18,69 @@ const cards = Array(6).fill({
 export default function InsightsPage() {
   return (
     <div className="relative min-h-screen bg-white text-black selection:bg-[#00E573] selection:text-black">
-      
-
-      <main className="mx-auto max-w-[1200px] px-8 pt-24 pb-32">
+      <main className="mx-auto max-w-[1400px] px-6 md:px-12 pt-[120px] pb-32 overflow-hidden">
         {/* Hero Text */}
-        <div className="max-w-4xl mb-20">
-          <h1 className="text-4xl font-bold tracking-tight text-black mb-5">Insights Page</h1>
-          <p className="text-[17px] text-black/80 leading-relaxed font-medium">
+        <ScrollReveal className="max-w-4xl mb-16 md:mb-20">
+          <h1 className="text-[clamp(2.5rem,4vw,4rem)] font-bold tracking-tight text-black mb-5">Insights Page</h1>
+          <p className="text-[16px] md:text-[18px] text-black/80 leading-relaxed font-medium">
             A unified page with clear segmentation for Blogs, Press Releases and Announcements. All three content types are accessible from this single page via a persistent tab or filter row.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Tab Filters */}
-        <div className="flex items-center gap-8 border-b border-black/10 mb-16 px-2">
-          <button className="pb-4 text-[11px] font-semibold text-[#00E573] border-b-2 border-[#00E573] mb-[-1px]">
+        <ScrollReveal delay={100} className="flex flex-wrap items-center gap-4 md:gap-10 border-b border-black/10 mb-16 px-2">
+          <button className="pb-4 text-[13px] md:text-[14px] font-bold text-[#00E573] border-b-2 border-[#00E573] mb-[-1px] uppercase tracking-widest">
             All
           </button>
-          <button className="pb-4 text-[11px] font-medium text-black/50 hover:text-black/80 transition-colors mb-[-1px]">
+          <button className="pb-4 text-[13px] md:text-[14px] font-bold text-black/50 hover:text-black/80 transition-colors mb-[-1px] uppercase tracking-widest">
             Press Releases
           </button>
-          <button className="pb-4 text-[11px] font-medium text-black/50 hover:text-black/80 transition-colors mb-[-1px]">
+          <button className="pb-4 text-[13px] md:text-[14px] font-bold text-black/50 hover:text-black/80 transition-colors mb-[-1px] uppercase tracking-widest">
             Announcement
           </button>
-        </div>
+        </ScrollReveal>
 
         {/* Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <ScrollReveal staggerChildren={true} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
           {cards.map((card, i) => (
-            <div key={i} className="flex flex-col border border-black/10 shadow-sm hover:shadow-lg transition-shadow bg-[#fcfcfc] overflow-hidden">
+            <div key={i} className="animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out flex flex-col border border-black/10 shadow-sm hover:shadow-xl hover:-translate-y-1 bg-[#fcfcfc] overflow-hidden">
               {/* Image Area */}
               <div className="aspect-square w-full bg-white relative border-b border-black/10">
                 {/* Empty placeholder to match screenshot exactly */}
+                <div className="absolute inset-0 bg-black/5 opacity-50" />
               </div>
               
               {/* Content Area */}
-              <div className="bg-[#0a0a0a] text-white p-7 flex flex-col flex-grow">
+              <div className="bg-[#0a0a0a] text-white p-6 md:p-10 flex flex-col flex-grow">
                 {/* Top Row: Tags + Date */}
-                <div className="flex items-center justify-between mb-5">
-                  <div className="flex gap-1.5">
-                    <span className="bg-white/20 text-[7.5px] font-bold tracking-widest px-2 py-1 uppercase rounded-sm">{card.tag1}</span>
-                    <span className="bg-white text-black text-[7.5px] font-bold tracking-widest px-2 py-1 uppercase rounded-sm">{card.tag2}</span>
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+                  <div className="flex flex-wrap gap-2">
+                    <span className="bg-white/20 text-[9px] md:text-[10px] font-bold tracking-widest px-2 md:px-3 py-1.5 uppercase rounded-sm">{card.tag1}</span>
+                    <span className="bg-white text-black text-[9px] md:text-[10px] font-bold tracking-widest px-2 md:px-3 py-1.5 uppercase rounded-sm">{card.tag2}</span>
                   </div>
-                  <span className="text-[7.5px] font-semibold tracking-widest uppercase text-white/50">{card.date}</span>
+                  <span className="text-[9px] md:text-[10px] font-semibold tracking-widest uppercase text-white/50">{card.date}</span>
                 </div>
                 
                 {/* Title */}
-                <h3 className="text-[13px] font-bold leading-relaxed mb-6">{card.title}</h3>
+                <h3 className="text-[18px] md:text-[22px] font-bold leading-relaxed mb-8">{card.title}</h3>
                 
                 {/* Subtitles (PDF Info) */}
-                <div className="mt-auto flex flex-col gap-1 mb-8">
+                <div className="mt-auto flex flex-col gap-1.5 mb-10">
                   {card.details.split('\n').map((line: string, idx: number) => (
-                    <p key={idx} className="text-[9.5px] text-white/50 font-medium">{line}</p>
+                    <p key={idx} className="text-[12px] md:text-[13px] text-white/50 font-medium">{line}</p>
                   ))}
                 </div>
                 
                 {/* Button */}
-                <button className="w-full bg-white text-black py-3 text-[10px] font-bold tracking-widest uppercase flex justify-center items-center gap-2 hover:bg-white/90 transition-colors rounded-sm">
+                <button className="w-full bg-white text-black py-4 text-[11px] md:text-[12px] font-bold tracking-widest uppercase flex justify-center items-center gap-2 hover:bg-white/90 transition-colors rounded-sm">
                   READ MORE
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </button>
               </div>
             </div>
           ))}
-        </div>
+        </ScrollReveal>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-black">
-        <div className="h-[2px] w-full bg-[#00E573]" />
-        <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-10 px-8 py-16 md:grid-cols-4">
-          <div>
-            <Logo small />
-            <p className="mt-6 max-w-xs text-xs leading-relaxed text-white/60">
-              Precision Engineering for a Sustainable Future. Global headquarters in Zurich,
-              manufacturing in Munich.
-            </p>
-          </div>
-          {[
-            { title: "PLATFORM", links: ["Technology", "Architecture", "Roadmap"] },
-            { title: "RESOURCES", links: ["Whitepapers", "Documentation", "Case Studies"] },
-            { title: "CONNECT", links: ["LinkedIn", "Contact Support", "Investor Relations"] },
-          ].map((col) => (
-            <div key={col.title}>
-              <h4 className="text-[10px] font-semibold tracking-[0.2em] text-white/60">{col.title}</h4>
-              <ul className="mt-5 space-y-3">
-                {col.links.map((l) => (
-                  <li key={l}>
-                    <a href="#" className="text-sm text-white/85 hover:text-white">
-                      {l}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </footer>
     </div>
   );
 }

@@ -2,31 +2,38 @@
 import { useEffect, useRef } from 'react';
 import styles from './Solutions.module.css';
 
+import Link from 'next/link';
+
 const solutions = [
   {
     title: "Depot Infrastructure",
     description: "High-capacity charging for EV fleet depots at scale.",
     image: "/images/Depot.png",
+    href: "/solutions/depot-infrastructure",
   },
   {
     title: "Charge Point Operators",
     description: "White-label power conversion for CPO networks.",
     image: "/images/CPO.png",
+    href: "/solutions/charge-point-operators",
   },
   {
     title: "Hospitality & Workplace",
     description: "Seamless EV charging experiences for commercial sites.",
     image: "/images/HPW.png",
+    href: "/solutions/hospitality-workplace",
   },
   {
     title: "Residential",
     description: "Intelligent home charging for modern living.",
     image: "/images/Residential.png",
+    href: "/solutions/residential",
   },
   {
     title: "Custom Solutions",
     description: "Bespoke power conversion for unique use cases.",
     image: "/images/CustomSolutions.png",
+    href: "/solutions/custom-solutions",
   },
 ];
 
@@ -67,8 +74,9 @@ export default function Solutions() {
 
         <div className={styles.cardsGrid}>
           {solutions.map((sol, i) => (
-            <div
+            <Link
               key={i}
+              href={sol.href}
               className={styles.card}
               style={{ backgroundImage: `url(${sol.image})` }}
             >
@@ -78,7 +86,7 @@ export default function Solutions() {
                 <p className={styles.cardDesc}>{sol.description}</p>
                 <span className={styles.cardCta}>Explore</span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
