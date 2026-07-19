@@ -430,6 +430,9 @@
   .top-4 {
     top: calc(var(--spacing) * 4);
   }
+  .top-6 {
+    top: calc(var(--spacing) * 6);
+  }
   .top-12 {
     top: calc(var(--spacing) * 12);
   }
@@ -462,6 +465,9 @@
   }
   .right-4 {
     right: calc(var(--spacing) * 4);
+  }
+  .right-6 {
+    right: calc(var(--spacing) * 6);
   }
   .right-10 {
     right: calc(var(--spacing) * 10);
@@ -507,6 +513,9 @@
   }
   .z-\[1\] {
     z-index: 1;
+  }
+  .z-\[9999\] {
+    z-index: 9999;
   }
   .order-1 {
     order: 1;
@@ -840,6 +849,9 @@
   .w-10 {
     width: calc(var(--spacing) * 10);
   }
+  .w-12 {
+    width: calc(var(--spacing) * 12);
+  }
   .w-48 {
     width: calc(var(--spacing) * 48);
   }
@@ -938,6 +950,9 @@
   }
   .max-w-\[1440px\] {
     max-width: 1440px;
+  }
+  .max-w-\[1600px\] {
+    max-width: 1600px;
   }
   .max-w-lg {
     max-width: var(--container-lg);
@@ -1106,6 +1121,9 @@
   .resize-none {
     resize: none;
   }
+  .list-disc {
+    list-style-type: disc;
+  }
   .list-none {
     list-style-type: none;
   }
@@ -1203,6 +1221,13 @@
       --tw-space-y-reverse: 0;
       margin-block-start: calc(calc(var(--spacing) * 2) * var(--tw-space-y-reverse));
       margin-block-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-3 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 3) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
   .space-y-6 {
@@ -1895,6 +1920,9 @@
   .pl-4 {
     padding-left: calc(var(--spacing) * 4);
   }
+  .pl-5 {
+    padding-left: calc(var(--spacing) * 5);
+  }
   .pl-8 {
     padding-left: calc(var(--spacing) * 8);
   }
@@ -2004,6 +2032,9 @@
   .text-\[clamp\(1\.5rem\,3\.8vw\,4rem\)\] {
     font-size: clamp(1.5rem, 3.8vw, 4rem);
   }
+  .text-\[clamp\(1\.5rem\,3vw\,2\.5rem\)\] {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+  }
   .text-\[clamp\(1\.5rem\,3vw\,2rem\)\] {
     font-size: clamp(1.5rem, 3vw, 2rem);
   }
@@ -2074,6 +2105,10 @@
   .leading-\[1\.08\] {
     --tw-leading: 1.08;
     line-height: 1.08;
+  }
+  .leading-\[1\.9\] {
+    --tw-leading: 1.9;
+    line-height: 1.9;
   }
   .leading-\[1\.35\] {
     --tw-leading: 1.35;
@@ -2179,6 +2214,12 @@
   .text-\[\#1f2937\] {
     color: #1f2937;
   }
+  .text-\[\#111\] {
+    color: #111;
+  }
+  .text-\[\#333\] {
+    color: #333;
+  }
   .text-\[\#374151\] {
     color: #374151;
   }
@@ -2187,6 +2228,12 @@
   }
   .text-black {
     color: var(--color-black);
+  }
+  .text-black\/20 {
+    color: color-mix(in srgb, #000 20%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-black) 20%, transparent);
+    }
   }
   .text-black\/30 {
     color: color-mix(in srgb, #000 30%, transparent);
@@ -3035,6 +3082,16 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--accent);
+      }
+    }
+  }
+  .hover\:bg-black\/10 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in srgb, #000 10%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-black) 10%, transparent);
+        }
       }
     }
   }
@@ -4089,6 +4146,16 @@
       position: absolute;
     }
   }
+  .md\:top-10 {
+    @media (width >= 48rem) {
+      top: calc(var(--spacing) * 10);
+    }
+  }
+  .md\:right-10 {
+    @media (width >= 48rem) {
+      right: calc(var(--spacing) * 10);
+    }
+  }
   .md\:order-1 {
     @media (width >= 48rem) {
       order: 1;
@@ -4573,6 +4640,11 @@
       padding-left: calc(var(--spacing) * 20);
     }
   }
+  .md\:text-left {
+    @media (width >= 48rem) {
+      text-align: left;
+    }
+  }
   .md\:text-2xl {
     @media (width >= 48rem) {
       font-size: var(--text-2xl);
@@ -4869,6 +4941,11 @@
       flex-shrink: 1;
     }
   }
+  .lg\:grid-cols-2 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
   .lg\:grid-cols-3 {
     @media (width >= 64rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -4897,6 +4974,11 @@
   .lg\:gap-16 {
     @media (width >= 64rem) {
       gap: calc(var(--spacing) * 16);
+    }
+  }
+  .lg\:gap-24 {
+    @media (width >= 64rem) {
+      gap: calc(var(--spacing) * 24);
     }
   }
   .lg\:overflow-hidden {
