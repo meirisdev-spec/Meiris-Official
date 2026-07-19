@@ -127,16 +127,16 @@ export default function Navbar() {
           </li>
           
           <li className={styles.mobileCta}>
-            <Link href="/contact">
-              <button className={styles.contactBtn}>Get in touch</button>
+            <Link href="/contact" className={styles.contactBtn}>
+              Get in touch
             </Link>
           </li>
         </ul>
 
         {/* CTA */}
         <div className={styles.actions}>
-          <Link href="/contact" className={styles.contactBtnWrapper}>
-            <button className={styles.contactBtn}>Get in touch</button>
+          <Link href="/contact" className={`${styles.contactBtnWrapper} ${styles.contactBtn}`}>
+            Get in touch
           </Link>
           <button className={styles.hamburger} onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.hamburgerIcon}>
