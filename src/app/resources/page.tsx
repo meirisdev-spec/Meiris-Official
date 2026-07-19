@@ -1,45 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Resources — Meiris Intelligent Power Conversion",
   description: "A single section containing all downloadable collaterals — brochures, operating manuals, technical specifications, and any other documents.",
 };
-
-const navItems = [
-  { label: "Platform", to: "/platform" },
-  { label: "Products", to: "/products" },
-  { label: "Solutions", to: "/solutions" },
-  { label: "Insights", to: "/insights" },
-  { label: "About", to: "/about" },
-];
-
-function Logo({ small = false }: { small?: boolean }) {
-  return (
-    <Link href="/" className="flex items-center gap-2 text-white">
-      <svg width={small ? 20 : 28} height={small ? 20 : 28} viewBox="0 0 40 40" fill="none" aria-hidden>
-        <circle cx="20" cy="20" r="2" fill="white" />
-        {Array.from({ length: 12 }).map((_, i) => {
-          const a = (i * Math.PI * 2) / 12;
-          return (
-            <line
-              key={i}
-              x1={20 + Math.cos(a) * 6}
-              y1={20 + Math.sin(a) * 6}
-              x2={20 + Math.cos(a) * 18}
-              y2={20 + Math.sin(a) * 18}
-              stroke="white"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          );
-        })}
-      </svg>
-      <span className={`${small ? "text-[10px]" : "text-xs"} font-semibold tracking-[0.25em]`}>MEIRIS</span>
-    </Link>
-  );
-}
 
 const cards = Array(6).fill({
   tag1: "CASE STUDY",
@@ -51,43 +17,41 @@ const cards = Array(6).fill({
 export default function ResourcesPage() {
   return (
     <div className="relative min-h-screen bg-white text-black selection:bg-[#00E573] selection:text-black">
-      
-
-      <main className="mx-auto max-w-[1200px] px-8 pt-24 pb-32">
+      <main className="mx-auto max-w-[1400px] px-6 md:px-12 pt-[120px] pb-32 overflow-hidden">
         {/* Hero Text */}
-        <div className="max-w-4xl mb-20">
-          <h1 className="text-4xl font-bold tracking-tight text-black mb-5">Resources</h1>
-          <p className="text-[15px] md:text-[17px] text-black/70 leading-relaxed font-medium max-w-3xl">
+        <ScrollReveal className="max-w-4xl mb-16 md:mb-20">
+          <h1 className="text-[clamp(2.5rem,4vw,4rem)] font-bold tracking-tight text-black mb-5">Resources</h1>
+          <p className="text-[16px] md:text-[18px] text-black/70 leading-relaxed font-medium max-w-3xl">
             A single section containing all downloadable collaterals — brochures, operating manuals, technical specifications, and any other documents MEIRIS makes available to visitors. Each collateral is presented as a card.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Tab Filters */}
-        <div className="flex items-center gap-8 border-b border-black/10 mb-16 px-2 overflow-x-auto whitespace-nowrap scrollbar-hide">
-          <button className="pb-4 text-[11px] font-semibold text-[#00E573] border-b-2 border-[#00E573] mb-[-1px]">
+        <ScrollReveal delay={100} className="flex flex-wrap items-center gap-4 md:gap-10 border-b border-black/10 mb-16 px-2">
+          <button className="pb-4 text-[13px] md:text-[14px] font-bold text-[#00E573] border-b-2 border-[#00E573] mb-[-1px] uppercase tracking-widest">
             All
           </button>
-          <button className="pb-4 text-[11px] font-medium text-black/50 hover:text-black/80 transition-colors mb-[-1px]">
+          <button className="pb-4 text-[13px] md:text-[14px] font-bold text-black/50 hover:text-black/80 transition-colors mb-[-1px] uppercase tracking-widest">
             Brochures
           </button>
-          <button className="pb-4 text-[11px] font-medium text-black/50 hover:text-black/80 transition-colors mb-[-1px]">
+          <button className="pb-4 text-[13px] md:text-[14px] font-bold text-black/50 hover:text-black/80 transition-colors mb-[-1px] uppercase tracking-widest">
             Specifications
           </button>
-          <button className="pb-4 text-[11px] font-medium text-black/50 hover:text-black/80 transition-colors mb-[-1px]">
+          <button className="pb-4 text-[13px] md:text-[14px] font-bold text-black/50 hover:text-black/80 transition-colors mb-[-1px] uppercase tracking-widest">
             Manuals
           </button>
-          <button className="pb-4 text-[11px] font-medium text-black/50 hover:text-black/80 transition-colors mb-[-1px]">
+          <button className="pb-4 text-[13px] md:text-[14px] font-bold text-black/50 hover:text-black/80 transition-colors mb-[-1px] uppercase tracking-widest">
             Case Studies
           </button>
-          <button className="pb-4 text-[11px] font-medium text-black/50 hover:text-black/80 transition-colors mb-[-1px]">
+          <button className="pb-4 text-[13px] md:text-[14px] font-bold text-black/50 hover:text-black/80 transition-colors mb-[-1px] uppercase tracking-widest">
             Corporate
           </button>
-        </div>
+        </ScrollReveal>
 
         {/* Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <ScrollReveal staggerChildren={true} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
           {cards.map((card, i) => (
-            <div key={i} className="flex flex-col border border-black/10 shadow-sm hover:shadow-lg transition-shadow bg-[#fcfcfc] overflow-hidden">
+            <div key={i} className="animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out flex flex-col border border-black/10 shadow-sm hover:shadow-xl hover:-translate-y-1 bg-[#fcfcfc] overflow-hidden">
               {/* Image Area */}
               <div className="aspect-[4/3] w-full bg-[#131b22] relative flex flex-col items-center justify-center">
                 {/* Glowing Car Graphic Placeholder */}
@@ -98,34 +62,32 @@ export default function ResourcesPage() {
               </div>
               
               {/* Content Area */}
-              <div className="bg-[#0a0a0a] text-white p-7 flex flex-col flex-grow">
+              <div className="bg-[#0a0a0a] text-white p-6 md:p-10 flex flex-col flex-grow">
                 {/* Top Row: Tags */}
-                <div className="flex gap-1.5 mb-5">
-                  <span className="bg-white/20 text-[7.5px] font-bold tracking-widest px-2 py-1 uppercase rounded-sm">{card.tag1}</span>
-                  <span className="bg-white text-black text-[7.5px] font-bold tracking-widest px-2 py-1 uppercase rounded-sm">{card.tag2}</span>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="bg-white/20 text-[9px] md:text-[10px] font-bold tracking-widest px-2 md:px-3 py-1.5 uppercase rounded-sm">{card.tag1}</span>
+                  <span className="bg-white text-black text-[9px] md:text-[10px] font-bold tracking-widest px-2 md:px-3 py-1.5 uppercase rounded-sm">{card.tag2}</span>
                 </div>
                 
                 {/* Title */}
-                <h3 className="text-[13px] font-bold leading-relaxed mb-6">{card.title}</h3>
+                <h3 className="text-[18px] md:text-[22px] font-bold leading-relaxed mb-8">{card.title}</h3>
                 
                 {/* Subtitles (PDF Info) */}
-                <div className="mt-auto flex flex-col gap-1 mb-8">
+                <div className="mt-auto flex flex-col gap-1.5 mb-10">
                   {card.details.split('\n').map((line: string, idx: number) => (
-                    <p key={idx} className="text-[9.5px] text-white/50 font-medium">{line}</p>
+                    <p key={idx} className="text-[12px] md:text-[13px] text-white/50 font-medium">{line}</p>
                   ))}
                 </div>
                 
                 {/* Button */}
-                <button className="w-full bg-white text-black py-3 text-[10px] font-bold tracking-widest uppercase flex justify-center items-center hover:bg-white/90 transition-colors rounded-sm">
+                <button className="w-full bg-white text-black py-4 text-[11px] md:text-[12px] font-bold tracking-widest uppercase flex justify-center items-center gap-2 hover:bg-white/90 transition-colors rounded-sm">
                   ACCESS DOCUMENT
                 </button>
               </div>
             </div>
           ))}
-        </div>
+        </ScrollReveal>
       </main>
-
-      
     </div>
   );
 }

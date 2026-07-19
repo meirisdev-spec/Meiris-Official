@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 import solCharge from "@/assets/sol-charge.jpg";
 import solDepot from "@/assets/sol-depot.jpg";
@@ -107,7 +108,7 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
     <section className="bg-white py-16 md:py-32 px-6 md:px-12 lg:px-24">
       <div className="max-w-[1440px] mx-auto w-full">
         {/* Header & Tabs */}
-        <div className="mb-16 md:mb-24">
+        <ScrollReveal className="mb-16 md:mb-24">
           {headingText && (
             <h2 className="text-[clamp(2.5rem,4vw,3.5rem)] font-bold text-[#1f2937] mb-8 tracking-tight font-[family-name:var(--font-primary)]">
               {headingText}
@@ -131,10 +132,10 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
               ))}
             </div>
           )}
-        </div>
+        </ScrollReveal>
         
         {setupData?.setupForm ? (
-          <div className="max-w-4xl mx-auto bg-white">
+          <ScrollReveal className="max-w-4xl mx-auto bg-white">
             <p className="text-gray-500 mb-8">{setupData.setupForm.subtitle}</p>
             <form className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
               {setupData.setupForm.fields.map((field: any, idx: number) => (
@@ -153,15 +154,15 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
                 </button>
               </div>
             </form>
-          </div>
+          </ScrollReveal>
         ) : (
-          <div className={`grid gap-10 md:gap-12 lg:gap-16 ${
+          <ScrollReveal staggerChildren={true} className={`grid gap-10 md:gap-12 lg:gap-16 ${
             featuresToDisplay.length === 4 
               ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4" 
               : "grid-cols-1 md:grid-cols-3"
           }`}>
             {featuresToDisplay.map((feature: any, idx: number) => (
-              <div key={idx} className="flex flex-col items-center">
+              <div key={idx} className="animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out flex flex-col items-center">
                 <div className="w-full aspect-[4/3] bg-gray-100 rounded-[2rem] overflow-hidden relative shadow-sm mb-8 transition-transform duration-500 hover:scale-[1.02]">
                   <Image 
                     src={feature.image} 
@@ -178,7 +179,7 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
                 </p>
               </div>
             ))}
-          </div>
+          </ScrollReveal>
         )}
       </div>
     </section>

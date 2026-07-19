@@ -8,6 +8,7 @@ import solHospitality from "@/assets/sol-hospitality.jpg";
 import solResidential from "@/assets/sol-residential.jpg";
 import RecommendedSetup from "./RecommendedSetup";
 import CustomSection2 from "./CustomSection2";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Solutions — Meiris Intelligent Power Conversion",
@@ -570,26 +571,27 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
       <section className="relative flex flex-col md:flex-row h-auto md:h-screen min-h-[100dvh] md:min-h-[700px] pt-[68px] bg-[#0c0c0c] w-full">
         {/* Left Content */}
         <div className="w-full md:w-1/2 px-6 md:pl-20 md:pr-12 pb-16 pt-20 md:pt-[15vh] z-10 flex flex-col justify-start md:justify-center">
-          <h1 className="text-[clamp(2.5rem,4.5vw,4.5rem)] font-bold text-white leading-[1.05] tracking-tight mb-6 max-w-xl">
-            {content.heroTitle}
-          </h1>
-          <p className="text-[15px] md:text-[16px] text-white/80 max-w-xl mb-10 leading-relaxed font-[family-name:var(--font-secondary)]">
-            {content.heroSubtitle}
-          </p>
-          <div className="flex flex-wrap items-center gap-4">
-            <button className="bg-[#00E573] text-black px-6 py-3 text-[13px] font-bold tracking-wide transition-all hover:bg-white hover:-translate-y-0.5 rounded-sm">
-              Talk to our expert
-            </button>
-            <button className="border border-white/20 text-white px-6 py-3 text-[13px] font-bold tracking-wide flex items-center gap-2 hover:bg-white/5 transition-all rounded-sm hover:-translate-y-0.5">
-              See how it works 
-              <span className="text-[14px] leading-none font-normal">→</span>
-            </button>
-          </div>
+          <ScrollReveal>
+            <h1 className="text-[clamp(2.5rem,4.5vw,4.5rem)] font-bold text-white leading-[1.05] tracking-tight mb-6 max-w-xl">
+              {content.heroTitle}
+            </h1>
+            <p className="text-[15px] md:text-[16px] text-white/80 max-w-xl mb-10 leading-relaxed font-[family-name:var(--font-secondary)]">
+              {content.heroSubtitle}
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <button className="bg-[#00E573] text-black px-6 py-3 text-[13px] font-bold tracking-wide transition-all hover:bg-white hover:-translate-y-0.5 rounded-sm">
+                Talk to our expert
+              </button>
+              <button className="border border-white/20 text-white px-6 py-3 text-[13px] font-bold tracking-wide flex items-center gap-2 hover:bg-white/5 transition-all rounded-sm hover:-translate-y-0.5">
+                See how it works 
+                <span className="text-[14px] leading-none font-normal">→</span>
+              </button>
+            </div>
+          </ScrollReveal>
         </div>
         
         {/* Right Massive Gray Block */}
-        <div className="hidden md:block absolute right-0 top-0 bottom-0 w-[55%] bg-[#e6e6e6] rounded-l-[4rem] shadow-2xl z-0">
-        </div>
+        <ScrollReveal delay={300} className="hidden md:block absolute right-0 top-0 bottom-0 w-[55%] bg-[#e6e6e6] rounded-l-[4rem] shadow-2xl z-0" />
       </section>
 
       {/* Interactive Map Section OR Custom Section 2 */}
@@ -598,53 +600,59 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
       ) : (
         <section className="bg-black py-16 md:py-32 px-6 md:px-20 border-t border-white/10 relative">
           <div className="mx-auto max-w-[1200px]">
-            <h2 className="text-[clamp(2rem,3.5vw,3rem)] font-bold text-white mb-16 max-w-4xl leading-[1.1] tracking-tight">
-              {content.mapHeading || (
-                <>
-                  Running a fleet depot has its own set of challenges.<br />
-                  Tap a marker to see where things typically go wrong.
-                </>
-              )}
-            </h2>
+            <ScrollReveal>
+              <h2 className="text-[clamp(2rem,3.5vw,3rem)] font-bold text-white mb-16 max-w-4xl leading-[1.1] tracking-tight">
+                {content.mapHeading || (
+                  <>
+                    Running a fleet depot has its own set of challenges.<br />
+                    Tap a marker to see where things typically go wrong.
+                  </>
+                )}
+              </h2>
+            </ScrollReveal>
             
-            <div className="w-full bg-white rounded-2xl md:rounded-3xl relative aspect-[4/3] md:aspect-[16/9] max-h-[700px] overflow-hidden mb-10 shadow-2xl p-4 md:p-8">
-              {/* SVG Lines Connecting Markers */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                <line x1="20%" y1="35%" x2="40%" y2="50%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
-                <line x1="20%" y1="35%" x2="30%" y2="60%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
-                <line x1="40%" y1="50%" x2="55%" y2="25%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
-                <line x1="40%" y1="50%" x2="70%" y2="50%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
-                <line x1="40%" y1="50%" x2="30%" y2="60%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
-                <line x1="55%" y1="25%" x2="70%" y2="50%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
-                <line x1="70%" y1="50%" x2="85%" y2="35%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
-                <line x1="70%" y1="50%" x2="90%" y2="60%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
-                <line x1="85%" y1="35%" x2="90%" y2="60%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
-              </svg>
-              
-              {/* Markers */}
-              <Marker num={1} top="35%" left="20%" />
-              <Marker num={2} top="50%" left="40%" />
-              <Marker num={3} top="25%" left="55%" labelOnTop={false} />
-              <Marker num={4} top="50%" left="70%" />
-              <Marker num={5} top="35%" left="85%" />
-              <Marker num={6} top="60%" left="90%" />
-              <Marker num={7} top="60%" left="30%" labelOnTop={false} />
-              
-              {/* Bottom text */}
-              <div className="absolute bottom-8 right-10 text-[#00E573] text-[10px] font-medium tracking-wide">
-                Select a marker to explore
+            <ScrollReveal delay={150}>
+              <div className="w-full bg-white rounded-2xl md:rounded-3xl relative aspect-[4/3] md:aspect-[16/9] max-h-[700px] overflow-hidden mb-10 shadow-2xl p-4 md:p-8">
+                {/* SVG Lines Connecting Markers */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                  <line x1="20%" y1="35%" x2="40%" y2="50%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
+                  <line x1="20%" y1="35%" x2="30%" y2="60%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
+                  <line x1="40%" y1="50%" x2="55%" y2="25%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
+                  <line x1="40%" y1="50%" x2="70%" y2="50%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
+                  <line x1="40%" y1="50%" x2="30%" y2="60%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
+                  <line x1="55%" y1="25%" x2="70%" y2="50%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
+                  <line x1="70%" y1="50%" x2="85%" y2="35%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
+                  <line x1="70%" y1="50%" x2="90%" y2="60%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
+                  <line x1="85%" y1="35%" x2="90%" y2="60%" stroke="black" strokeWidth="1" strokeOpacity="0.3" />
+                </svg>
+                
+                {/* Markers */}
+                <Marker num={1} top="35%" left="20%" />
+                <Marker num={2} top="50%" left="40%" />
+                <Marker num={3} top="25%" left="55%" labelOnTop={false} />
+                <Marker num={4} top="50%" left="70%" />
+                <Marker num={5} top="35%" left="85%" />
+                <Marker num={6} top="60%" left="90%" />
+                <Marker num={7} top="60%" left="30%" labelOnTop={false} />
+                
+                {/* Bottom text */}
+                <div className="absolute bottom-8 right-10 text-[#00E573] text-[10px] font-medium tracking-wide">
+                  Select a marker to explore
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
             
             {/* Over-heating / Quality Card */}
-            <div className="w-full bg-[#eefaf3] rounded-xl p-6 md:p-8 border border-[#cbeadd] shadow-sm">
-              <h3 className="text-[#0d6447] font-bold text-sm md:text-[13px] tracking-[0.1em] mb-3 uppercase">
-                {content.cardTitle}
-              </h3>
-              <p className="text-[#374151] text-[14px] md:text-[15px] leading-relaxed max-w-5xl">
-                {content.cardText}
-              </p>
-            </div>
+            <ScrollReveal delay={300}>
+              <div className="w-full bg-[#eefaf3] rounded-xl p-6 md:p-8 border border-[#cbeadd] shadow-sm">
+                <h3 className="text-[#0d6447] font-bold text-sm md:text-[13px] tracking-[0.1em] mb-3 uppercase">
+                  {content.cardTitle}
+                </h3>
+                <p className="text-[#374151] text-[14px] md:text-[15px] leading-relaxed max-w-5xl">
+                  {content.cardText}
+                </p>
+              </div>
+            </ScrollReveal>
           </div>
         </section>
       )}
@@ -652,19 +660,21 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
       {/* "One partner" Section */}
       <section className="bg-[#171717] py-16 md:py-32 px-6 md:px-20 relative border-t border-white/5">
         <div className="mx-auto max-w-[1400px]">
-          <h2 className="text-[clamp(2rem,3.5vw,3.2rem)] font-bold text-white mb-16 max-w-4xl leading-[1.05] tracking-tight">
-            {content.sectionHeading}
-          </h2>
+          <ScrollReveal>
+            <h2 className="text-[clamp(2rem,3.5vw,3.2rem)] font-bold text-white mb-16 max-w-4xl leading-[1.05] tracking-tight">
+              {content.sectionHeading}
+            </h2>
+          </ScrollReveal>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <ScrollReveal staggerChildren={true} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {content.features.map((feature: any, i: number) => (
-              <div key={i} className="border border-white/20 rounded-2xl p-8 flex flex-col gap-4 hover:bg-white/5 transition-colors">
+              <div key={i} className="animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out border border-white/20 rounded-2xl p-8 flex flex-col gap-4 hover:bg-white/5">
                 <div className="w-3.5 h-3.5 rounded-full bg-white/90 shadow-sm"></div>
                 <h3 className="text-white font-bold text-lg mt-3 pr-4 leading-tight">{feature.title}</h3>
                 <p className="text-white/50 text-[11px] leading-relaxed pr-2">{feature.desc}</p>
               </div>
             ))}
-          </div>
+          </ScrollReveal>
         </div>
         
       </section>
@@ -674,13 +684,15 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
       {/* Uptime Section */}
       <section className="bg-white py-16 md:py-32 px-6 md:px-20 relative border-t border-black/5">
         <div className="mx-auto max-w-[1000px]">
-          <h2 className="text-[clamp(2rem,3vw,2.5rem)] font-bold text-black mb-16 text-center tracking-tight leading-tight">
-            {content.benefitsHeading}
-          </h2>
+          <ScrollReveal>
+            <h2 className="text-[clamp(2rem,3vw,2.5rem)] font-bold text-black mb-16 text-center tracking-tight leading-tight">
+              {content.benefitsHeading}
+            </h2>
+          </ScrollReveal>
           
-          <div className="flex flex-col gap-4">
+          <ScrollReveal staggerChildren={true} className="flex flex-col gap-4">
             {content.benefits.map((item: any, i: number) => (
-              <div key={i} className="bg-[#f0f1f3] rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8 hover:bg-[#e6e8eb] transition-colors">
+              <div key={i} className="animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out bg-[#f0f1f3] rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8 hover:bg-[#e6e8eb]">
                 <div className="w-6 h-6 rounded-full bg-[#00E573] flex-shrink-0 mt-1 md:mt-0 shadow-[0_0_15px_rgba(0,229,115,0.4)]"></div>
                 <div className="flex flex-col gap-1.5 flex-grow">
                   <h3 className="text-black font-bold text-[17px]">{item.heading}</h3>
@@ -695,7 +707,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
                 )}
               </div>
             ))}
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
