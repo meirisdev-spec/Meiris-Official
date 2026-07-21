@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ProductsClient from "./ProductsClient";
+import { client } from "@/sanity/lib/client";
 
 import { getLocalizedMetadata } from "@/lib/seo";
 
@@ -12,6 +13,45 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   });
 }
 
-export default function Page() {
-  return <ProductsClient />;
+export default async function Page({ params: { locale } }: { params: { locale: string } }) {
+  const productsPage = await client.fetch(
+    `*[_type == "productsPage" && language == $locale][0] {
+      ...,
+      hero {
+        ...,
+        "imageUrl": image.asset->url
+      },
+      categories {
+        acCard {
+          ...,
+          "imageUrl": image.asset->url
+        },
+        dcCard {
+          ...,
+          "imageUrl": image.asset->url
+        }
+      }
+    }`,
+    { locale }
+  ) || await client.fetch(
+    `*[_type == "productsPage" && language == "en"][0] {
+      ...,
+      hero {
+        ...,
+        "imageUrl": image.asset->url
+      },
+      categories {
+        acCard {
+          ...,
+          "imageUrl": image.asset->url
+        },
+        dcCard {
+          ...,
+          "imageUrl": image.asset->url
+        }
+      }
+    }`
+  );
+
+  return <ProductsClient data={productsPage} />;
 }
