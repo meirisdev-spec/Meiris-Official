@@ -6,25 +6,26 @@ import solCharge from "@/assets/sol-charge.jpg";
 import solHospitality from "@/assets/sol-hospitality.jpg";
 import platformModule from "@/assets/platform-module.jpg";
 
-const acModels = [
-  { id: '3.3', name: '3.3 kW', formFactor: 'Compact wall mount', useCase: 'Home / residential bay', spec: 'Single-phase, overnight charging' },
-  { id: '7.4', name: '7.4 kW', formFactor: 'Compact wall mount', useCase: 'Home / residential bay', spec: 'Single-phase, faster overnight' },
-  { id: '11', name: '11 kW', formFactor: 'Wall mount / pedestal', useCase: 'Workplace / apartment complex', spec: 'Three-phase' },
-  { id: '22', name: '22 kW', formFactor: 'Pedestal', useCase: 'Workplace / commercial car park', spec: 'Three-phase, higher throughput' },
-];
-
-const dcModels = [
-  { id: '30', name: '30 kW', formFactor: 'Compact pedestal', useCase: 'Cab / light EV depot', spec: 'Si/SiC-based, compact footprint' },
-  { id: '60', name: '60 kW', formFactor: 'Floor mounted', useCase: 'Cab / light commercial depot', spec: 'Si/SiC-based' },
-  { id: '120', name: '120 kW', formFactor: 'Floor mounted', useCase: 'Bus / truck depot, highway site', spec: 'Si/SiC-based, high power' },
-  { id: '180', name: '180 kW', formFactor: 'Floor mounted', useCase: 'Bus / truck depot, highway site', spec: 'Si/SiC-based, high power' },
-  { id: '240', name: '240 kW', formFactor: 'Floor mounted', useCase: 'Heavy commercial depot, HPC hub', spec: 'MEIRIS CHARGE Plus flagship, Si/SiC based' },
-  { id: '360', name: '360 kW', formFactor: 'Floor mounted', useCase: 'Ultra-high power, HPC hub', spec: 'Si/SiC based, Multi-module, high-throughput' },
-];
-
-export default function ProductsPage() {
+export default function ProductsPage({ data }: { data?: any }) {
   const [activeCategory, setActiveCategory] = useState<'ac' | 'dc' | null>(null);
   const [isClosing, setIsClosing] = useState(false);
+
+  // Fallback to hardcoded arrays if Sanity data is missing
+  const acModels = data?.acModels?.length ? data.acModels : [
+    { id: '3.3', name: '3.3 kW', formFactor: 'Compact wall mount', useCase: 'Home / residential bay', spec: 'Single-phase, overnight charging' },
+    { id: '7.4', name: '7.4 kW', formFactor: 'Compact wall mount', useCase: 'Home / residential bay', spec: 'Single-phase, faster overnight' },
+    { id: '11', name: '11 kW', formFactor: 'Wall mount / pedestal', useCase: 'Workplace / apartment complex', spec: 'Three-phase' },
+    { id: '22', name: '22 kW', formFactor: 'Pedestal', useCase: 'Workplace / commercial car park', spec: 'Three-phase, higher throughput' },
+  ];
+
+  const dcModels = data?.dcModels?.length ? data.dcModels : [
+    { id: '30', name: '30 kW', formFactor: 'Compact pedestal', useCase: 'Cab / light EV depot', spec: 'Si/SiC-based, compact footprint' },
+    { id: '60', name: '60 kW', formFactor: 'Floor mounted', useCase: 'Cab / light commercial depot', spec: 'Si/SiC-based' },
+    { id: '120', name: '120 kW', formFactor: 'Floor mounted', useCase: 'Bus / truck depot, highway site', spec: 'Si/SiC-based, high power' },
+    { id: '180', name: '180 kW', formFactor: 'Floor mounted', useCase: 'Bus / truck depot, highway site', spec: 'Si/SiC-based, high power' },
+    { id: '240', name: '240 kW', formFactor: 'Floor mounted', useCase: 'Heavy commercial depot, HPC hub', spec: 'MEIRIS CHARGE Plus flagship, Si/SiC based' },
+    { id: '360', name: '360 kW', formFactor: 'Floor mounted', useCase: 'Ultra-high power, HPC hub', spec: 'Si/SiC based, Multi-module, high-throughput' },
+  ];
 
   // Animation and selected model state
   const [activeModelIndex, setActiveModelIndex] = useState(0);
@@ -124,36 +125,28 @@ export default function ProductsPage() {
       >
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0">
-            <Image src={solHospitality} alt="Commercial Charging" className="h-full w-full object-cover object-right" placeholder="blur" />
-          </div>
-          <div
-            className="absolute inset-0"
-            style={{ clipPath: "polygon(0 0, 85% 0, 70% 100%, 0 100%)" }}
-          >
-            <Image src={solCharge} alt="Highway Charging" className="h-full w-full object-cover object-[70%_center]" placeholder="blur" />
-          </div>
-          <div
-            className="absolute inset-0"
-            style={{ clipPath: "polygon(0 0, 55% 0, 40% 100%, 0 100%)" }}
-          >
-            <Image src={solDepot} alt="Depot Charging" className="h-full w-full object-cover object-[30%_center] opacity-80" placeholder="blur" />
+            {data?.hero?.imageUrl ? (
+              <img src={data.hero.imageUrl} alt="Hero Background" className="h-full w-full object-cover" />
+            ) : (
+              <Image src={solCharge} alt="Hero Background" className="h-full w-full object-cover" placeholder="blur" />
+            )}
           </div>
           <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-black/30"></div>
         </div>
 
         <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col justify-center px-8 md:px-16 py-12 md:py-24 pt-[120px] md:pt-[140px]">
-          <h1 className="max-w-4xl text-[clamp(2.5rem,4.5vw,4.5rem)] font-bold leading-[1.05] tracking-tight">
-            Engineered for harsh operating conditions.<br /> Built to deliver every time.
+          <h1 className="max-w-4xl text-[clamp(2.5rem,4.5vw,4.5rem)] font-bold leading-[1.05] tracking-tight whitespace-pre-line">
+            {data?.hero?.title || "Engineered for harsh operating conditions.\nBuilt to deliver every time."}
           </h1>
-          <p className="mt-8 max-w-2xl text-[15px] leading-relaxed text-white/90">
-            AC chargers for residential and workplace dwell-time charging. DC fast chargers for fleets, depots and highway corridors. Dynamic Load Balancing for intelligent multi-charger site management.
+          <p className="mt-8 max-w-2xl text-[15px] leading-relaxed text-white/90 whitespace-pre-line">
+            {data?.hero?.description || "AC chargers for residential and workplace dwell-time charging. DC fast chargers for fleets, depots and highway corridors. Dynamic Load Balancing for intelligent multi-charger site management."}
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <button className="bg-[#00E573] text-white px-6 py-3 text-[13px] font-bold tracking-wide rounded-sm cursor-pointer hover:bg-[#00c261] transition-colors">
-              Talk to our expert
+              {data?.hero?.btnTalk || "Talk to our expert"}
             </button>
             <button className="border border-white text-white px-6 py-3 text-[13px] font-semibold flex items-center gap-2 hover:bg-white/10 transition-colors rounded-sm cursor-pointer">
-              See how it works
+              {data?.hero?.btnHowItWorks || "See how it works"}
               <span>→</span>
             </button>
           </div>
@@ -174,18 +167,28 @@ export default function ProductsPage() {
               className="flex flex-col animate-on-scroll opacity-0 translate-y-10 transition duration-700 ease-out cursor-pointer group"
             >
               <div className="relative aspect-square w-full overflow-hidden bg-black border border-white/5">
-                <Image src={platformModule} alt="AC Chargers Module" className="absolute inset-0 h-full w-full object-cover opacity-40 grayscale transition-transform duration-700 group-hover:scale-105" placeholder="blur" />
+                {data?.categories?.acCard?.imageUrl ? (
+                  <img src={data.categories.acCard.imageUrl} alt="AC Chargers Module" className="absolute inset-0 h-full w-full object-cover opacity-40 grayscale transition-transform duration-700 group-hover:scale-105" />
+                ) : (
+                  <Image src={platformModule} alt="AC Chargers Module" className="absolute inset-0 h-full w-full object-cover opacity-40 grayscale transition-transform duration-700 group-hover:scale-105" placeholder="blur" />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 p-10 pointer-events-none">
-                  <h2 className="text-[clamp(2rem,3vw,2.5rem)] font-bold tracking-tight">AC Chargers</h2>
-                  <div className="mt-4 text-[11px] text-white/80 space-y-1">
-                    <p>3.3 · 7.4 · 11 · 22 kW</p>
-                    <p>Bidirectional Distributed Dispenser Systems</p>
+                  <h2 className="text-[clamp(2rem,3vw,2.5rem)] font-bold tracking-tight whitespace-pre-line">{data?.categories?.acCard?.title || "AC Chargers"}</h2>
+                  <div className="mt-4 text-[11px] text-white/80 space-y-1 whitespace-pre-line">
+                    {data?.categories?.acCard?.subtitles ? (
+                      <p>{data.categories.acCard.subtitles}</p>
+                    ) : (
+                      <>
+                        <p>3.3 · 7.4 · 11 · 22 kW</p>
+                        <p>Bidirectional Distributed Dispenser Systems</p>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
               <button className="w-full bg-[#d9d9d9] group-hover:bg-[#c9c9c9] transition-colors text-black py-5 flex items-center justify-center gap-3 text-[13px] font-medium border border-black/10 cursor-pointer">
-                See how it works
+                {data?.categories?.acCard?.btnText || "See how it works"}
                 <span className="font-light">→</span>
               </button>
             </div>
@@ -196,18 +199,30 @@ export default function ProductsPage() {
               className="flex flex-col animate-on-scroll opacity-0 translate-y-10 transition duration-700 ease-out cursor-pointer group"
             >
               <div className="relative aspect-square w-full overflow-hidden bg-black border border-white/5">
-                <Image src={platformModule} alt="DC Fast Chargers Module" className="absolute inset-0 h-full w-full object-cover opacity-40 grayscale transition-transform duration-700 group-hover:scale-105" placeholder="blur" />
+                {data?.categories?.dcCard?.imageUrl ? (
+                  <img src={data.categories.dcCard.imageUrl} alt="DC Fast Chargers Module" className="absolute inset-0 h-full w-full object-cover opacity-40 grayscale transition-transform duration-700 group-hover:scale-105" />
+                ) : (
+                  <Image src={platformModule} alt="DC Fast Chargers Module" className="absolute inset-0 h-full w-full object-cover opacity-40 grayscale transition-transform duration-700 group-hover:scale-105" placeholder="blur" />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 p-10 pointer-events-none">
-                  <h2 className="text-[clamp(2rem,3vw,2.5rem)] font-bold tracking-tight leading-[1.1]">DC Fast<br />Chargers</h2>
-                  <div className="mt-4 text-[11px] text-white/80 space-y-1">
-                    <p>30 · 60 · 120 · 180 · 240 · 360 kW</p>
-                    <p>Bidirectional Distributed Dispenser Systems</p>
+                  <h2 className="text-[clamp(2rem,3vw,2.5rem)] font-bold tracking-tight leading-[1.1] whitespace-pre-line">
+                    {data?.categories?.dcCard?.title || "DC Fast\nChargers"}
+                  </h2>
+                  <div className="mt-4 text-[11px] text-white/80 space-y-1 whitespace-pre-line">
+                    {data?.categories?.dcCard?.subtitles ? (
+                      <p>{data.categories.dcCard.subtitles}</p>
+                    ) : (
+                      <>
+                        <p>30 · 60 · 120 · 180 · 240 · 360 kW</p>
+                        <p>Bidirectional Distributed Dispenser Systems</p>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
               <button className="w-full bg-[#d9d9d9] group-hover:bg-[#c9c9c9] transition-colors text-black py-5 flex items-center justify-center gap-3 text-[13px] font-medium border border-black/10 cursor-pointer">
-                See how it works
+                {data?.categories?.dcCard?.btnText || "See how it works"}
                 <span className="font-light">→</span>
               </button>
             </div>
@@ -344,10 +359,10 @@ export default function ProductsPage() {
       >
         <div className="mx-auto w-full max-w-[1400px]">
           <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold tracking-tight text-white mb-12">
-            Everything after delivery.
+            {data?.servicesSection?.heading || "Everything after delivery."}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll opacity-0 translate-y-10 transition duration-700 ease-out">
-            {[
+            {(data?.servicesSection?.services || [
               {
                 title: 'Pan-India Service Support',
                 description: 'Nationwide coverage with local technical expertise and spares.',
@@ -368,7 +383,7 @@ export default function ProductsPage() {
                 description: 'Responsible decommissioning, component recovery and recycling programme.',
                 badge: null,
               }
-            ].map((service, i) => (
+            ]).map((service: any, i: number) => (
               <div
                 key={i}
                 className="bg-[#EAEAEA] p-10 flex flex-col h-full min-h-[300px]"
