@@ -1,19 +1,19 @@
 "use client";
 import { useEffect, useRef } from 'react';
 import styles from './Hero.module.css';
+import { useTranslations } from 'next-intl';
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const t = useTranslations('Hero');
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Pause playback when hero is not visible to free up CPU/GPU
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Play and catch any autoplay policy rejections silently
           video.play().catch(() => { });
         } else {
           video.pause();
@@ -51,20 +51,19 @@ export default function Hero() {
       {/* Content */}
       <div className={styles.content}>
         <h1 className={styles.title}>
-          The power conversion <br className={styles.desktopBr} />
-          platform <span className={styles.highlight}>global</span> <br className={styles.desktopBr} />
-          <span className={styles.highlight}>electrification</span> needs
+          {t('title1')} <br className={styles.desktopBr} />
+          {t('title2')} <span className={styles.highlight}>{t('title3')}</span> <br className={styles.desktopBr} />
+          <span className={styles.highlight}>{t('title4')}</span> {t('title5')}
         </h1>
       </div>
 
       <div className={styles.bottomContent}>
         <p className={styles.description}>
-          From fleet depots to residential grids, our vertically integrated architecture delivers <br className={styles.desktopBr} />
-          precision control and unmatched efficiency across every electrification touchpoint.
+          {t('description')}
         </p>
         <div className={styles.actions}>
-          <button className={`${styles.btn} ${styles.btnPrimary}`}>EXPLORE ARCHITECTURE</button>
-          <button className={`${styles.btn} ${styles.btnSecondary}`}>VIEW SOLUTIONS</button>
+          <button className={`${styles.btn} ${styles.btnPrimary}`}>{t('btnExplore')}</button>
+          <button className={`${styles.btn} ${styles.btnSecondary}`}>{t('btnSolutions')}</button>
         </div>
       </div>
     </section>

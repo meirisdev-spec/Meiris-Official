@@ -1,5 +1,7 @@
 {
-  "/contact/page": "app/contact/page.js",
-  "/page": "app/page.js",
-  "/insights/page": "app/insights/page.js"
+  "/(main)/[locale]/page": "app/(main)/[locale]/page.js",
+  "/(admin)/studio/[[...tool]]/page": "app/(admin)/studio/[[...tool]]/page.js",
+  "/(main)/[locale]/insights/page": "app/(main)/[locale]/insights/page.js",
+  "/(main)/[locale]/team/page": "app/(main)/[locale]/team/page.js",
+  "/(main)/[locale]/platform/page": "app/(main)/[locale]/platform/page.js"
 }

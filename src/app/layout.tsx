@@ -1,6 +1,11 @@
-import type { Metadata } from "next";
+import { Metadata } from 'next';
+import { ReactNode } from 'react';
+import { getLocale } from 'next-intl/server';
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://meiris.com'),
+};
 import { DM_Sans, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -20,31 +25,17 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["700"],
 });
 
-export const metadata: Metadata = {
-  title: "Meiris — The power conversion platform for global electrification",
-  description: "From fleet depots to residential grids, our vertically integrated architecture delivers precision control and unmatched efficiency across every electrification touchpoint.",
-};
-
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-
-
-import { LenisProvider } from "./LenisProvider";
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  let locale = 'en';
+  try {
+    locale = await getLocale();
+  } catch (e) {
+    // Fallback for non-i18n routes like /studio
+  }
+  
   return (
-    <html lang="en" className={`${dmSans.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable}`}>
-      <body>
-        <LenisProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </LenisProvider>
-      </body>
+    <html lang={locale} className={`${dmSans.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useRef } from 'react';
 import styles from './Contact.module.css';
+import { useTranslations } from 'next-intl';
 
 export default function Contact() {
   const sectionRef = useRef(null);
+  const t = useTranslations('Contact');
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -24,17 +26,17 @@ export default function Contact() {
       <div className={styles.container}>
         <div className={styles.contactBox}>
           <div className={styles.textContent}>
-            <h2 className={styles.title}>Ready to Engineer the Transition?</h2>
+            <h2 className={styles.title}>{t('heading')}</h2>
             <p className={styles.description}>
-              Whether you are building the next generation of chargers or scaling industrial storage, our platform provides the precision you need.
+              {t('description')}
             </p>
             <form className={styles.form}>
               <div className={styles.inputGroup}>
-                <input type="text" placeholder="Full Name" className={styles.input} required />
-                <input type="email" placeholder="Work Email" className={styles.input} required />
+                <input type="text" placeholder={t('namePlaceholder')} className={styles.input} required />
+                <input type="email" placeholder={t('emailPlaceholder')} className={styles.input} required />
               </div>
-              <textarea placeholder="Project Details" className={styles.textarea} rows={4} required></textarea>
-              <button type="submit" className={styles.submitBtn}>Initialize Consultation</button>
+              <textarea placeholder={t('messagePlaceholder')} className={styles.textarea} rows={4} required></textarea>
+              <button type="submit" className={styles.submitBtn}>{t('submit')}</button>
             </form>
           </div>
           <div className={styles.imageContent}>
