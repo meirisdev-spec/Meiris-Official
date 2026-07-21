@@ -2,46 +2,10 @@
 import { useEffect, useRef } from 'react';
 import styles from './Solutions.module.css';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
-import { useLocale } from 'next-intl';
-
-export default function Solutions() {
+export default function Solutions({ data }: { data: any }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const t = useTranslations('Solutions');
-  const locale = useLocale();
-
-  const solutions = [
-    {
-      title: t('depot.title'),
-      description: t('depot.description'),
-      image: "/images/Depot.png",
-      href: `/${locale}/solutions/depot-infrastructure`,
-    },
-    {
-      title: t('cpo.title'),
-      description: t('cpo.description'),
-      image: "/images/CPO.png",
-      href: `/${locale}/solutions/charge-point-operators`,
-    },
-    {
-      title: t('hospitality.title'),
-      description: t('hospitality.description'),
-      image: "/images/HPW.png",
-      href: `/${locale}/solutions/hospitality-workplace`,
-    },
-    {
-      title: t('residential.title'),
-      description: t('residential.description'),
-      image: "/images/Residential.png",
-      href: `/${locale}/solutions/residential`,
-    },
-    {
-      title: t('custom.title'),
-      description: t('custom.description'),
-      image: "/images/CustomSolutions.png",
-      href: `/${locale}/solutions/custom-solutions`,
-    },
-  ];
+  
+  const solutions = data.solutions || [];
 
   useEffect(() => {
     const cardEls = sectionRef.current?.querySelectorAll(`.${styles.card}`) ?? [];
@@ -67,22 +31,22 @@ export default function Solutions() {
     <section className={styles.solutions} ref={sectionRef}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>{t('heading')}</h2>
+          <h2 className={styles.title}>{data.heading}</h2>
         </div>
 
         <div className={styles.cardsGrid}>
-          {solutions.map((sol, i) => (
+          {solutions.map((sol: any, i: number) => (
             <Link
               key={i}
               href={sol.href}
               className={styles.card}
-              style={{ backgroundImage: `url(${sol.image})` }}
+              style={{ backgroundImage: `url(${sol.imageUrl || '/images/CustomSolutions.png'})` }}
             >
               <div className={styles.cardOverlay} />
               <div className={styles.cardBody}>
                 <h3 className={styles.cardTitle}>{sol.title}</h3>
                 <p className={styles.cardDesc}>{sol.description}</p>
-                <span className={styles.cardCta}>{t('explore')}</span>
+                <span className={styles.cardCta}>{data.exploreText}</span>
               </div>
             </Link>
           ))}

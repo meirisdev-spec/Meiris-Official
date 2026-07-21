@@ -17,7 +17,7 @@ async function migrate() {
 
   const transaction = client.transaction()
 
-  docs.forEach((doc) => {
+  docs.forEach((doc: any) => {
     transaction.patch(doc._id, (p) => p.set({ language: 'en' }))
   })
 

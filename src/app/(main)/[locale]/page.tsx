@@ -6,6 +6,8 @@ import Contact from '../../_components/Contact';
 import { getLocalizedMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
+import { client } from '@/sanity/lib/client';
+
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   return getLocalizedMetadata({
     locale,
@@ -14,13 +16,64 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   });
 }
 
-export default function Home() {
+export default async function Home({ params: { locale } }: { params: { locale: string } }) {
+  // Fetch the homepage document for this locale. Fallback to English if not found.
+  const homePage = await client.fetch(
+    `*[_type == "homePage" && language == $locale][0] {
+      ...,
+      "solutionsSection": {
+        ...,
+        solutions[] {
+          ...,
+          "imageUrl": image.asset->url
+        }
+      },
+      "contactSection": {
+        ...,
+        "imageUrl": image.asset->url
+      }
+    }
+    `,
+    { locale }
+  ) || await client.fetch(
+    `*[_type == "homePage" && language == "en"][0] {
+      ...,
+      "solutionsSection": {
+        ...,
+        solutions[] {
+          ...,
+          "imageUrl": image.asset->url
+        }
+      },
+      "contactSection": {
+        ...,
+        "imageUrl": image.asset->url
+      }
+    }`
+  );
+
+  // Fetch the latest 3 posts dynamically
+  const latestPosts = await client.fetch(
+    `*[_type == "post" && (!defined(language) || language == $locale)] | order(publishedAt desc)[0...3] {
+      title,
+      publishedAt,
+      "slug": slug.current,
+      "imageUrl": mainImage.asset->url,
+      categories[]->{title}
+    }`,
+    { locale }
+  );
+
+  if (!homePage) {
+    return <div>Home page content not found.</div>;
+  }
+
   return (
     <div className="main-wrapper">
-      <Hero />
-      <Solutions />
-      <LatestNews />
-      <Contact />
+      <Hero data={homePage.hero} />
+      <Solutions data={homePage.solutionsSection} />
+      <LatestNews data={{...homePage.latestNewsSection, posts: latestPosts}} locale={locale} />
+      <Contact data={homePage.contactSection} />
     </div>
   );
 }
