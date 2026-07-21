@@ -27,6 +27,9 @@ export const structure: StructureResolver = (S) =>
                       .title(`${lang.title} — Posts`)
                       .filter('_type == "post" && (language == $lang || ($lang == "en" && !defined(language)))')
                       .params({ lang: lang.id })
+                      .initialValueTemplates([
+                        S.initialValueTemplateItem(`post-${lang.id}`)
+                      ])
                   )
               )
             )
@@ -49,6 +52,9 @@ export const structure: StructureResolver = (S) =>
                       .title(`${lang.title} — Team`)
                       .filter('_type == "teamMember" && (language == $lang || ($lang == "en" && !defined(language)))')
                       .params({ lang: lang.id })
+                      .initialValueTemplates([
+                        S.initialValueTemplateItem(`teamMember-${lang.id}`)
+                      ])
                   )
               )
             )
