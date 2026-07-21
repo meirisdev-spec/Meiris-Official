@@ -1,11 +1,8 @@
 "use client";
 import { useEffect, useRef } from 'react';
 import styles from './Contact.module.css';
-import { useTranslations } from 'next-intl';
-
-export default function Contact() {
+export default function Contact({ data }: { data: any }) {
   const sectionRef = useRef(null);
-  const t = useTranslations('Contact');
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -26,21 +23,21 @@ export default function Contact() {
       <div className={styles.container}>
         <div className={styles.contactBox}>
           <div className={styles.textContent}>
-            <h2 className={styles.title}>{t('heading')}</h2>
+            <h2 className={styles.title}>{data.heading}</h2>
             <p className={styles.description}>
-              {t('description')}
+              {data.description}
             </p>
             <form className={styles.form}>
               <div className={styles.inputGroup}>
-                <input type="text" placeholder={t('namePlaceholder')} className={styles.input} required />
-                <input type="email" placeholder={t('emailPlaceholder')} className={styles.input} required />
+                <input type="text" placeholder={data.namePlaceholder} className={styles.input} required />
+                <input type="email" placeholder={data.emailPlaceholder} className={styles.input} required />
               </div>
-              <textarea placeholder={t('messagePlaceholder')} className={styles.textarea} rows={4} required></textarea>
-              <button type="submit" className={styles.submitBtn}>{t('submit')}</button>
+              <textarea placeholder={data.messagePlaceholder} className={styles.textarea} rows={4} required></textarea>
+              <button type="submit" className={styles.submitBtn}>{data.submitBtn}</button>
             </form>
           </div>
           <div className={styles.imageContent}>
-            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Engineers discussing" className={styles.image} />
+            <img src={data.imageUrl || "https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"} alt="Contact" className={styles.image} />
           </div>
         </div>
       </div>

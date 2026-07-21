@@ -1,11 +1,8 @@
 "use client";
 import { useEffect, useRef } from 'react';
 import styles from './Hero.module.css';
-import { useTranslations } from 'next-intl';
-
-export default function Hero() {
+export default function Hero({ data }: { data: any }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const t = useTranslations('Hero');
 
   useEffect(() => {
     const video = videoRef.current;
@@ -43,7 +40,7 @@ export default function Hero() {
           poster="/images/Depot.png"
           aria-hidden="true"
         >
-          <source src="/videos/Home Page.mp4" type="video/mp4" />
+          <source src={data.videoUrl} type="video/mp4" />
         </video>
         <div className={styles.overlay} />
       </div>
@@ -51,19 +48,19 @@ export default function Hero() {
       {/* Content */}
       <div className={styles.content}>
         <h1 className={styles.title}>
-          {t('title1')} <br className={styles.desktopBr} />
-          {t('title2')} <span className={styles.highlight}>{t('title3')}</span> <br className={styles.desktopBr} />
-          <span className={styles.highlight}>{t('title4')}</span> {t('title5')}
+          {data.title1} <br className={styles.desktopBr} />
+          {data.title2} <span className={styles.highlight}>{data.title3}</span> <br className={styles.desktopBr} />
+          <span className={styles.highlight}>{data.title4}</span> {data.title5}
         </h1>
       </div>
 
       <div className={styles.bottomContent}>
         <p className={styles.description}>
-          {t('description')}
+          {data.description}
         </p>
         <div className={styles.actions}>
-          <button className={`${styles.btn} ${styles.btnPrimary}`}>{t('btnExplore')}</button>
-          <button className={`${styles.btn} ${styles.btnSecondary}`}>{t('btnSolutions')}</button>
+          <button className={`${styles.btn} ${styles.btnPrimary}`}>{data.btnExplore}</button>
+          <button className={`${styles.btn} ${styles.btnSecondary}`}>{data.btnSolutions}</button>
         </div>
       </div>
     </section>
