@@ -20,6 +20,13 @@ function ScrollRestoration() {
 }
 
 export function LenisProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
+  // Disable smooth scrolling in Sanity Studio, as it breaks its internal scrolling containers
+  if (pathname?.startsWith("/studio")) {
+    return <>{children}</>;
+  }
+
   return (
     <ReactLenis root options={{ lerp: 0.05, duration: 1.5, smoothWheel: true }}>
       <ScrollRestoration />

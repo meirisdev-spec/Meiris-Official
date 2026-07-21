@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from 'react';
 import styles from './LatestNews.module.css';
+import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 
-// Mock data (would normally be fetched from Sanity)
 const mockNews = [
   {
     category: "Press Release",
@@ -30,9 +31,10 @@ const mockNews = [
 export default function LatestNews() {
   const sectionRef = useRef<HTMLElement>(null);
   const [news, setNews] = useState<typeof mockNews>([]);
+  const t = useTranslations('LatestNews');
+  const locale = useLocale();
 
   useEffect(() => {
-    // Simulate fetching from Sanity
     setNews(mockNews);
 
     const observer = new IntersectionObserver((entries) => {
@@ -53,8 +55,8 @@ export default function LatestNews() {
     <section className={styles.newsSection} ref={sectionRef}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>Latest News</h2>
-          <a href="/insights" className={styles.viewAll}>All News →</a>
+          <h2 className={styles.title}>{t('heading')}</h2>
+          <a href={`/${locale}/insights`} className={styles.viewAll}>{t('viewAll')}</a>
         </div>
         <div className={styles.newsGrid}>
           {news.map((item, index) => (
@@ -66,7 +68,7 @@ export default function LatestNews() {
                 <h3 className={styles.newsTitle}>{item.title}</h3>
                 <div className={styles.meta}>
                   <span className={styles.date}>{item.date}</span>
-                  <a href={item.link} className={styles.readMore}>Read More →</a>
+                  <a href={item.link} className={styles.readMore}>{t('readMore')}</a>
                 </div>
               </div>
             </div>

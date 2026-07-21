@@ -1,0 +1,86 @@
+{
+  "Navbar": {
+    "platform": "Plataforma",
+    "products": "Productos",
+    "solutions": "Soluciones",
+    "insights": "Perspectivas",
+    "about": "Nosotros",
+    "contact": "Contáctenos"
+  },
+  "Prompt": {
+    "title": "Selecciona tu región",
+    "en": "Continuar en inglés internacional",
+    "es": "Cambiar a Español (Latinoamérica)"
+  },
+  "Hero": {
+    "title1": "La plataforma de",
+    "title2": "conversión de energía",
+    "title3": "global",
+    "title4": "electrificación",
+    "title5": "necesita",
+    "description": "Desde depósitos de flotas hasta redes residenciales, nuestra arquitectura verticalmente integrada ofrece control de precisión y eficiencia incomparable en cada punto de electrificación.",
+    "btnExplore": "EXPLORAR ARQUITECTURA",
+    "btnSolutions": "VER SOLUCIONES"
+  },
+  "Solutions": {
+    "heading": "Nuestras Soluciones",
+    "explore": "Explorar",
+    "depot": {
+      "title": "Infraestructura de Depósito",
+      "description": "Carga de alta capacidad para depósitos de flotas de vehículos eléctricos a escala."
+    },
+    "cpo": {
+      "title": "Operadores de Puntos de Carga",
+      "description": "Conversión de energía de marca blanca para redes CPO."
+    },
+    "hospitality": {
+      "title": "Hospitalidad y Lugares de Trabajo",
+      "description": "Experiencias de carga de vehículos eléctricos sin interrupciones para sitios comerciales."
+    },
+    "residential": {
+      "title": "Residencial",
+      "description": "Carga doméstica inteligente para la vida moderna."
+    },
+    "custom": {
+      "title": "Soluciones Personalizadas",
+      "description": "Conversión de energía a medida para casos de uso únicos."
+    }
+  },
+  "LatestNews": {
+    "heading": "Últimas Noticias",
+    "viewAll": "Todas las Noticias →",
+    "readMore": "Leer Más →"
+  },
+  "Contact": {
+    "heading": "¿Listo para Diseñar la Transición?",
+    "description": "Ya sea que esté construyendo la próxima generación de cargadores o escalando almacenamiento industrial, nuestra plataforma le brinda la precisión que necesita.",
+    "namePlaceholder": "Nombre Completo",
+    "emailPlaceholder": "Correo Empresarial",
+    "messagePlaceholder": "Detalles del Proyecto",
+    "submit": "Inicializar Consulta"
+  },
+  "ContactPage": {
+    "heroTitle": "Ya sea que sea fabricante de vehículos eléctricos, operador de flota o empresa que explora la infraestructura de EV, nos encantaría saber de usted.",
+    "heroSubtitle": "Conéctese con nuestros expertos para analizar soluciones de carga inteligente diseñadas para la movilidad del mañana.",
+    "formHeading": "Contáctenos",
+    "catSales": "Ventas y Alianzas",
+    "catSupport": "Soporte Técnico",
+    "catProduct": "Información de Producto",
+    "catGeneral": "Consultas Generales",
+    "labelName": "Nombre Completo",
+    "labelCompany": "Empresa",
+    "labelEmail": "Correo Electrónico",
+    "labelPhone": "Número de Teléfono",
+    "labelMessage": "Su Mensaje",
+    "placeholderName": "Juan Pérez",
+    "placeholderCompany": "Nombre de la Organización",
+    "placeholderEmail": "juan@empresa.com",
+    "placeholderPhone": "+52 (55) 0000-0000",
+    "placeholderMessage": "¿Cómo podemos ayudarle?",
+    "send": "ENVIAR MENSAJE",
+    "hqTitle": "Sede Global",
+    "emailTitle": "Escríbenos",
+    "callTitle": "Llamar a Expertos",
+    "callHours": "Lun - Vie, 9am - 6pm SGT"
+  }
+}

@@ -1,18 +1,33 @@
 "use client";
 import { useEffect, useRef, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Navbar.module.css';
+import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 
 export default function Navbar() {
-  // Use a ref for the progress bar — direct DOM mutation avoids React re-renders
-  // on every scroll tick, which was causing the stepping/lag
   const progressBarRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
+  const router = useRouter();
+  const t = useTranslations('Navbar');
+  const currentLocale = useLocale();
   let rafId: number | null = null;
+
+  const switchLanguage = (newLocale: string) => {
+    // Save preference in cookie for next-intl middleware (1 year expiry)
+    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`;
+    
+    // Strip current locale prefix and replace with new one
+    const currentPath = pathname?.replace(/^\/(en|es-419)/, '') || '/';
+    router.push(`/${newLocale}${currentPath || '/'}`);
+  };
+
+  // Build locale-aware href
+  const localePath = (path: string) => `/${currentLocale}${path}`;
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -28,7 +43,6 @@ export default function Navbar() {
     if (!bar) return;
 
     const onScroll = () => {
-      // Cancel any pending frame so we only update once per frame
       if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
         const scrollTop = window.scrollY;
@@ -39,7 +53,7 @@ export default function Navbar() {
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // set initial state
+    onScroll();
 
     return () => {
       window.removeEventListener('scroll', onScroll);
@@ -53,7 +67,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <div className={styles.logo}>
-          <Link href="/">
+          <Link href={localePath('/')}>
             <Image
               src="/logos/Meiris-Logo.png"
               alt="MEIRIS — Intelligent Power Conversion"
@@ -67,76 +81,90 @@ export default function Navbar() {
 
         {/* Nav links */}
         <ul className={`${styles.navLinks} ${isMenuOpen ? styles.active : ''}`}>
-          <li><Link href="/">Home</Link></li>
-          <li><Link href="/platform">Platform</Link></li>
+          <li><Link href={localePath('/')}>Home</Link></li>
+          <li><Link href={localePath('/platform')}>{t('platform')}</Link></li>
 
           <li className={`${styles.dropdown} ${activeDropdown === 'products' ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown('products')}>
             <span className={styles.dropdownTrigger}>
-              Products
+              {t('products')}
               <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
               </svg>
             </span>
             <div className={styles.dropdownPanel}>
-              <Link href="/products" className={styles.dropdownItem}>MEIRIS Charge</Link>
+              <Link href={localePath('/products')} className={styles.dropdownItem}>MEIRIS Charge</Link>
             </div>
           </li>
 
           <li className={`${styles.dropdown} ${activeDropdown === 'solutions' ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown('solutions')}>
             <span className={styles.dropdownTrigger}>
-              Solutions
+              {t('solutions')}
               <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
               </svg>
             </span>
             <div className={styles.dropdownPanel}>
-              <Link href="/solutions/depot-infrastructure" className={styles.dropdownItem}>Depot Infrastructure</Link>
-              <Link href="/solutions/charge-point-operators" className={styles.dropdownItem}>Charge Point Operators</Link>
-              <Link href="/solutions/hospitality-workplace" className={styles.dropdownItem}>Hospitality &amp; Workplace</Link>
-              <Link href="/solutions/residential" className={styles.dropdownItem}>Residential</Link>
-              <Link href="/solutions/custom-solutions" className={styles.dropdownItem}>Custom Solutions</Link>
+              <Link href={localePath('/solutions/depot-infrastructure')} className={styles.dropdownItem}>Depot Infrastructure</Link>
+              <Link href={localePath('/solutions/charge-point-operators')} className={styles.dropdownItem}>Charge Point Operators</Link>
+              <Link href={localePath('/solutions/hospitality-workplace')} className={styles.dropdownItem}>Hospitality &amp; Workplace</Link>
+              <Link href={localePath('/solutions/residential')} className={styles.dropdownItem}>Residential</Link>
+              <Link href={localePath('/solutions/custom-solutions')} className={styles.dropdownItem}>Custom Solutions</Link>
             </div>
           </li>
 
           <li className={`${styles.dropdown} ${activeDropdown === 'insights' ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown('insights')}>
             <span className={styles.dropdownTrigger}>
-              Insights
+              {t('insights')}
               <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
               </svg>
             </span>
             <div className={styles.dropdownPanel}>
-              <Link href="/insights" className={styles.dropdownItem}>Press Releases &amp; Announcements</Link>
-              <Link href="/resources" className={styles.dropdownItem}>Resources</Link>
+              <Link href={localePath('/insights')} className={styles.dropdownItem}>Press Releases &amp; Announcements</Link>
+              <Link href={localePath('/resources')} className={styles.dropdownItem}>Resources</Link>
             </div>
           </li>
 
           <li className={`${styles.dropdown} ${activeDropdown === 'about' ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown('about')}>
             <span className={styles.dropdownTrigger}>
-              About
+              {t('about')}
               <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
               </svg>
             </span>
             <div className={styles.dropdownPanel}>
-              <Link href="/about" className={styles.dropdownItem}>About Us</Link>
-              <Link href="/team" className={styles.dropdownItem}>Team</Link>
-              <Link href="/careers" className={styles.dropdownItem}>Career</Link>
-              <Link href="/contact" className={styles.dropdownItem}>Contact Us</Link>
+              <Link href={localePath('/about')} className={styles.dropdownItem}>About Us</Link>
+              <Link href={localePath('/team')} className={styles.dropdownItem}>Team</Link>
+              <Link href={localePath('/careers')} className={styles.dropdownItem}>Career</Link>
+              <Link href={localePath('/contact')} className={styles.dropdownItem}>Contact Us</Link>
             </div>
           </li>
           
           <li className={styles.mobileCta}>
-            <Link href="/contact" className={styles.contactBtn}>
+            <Link href={localePath('/contact')} className={styles.contactBtn}>
               Get in touch
             </Link>
           </li>
         </ul>
 
-        {/* CTA */}
+        {/* CTA and Lang */}
         <div className={styles.actions}>
-          <Link href="/contact" className={`${styles.contactBtnWrapper} ${styles.contactBtn}`}>
-            Get in touch
+          <div className="flex bg-white/10 rounded-full p-1 border border-white/20">
+            <button 
+              onClick={() => switchLanguage('en')}
+              className={`px-3 py-1 text-xs font-bold uppercase rounded-full transition-all duration-200 ${currentLocale === 'en' ? 'bg-white text-black shadow-sm' : 'text-white/60 hover:text-white'}`}
+            >
+              EN
+            </button>
+            <button 
+              onClick={() => switchLanguage('es-419')}
+              className={`px-3 py-1 text-xs font-bold uppercase rounded-full transition-all duration-200 ${currentLocale === 'es-419' ? 'bg-[#00E573] text-black shadow-sm' : 'text-white/60 hover:text-white'}`}
+            >
+              ES
+            </button>
+          </div>
+          <Link href={localePath('/contact')} className={`${styles.contactBtnWrapper} ${styles.contactBtn}`}>
+            {t('contact')}
           </Link>
           <button className={styles.hamburger} onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.hamburgerIcon}>
