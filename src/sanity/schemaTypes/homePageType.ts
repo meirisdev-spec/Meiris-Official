@@ -18,7 +18,7 @@ export const homePageType = defineType({
       name: 'hero',
       title: 'Hero Section',
       type: 'object',
-      group: 'content',
+      group: 'hero',
       fields: [
         defineField({
           name: 'title1',
@@ -76,7 +76,7 @@ export const homePageType = defineType({
       name: 'solutionsSection',
       title: 'Solutions Section',
       type: 'object',
-      group: 'content',
+      group: 'solutions',
       fields: [
         defineField({
           name: 'heading',
@@ -112,7 +112,7 @@ export const homePageType = defineType({
       name: 'latestNewsSection',
       title: 'Latest News Section',
       type: 'object',
-      group: 'content',
+      group: 'latestNews',
       fields: [
         defineField({
           name: 'heading',
@@ -137,7 +137,7 @@ export const homePageType = defineType({
       name: 'contactSection',
       title: 'Contact Section',
       type: 'object',
-      group: 'content',
+      group: 'contact',
       fields: [
         defineField({
           name: 'heading',
@@ -179,11 +179,10 @@ export const homePageType = defineType({
     }),
   ],
   groups: [
-    {
-      name: 'content',
-      title: 'Content',
-      default: true,
-    },
+    { name: 'hero', title: 'Hero Section', default: true },
+    { name: 'solutions', title: 'Solutions Section' },
+    { name: 'latestNews', title: 'Latest News Section' },
+    { name: 'contact', title: 'Contact Section' },
   ],
   preview: {
     prepare() {
