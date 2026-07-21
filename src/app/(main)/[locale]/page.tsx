@@ -16,19 +16,22 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   });
 }
 
+export const revalidate = 0; // Disable caching to fetch live data from Sanity
+
+
 export default async function Home({ params: { locale } }: { params: { locale: string } }) {
   // Fetch the homepage document for this locale. Fallback to English if not found.
   const homePage = await client.fetch(
     `*[_type == "homePage" && language == $locale][0] {
       ...,
-      "solutionsSection": {
+      solutionsSection {
         ...,
         solutions[] {
           ...,
           "imageUrl": image.asset->url
         }
       },
-      "contactSection": {
+      contactSection {
         ...,
         "imageUrl": image.asset->url
       }
@@ -38,14 +41,14 @@ export default async function Home({ params: { locale } }: { params: { locale: s
   ) || await client.fetch(
     `*[_type == "homePage" && language == "en"][0] {
       ...,
-      "solutionsSection": {
+      solutionsSection {
         ...,
         solutions[] {
           ...,
           "imageUrl": image.asset->url
         }
       },
-      "contactSection": {
+      contactSection {
         ...,
         "imageUrl": image.asset->url
       }
@@ -64,16 +67,18 @@ export default async function Home({ params: { locale } }: { params: { locale: s
     { locale }
   );
 
+  console.log("HOMEPAGE DATA FROM SANITY:", JSON.stringify(homePage, null, 2));
+
   if (!homePage) {
     return <div>Home page content not found.</div>;
   }
 
   return (
     <div className="main-wrapper">
-      <Hero data={homePage.hero} />
-      <Solutions data={homePage.solutionsSection} />
-      <LatestNews data={{...homePage.latestNewsSection, posts: latestPosts}} locale={locale} />
-      <Contact data={homePage.contactSection} />
+      <Hero data={homePage.hero || {}} />
+      <Solutions data={homePage.solutionsSection || {}} />
+      <LatestNews data={{...(homePage.latestNewsSection || {}), posts: latestPosts}} locale={locale} />
+      <Contact data={homePage.contactSection || {}} />
     </div>
   );
 }
