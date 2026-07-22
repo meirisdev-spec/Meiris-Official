@@ -33,7 +33,14 @@ export default function ResourcesClient({ data }: { data: any }) {
   };
 
   const formatDate = (dateStr?: string) => {
-    return dateStr ? dateStr : "Uploaded Date N/A";
+    if (!dateStr) return "Uploaded Date N/A";
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
   };
 
   return (
@@ -83,7 +90,7 @@ export default function ResourcesClient({ data }: { data: any }) {
       <ScrollReveal key={activeTab} staggerChildren={true} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
         {filteredResources.map((card, i) => (
           <div
-            key={i}
+            key={card._id || i}
             className="animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out flex flex-col border border-black/10 shadow-sm hover:shadow-xl hover:-translate-y-1 bg-[#fcfcfc] overflow-hidden"
           >
             {/* Image Area */}
@@ -91,7 +98,7 @@ export default function ResourcesClient({ data }: { data: any }) {
               {card.thumbnailUrl ? (
                 <Image
                   src={card.thumbnailUrl}
-                  alt={card.title}
+                  alt={card.cardTitle || "Resource Thumbnail"}
                   fill
                   className="object-cover"
                 />

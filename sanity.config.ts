@@ -39,8 +39,20 @@ export default defineConfig({
       resolve: {
         mainDocuments: [
           {
-            route: '/en/insights',
+            route: '/:language/insights',
             filter: '_type == "insightsPage"',
+          },
+          {
+            route: '/:language/resources',
+            filter: '_type == "resourcesPage"',
+          },
+          {
+            route: '/:language/insights',
+            filter: '_type == "insightPost"',
+          },
+          {
+            route: '/:language/resources',
+            filter: '_type == "resourcePost"',
           },
         ],
       },
@@ -49,7 +61,7 @@ export default defineConfig({
       // The two locales required by the contract (Section 6.1)
       supportedLanguages: SUPPORTED_LANGUAGES,
       // Document types that need per-language variants
-      schemaTypes: ['teamMember', 'solution', 'homePage', 'productsPage', 'aboutPage', 'careersPage', 'contactPage', 'footer', 'resourcesPage', 'insightsPage'],
+      schemaTypes: ['teamMember', 'solution', 'homePage', 'productsPage', 'aboutPage', 'careersPage', 'contactPage', 'footer', 'resourcesPage', 'insightsPage', 'insightPost', 'resourcePost'],
       // The field that stores the language on each document
       languageField: 'language',
       // Weakly referenced so deleting a translation doesn't cascade-delete all

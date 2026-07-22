@@ -12,6 +12,8 @@ import { navbarType } from './navbarType'
 import { resourcesPageType } from './resourcesPageType'
 import { resourceCategoryType } from './resourceCategoryType'
 import { insightsPageType } from './insightsPageType'
+import { insightPostType } from './insightPostType'
+import { resourcePostType } from './resourcePostType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -27,5 +29,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     resourcesPageType,
     resourceCategoryType,
     insightsPageType,
+    insightPostType,
+    resourcePostType,
   ],
 }

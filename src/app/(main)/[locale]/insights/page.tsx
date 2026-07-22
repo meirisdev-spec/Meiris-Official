@@ -23,8 +23,7 @@ export default async function InsightsPage({ params: { locale } }: { params: { l
     query: `*[_type == "insightsPage" && language == $locale][0] {
       pageTitle,
       pageSubtitle,
-      tabCategories,
-      insightsItems
+      tabCategories
     }`,
     params: { locale }
   });
@@ -34,10 +33,26 @@ export default async function InsightsPage({ params: { locale } }: { params: { l
       query: `*[_type == "insightsPage" && language == "en"][0] {
         pageTitle,
         pageSubtitle,
-        tabCategories,
-        insightsItems
+        tabCategories
       }`
     });
+  }
+
+  // Fetch standalone posts
+  let posts = await sanityFetch<any[]>({
+    query: `*[_type == "insightPost" && language == $locale] | order(coalesce(publishedAt, _createdAt) desc)`,
+    params: { locale }
+  });
+
+  if (!posts || posts.length === 0) {
+    posts = await sanityFetch<any[]>({
+      query: `*[_type == "insightPost" && language == "en"] | order(coalesce(publishedAt, _createdAt) desc)`
+    });
+  }
+
+  // Inject posts into content for client compatibility
+  if (content) {
+    content.insightsItems = posts;
   }
 
   return (
