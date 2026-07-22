@@ -4,7 +4,24 @@ import { post } from './post'
 import { teamMember } from './teamMember'
 import { homePageType } from './homePageType'
 import { productsPageType } from './productsPageType'
+import { aboutPageType } from './aboutPageType'
+import { careersPageType } from './careersPageType'
+import { contactPageType } from './contactPageType'
+import { solutionType } from './solutionType'
+import { footerType } from './footerType'
+import { navbarType } from './navbarType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [post, teamMember, homePageType, productsPageType],
+  types: [
+    post,
+    solutionType,
+    homePageType,
+    aboutPageType,
+    careersPageType,
+    contactPageType,
+    productsPageType,
+    teamMember,
+    footerType,
+    navbarType,
+  ],
 }

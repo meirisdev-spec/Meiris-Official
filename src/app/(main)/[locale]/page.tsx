@@ -61,13 +61,11 @@ export default async function Home({ params: { locale } }: { params: { locale: s
       title,
       publishedAt,
       "slug": slug.current,
-      "imageUrl": mainImage.asset->url,
-      categories[]->{title}
+      "imageUrl": image.asset->url
     }`,
     { locale }
   );
 
-  console.log("HOMEPAGE DATA FROM SANITY:", JSON.stringify(homePage, null, 2));
 
   if (!homePage) {
     return <div>Home page content not found.</div>;
