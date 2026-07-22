@@ -1,12 +1,11 @@
 import type { StructureResolver } from 'sanity/structure'
-import PreviewIFrame from './components/PreviewIFrame'
 
 const LANGUAGES = [
   { id: 'en', title: '🇬🇧 International English' },
   { id: 'es-419', title: 'Español (Latinoamérica)' },
 ]
 
-const I18N_TYPES = ['teamMember', 'solution', 'homePage', 'productsPage', 'aboutPage', 'careersPage', 'contactPage', 'footer', 'navbar', 'resourcesPage', 'insightsPage']
+const I18N_TYPES = ['teamMember', 'solution', 'homePage', 'productsPage', 'aboutPage', 'careersPage', 'contactPage', 'footer', 'navbar', 'resourcesPage', 'insightsPage', 'insightPost', 'resourcePost']
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
@@ -243,15 +242,58 @@ export const structure: StructureResolver = (S) =>
                       .initialValueTemplates([
                         S.initialValueTemplateItem(`insightsPage-${lang.id}`)
                       ])
-                      .child((documentId) =>
-                        S.document()
-                          .documentId(documentId)
-                          .schemaType('insightsPage')
-                          .views([
-                            S.view.form(),
-                            S.view.component(PreviewIFrame).title('Live Preview')
-                          ])
-                      )
+                  )
+              )
+            )
+        ),
+
+      S.divider(),
+
+      // ── Insight Posts (multilingual) ──────────────────────────────────────────
+      S.listItem()
+        .title('Insight Posts')
+        .child(
+          S.list()
+            .title('Insight Posts')
+            .items(
+              LANGUAGES.map((lang) =>
+                S.listItem()
+                  .title(lang.title)
+                  .child(
+                    S.documentList()
+                      .title(`${lang.title} — Insight Posts`)
+                      .filter('_type == "insightPost" && (language == $lang || ($lang == "en" && !defined(language)))')
+                      .params({ lang: lang.id })
+                      .apiVersion('2023-01-01')
+                      .initialValueTemplates([
+                        S.initialValueTemplateItem(`insightPost-${lang.id}`)
+                      ])
+                  )
+              )
+            )
+        ),
+
+      S.divider(),
+
+      // ── Resource Posts (multilingual) ──────────────────────────────────────────
+      S.listItem()
+        .title('Resource Posts')
+        .child(
+          S.list()
+            .title('Resource Posts')
+            .items(
+              LANGUAGES.map((lang) =>
+                S.listItem()
+                  .title(lang.title)
+                  .child(
+                    S.documentList()
+                      .title(`${lang.title} — Resource Posts`)
+                      .filter('_type == "resourcePost" && (language == $lang || ($lang == "en" && !defined(language)))')
+                      .params({ lang: lang.id })
+                      .apiVersion('2023-01-01')
+                      .initialValueTemplates([
+                        S.initialValueTemplateItem(`resourcePost-${lang.id}`)
+                      ])
                   )
               )
             )

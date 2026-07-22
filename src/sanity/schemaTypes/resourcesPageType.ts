@@ -30,61 +30,6 @@ export const resourcesPageType = defineType({
       of: [{ type: 'string' }],
       description: 'Add categories to sort the cards (e.g., "Brochures", "Specifications"). These will appear as tabs in the order specified.',
     }),
-    defineField({
-      name: 'resourceItems',
-      title: 'Resource Cards',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'cardCategory',
-              title: 'Category',
-              type: 'string',
-              components: {
-                input: CategoryDropdownInput,
-              },
-            }),
-            defineField({
-              name: 'cardTitle',
-              title: 'Resource Title',
-              type: 'string',
-            }),
-            defineField({
-              name: 'cardFile',
-              title: 'File Upload',
-              type: 'file',
-            }),
-            defineField({
-              name: 'cardVersion',
-              title: 'Version Number',
-              type: 'string',
-              description: 'e.g., "v1.2"',
-            }),
-            defineField({
-              name: 'cardUploadDate',
-              title: 'Upload Date (Display)',
-              type: 'string',
-              description: 'e.g., "16 Jun 2026"',
-            }),
-            defineField({
-              name: 'cardThumbnail',
-              title: 'Card Thumbnail',
-              type: 'image',
-              options: { hotspot: true },
-            }),
-          ],
-          preview: {
-            select: {
-              title: 'title',
-              subtitle: 'category',
-              media: 'thumbnail',
-            },
-          },
-        },
-      ],
-    }),
   ],
   preview: {
     prepare() {

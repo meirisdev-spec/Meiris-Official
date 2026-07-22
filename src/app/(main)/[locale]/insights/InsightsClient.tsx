@@ -60,7 +60,7 @@ export default function InsightsClient({ data }: { data?: any }) {
   // Automatically open article if URL param is present
   useEffect(() => {
     if (postId && allPosts.length > 0) {
-      const article = allPosts.find((p: any) => p._key === postId);
+      const article = allPosts.find((p: any) => (p._id || p._key) === postId);
       if (article) {
         setSelectedArticle(article);
       }
@@ -87,6 +87,7 @@ export default function InsightsClient({ data }: { data?: any }) {
     setTimeout(() => {
       setSelectedArticle(null);
       setIsClosing(false);
+      window.history.pushState({}, '', window.location.pathname);
     }, 280);
   };
 
@@ -182,7 +183,12 @@ export default function InsightsClient({ data }: { data?: any }) {
                 
                 {/* Button */}
                 <button 
-                  onClick={() => setSelectedArticle(card)}
+                  onClick={() => {
+                    setSelectedArticle(card);
+                    if (card._id) {
+                      window.history.pushState({}, '', `?post=${card._id}`);
+                    }
+                  }}
                   className="w-full bg-white text-black py-4 text-[11px] md:text-[12px] font-bold tracking-widest uppercase flex justify-center items-center gap-2 hover:bg-white/90 transition-colors rounded-sm cursor-pointer"
                 >
                   READ MORE

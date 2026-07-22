@@ -1,10 +1,22 @@
-import React, { useCallback } from 'react'
-import { Select } from '@sanity/ui'
-import { StringInputProps, set, unset, useFormValue } from 'sanity'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Select, Spinner, Box } from '@sanity/ui'
+import { StringInputProps, set, unset, useFormValue, useClient } from 'sanity'
 
 export function InsightsCategoryDropdown(props: StringInputProps) {
   const { value, onChange } = props
-  const tabCategories = (useFormValue(['tabCategories']) as string[]) || []
+  const language = useFormValue(['language']) as string | undefined
+  const client = useClient({ apiVersion: '2023-01-01' })
+  const [categories, setCategories] = useState<string[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    client.fetch(`*[_type == "insightsPage" && language == $lang][0].tabCategories`, { lang: language || 'en' })
+      .then((res) => {
+        setCategories(res || [])
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [client, language])
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -14,10 +26,14 @@ export function InsightsCategoryDropdown(props: StringInputProps) {
     [onChange]
   )
 
+  if (loading) {
+    return <Box padding={2}><Spinner /></Box>
+  }
+
   return (
     <Select value={value || ''} onChange={handleChange}>
       <option value="">-- Select a category --</option>
-      {tabCategories.filter(Boolean).map((cat) => (
+      {categories.filter(Boolean).map((cat) => (
         <option key={cat} value={cat}>
           {cat}
         </option>

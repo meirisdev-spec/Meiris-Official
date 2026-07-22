@@ -14,6 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: "Brochures, datasheets, and technical specifications for Meiris products and solutions.",
   });
 }
+import { sanityFetch } from "@/sanity/lib/sanityFetch";
 
 export const revalidate = 0; // Disable caching to fetch live data from Sanity
 
@@ -22,12 +23,45 @@ export default async function ResourcesPage({ params }: { params: Promise<{ loca
   const locale = resolvedParams?.locale || 'en';
 
   // Fetch the resources page document for this locale. Fallback to English if not found.
-  let content = await client.fetch(
-    `*[_type == "resourcesPage" && language == $locale][0] {
+  let content = await sanityFetch<any>({
+    query: `*[_type == "resourcesPage" && language == $locale][0] {
       pageTitle,
       pageSubtitle,
-      tabCategories,
-      "resourceItems": resourceItems[] {
+      tabCategories
+    }`,
+    params: { locale }
+  });
+
+  if (!content) {
+    content = await sanityFetch<any>({
+      query: `*[_type == "resourcesPage" && language == "en"][0] {
+        pageTitle,
+        pageSubtitle,
+        tabCategories
+      }`
+    });
+  }
+
+  // Fetch standalone posts
+  let posts = await sanityFetch<any[]>({
+    query: `*[_type == "resourcePost" && language == $locale] | order(_createdAt desc) {
+      _id,
+      cardTitle,
+      cardCategory,
+      cardVersion,
+      cardUploadDate,
+      "thumbnailUrl": cardThumbnail.asset->url,
+      "fileUrl": cardFile.asset->url,
+      "fileExtension": cardFile.asset->extension,
+      "fileSize": cardFile.asset->size
+    }`,
+    params: { locale }
+  });
+
+  if (!posts || posts.length === 0) {
+    posts = await sanityFetch<any[]>({
+      query: `*[_type == "resourcePost" && language == "en"] | order(_createdAt desc) {
+        _id,
         cardTitle,
         cardCategory,
         cardVersion,
@@ -36,29 +70,13 @@ export default async function ResourcesPage({ params }: { params: Promise<{ loca
         "fileUrl": cardFile.asset->url,
         "fileExtension": cardFile.asset->extension,
         "fileSize": cardFile.asset->size
-      }
-    }`,
-    { locale }
-  );
-
-  if (!content) {
-    content = await client.fetch(
-      `*[_type == "resourcesPage" && language == "en"][0] {
-        pageTitle,
-        pageSubtitle,
-        tabCategories,
-        "resourceItems": resourceItems[] {
-          cardTitle,
-          cardCategory,
-          cardVersion,
-          cardUploadDate,
-          "thumbnailUrl": cardThumbnail.asset->url,
-          "fileUrl": cardFile.asset->url,
-          "fileExtension": cardFile.asset->extension,
-          "fileSize": cardFile.asset->size
-        }
       }`
-    );
+    });
+  }
+
+  // Inject posts into content for client compatibility
+  if (content) {
+    content.resourceItems = posts;
   }
 
   return (

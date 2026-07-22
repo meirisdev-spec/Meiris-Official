@@ -6,7 +6,7 @@ import Contact from '../../_components/Contact';
 import { getLocalizedMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
-import { client } from '@/sanity/lib/client';
+import { sanityFetch } from '@/sanity/lib/sanityFetch';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   return getLocalizedMetadata({
@@ -21,8 +21,8 @@ export const revalidate = 0; // Disable caching to fetch live data from Sanity
 
 export default async function Home({ params: { locale } }: { params: { locale: string } }) {
   // Fetch the homepage document for this locale. Fallback to English if not found.
-  const homePage = await client.fetch(
-    `*[_type == "homePage" && language == $locale][0] {
+  const homePage = await sanityFetch<any>({
+    query: `*[_type == "homePage" && language == $locale][0] {
       ...,
       solutionsSection {
         ...,
@@ -35,11 +35,10 @@ export default async function Home({ params: { locale } }: { params: { locale: s
         ...,
         "imageUrl": image.asset->url
       }
-    }
-    `,
-    { locale }
-  ) || await client.fetch(
-    `*[_type == "homePage" && language == "en"][0] {
+    }`,
+    params: { locale }
+  }) || await sanityFetch<any>({
+    query: `*[_type == "homePage" && language == "en"][0] {
       ...,
       solutionsSection {
         ...,
@@ -53,28 +52,28 @@ export default async function Home({ params: { locale } }: { params: { locale: s
         "imageUrl": image.asset->url
       }
     }`
-  );
+  });
 
-  // Fetch the latest 3 posts dynamically from the insightsPage singleton
-  let latestPosts = await client.fetch(
-    `*[_type == "insightsPage" && language == $locale][0].insightsItems[] | order(publishedAt desc)[0...3] {
+  // Fetch the latest 3 posts dynamically from the standalone insightPost documents
+  let latestPosts = await sanityFetch<any[]>({
+    query: `*[_type == "insightPost" && language == $locale] | order(coalesce(publishedAt, _createdAt) desc)[0...3] {
       title,
       publishedAt,
-      "slug": _key,
+      "slug": _id,
       "imageUrl": image.asset->url + "?w=800&h=450&fit=crop"
     }`,
-    { locale }
-  );
+    params: { locale }
+  });
 
   if (!latestPosts || latestPosts.length === 0) {
-    latestPosts = await client.fetch(
-      `*[_type == "insightsPage" && language == "en"][0].insightsItems[] | order(publishedAt desc)[0...3] {
+    latestPosts = await sanityFetch<any[]>({
+      query: `*[_type == "insightPost" && language == "en"] | order(coalesce(publishedAt, _createdAt) desc)[0...3] {
         title,
         publishedAt,
-        "slug": _key,
+        "slug": _id,
         "imageUrl": image.asset->url + "?w=800&h=450&fit=crop"
       }`
-    );
+    });
   }
 
 
