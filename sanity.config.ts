@@ -9,6 +9,8 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { documentInternationalization } from '@sanity/document-internationalization'
 
+import { presentationTool } from 'sanity/presentation'
+
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from './src/sanity/env'
 import { schema } from './src/sanity/schemaTypes'
@@ -27,11 +29,27 @@ export default defineConfig({
   plugins: [
     structureTool({ structure }),
     visionTool({ defaultApiVersion: apiVersion }),
+    presentationTool({
+      previewUrl: {
+        origin: 'http://localhost:3000',
+        previewMode: {
+          enable: '/api/draft',
+        },
+      },
+      resolve: {
+        mainDocuments: [
+          {
+            route: '/en/insights',
+            filter: '_type == "insightsPage"',
+          },
+        ],
+      },
+    }),
     documentInternationalization({
       // The two locales required by the contract (Section 6.1)
       supportedLanguages: SUPPORTED_LANGUAGES,
       // Document types that need per-language variants
-      schemaTypes: ['post', 'teamMember', 'solution', 'homePage', 'productsPage', 'aboutPage', 'careersPage', 'contactPage', 'footer', 'resourcesPage'],
+      schemaTypes: ['teamMember', 'solution', 'homePage', 'productsPage', 'aboutPage', 'careersPage', 'contactPage', 'footer', 'resourcesPage', 'insightsPage'],
       // The field that stores the language on each document
       languageField: 'language',
       // Weakly referenced so deleting a translation doesn't cascade-delete all

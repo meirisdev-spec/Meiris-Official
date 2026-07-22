@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { getLocale } from 'next-intl/server';
+import { draftMode } from 'next/headers';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://meiris.com'),
@@ -28,6 +29,8 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["700"],
 });
 
+import VisualEditingWrapper from '@/components/VisualEditingWrapper';
+
 export default async function RootLayout({ children }: { children: ReactNode }) {
   let locale = 'en';
   try {
@@ -35,10 +38,16 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   } catch (e) {
     // Fallback for non-i18n routes like /studio
   }
+
+  const isDraft = draftMode().isEnabled;
   
   return (
     <html lang={locale} translate="no" className={`${dmSans.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        {isDraft && <VisualEditingWrapper />}
+      </body>
     </html>
   );
 }
+

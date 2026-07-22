@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { PortableText } from '@portabletext/react';
 import { urlFor } from '@/sanity/lib/image';
@@ -8,19 +9,30 @@ import { urlFor } from '@/sanity/lib/image';
 export type SanityPost = {
   _id: string;
   title: string;
-  tag1?: string;
-  tag2?: string;
+  postCategory?: string;
   publishedAt: string;
   details?: string;
   image?: any;
   contentCol1?: any;
   contentCol2?: any;
+  isStatic?: boolean;
 };
 
 const portableTextComponents = {
   block: {
     normal: ({ children }: any) => <p className="mb-6">{children}</p>,
     h3: ({ children }: any) => <p className="mb-6 font-bold">{children}</p>,
+    h2: ({ children }: any) => <h2 className="mb-6 text-[18px] md:text-[20px] font-bold mt-8">{children}</h2>,
+  },
+  types: {
+    image: ({ value }: any) => {
+      if (!value?.asset?._ref) return null;
+      return (
+        <div className="mb-6 relative w-full aspect-video border border-black/10 rounded-sm overflow-hidden bg-black/5">
+          <img src={urlFor(value).width(800).url()} alt={value.alt || " " } className="w-full h-full object-cover" />
+        </div>
+      );
+    }
   },
   list: {
     bullet: ({ children }: any) => <ul className="list-disc pl-5 space-y-3 mb-6 text-black/70">{children}</ul>,
@@ -33,64 +45,32 @@ const portableTextComponents = {
   }
 };
 
-export default function InsightsClient({ initialPosts = [] }: { initialPosts?: SanityPost[] }) {
-  const defaultCards: any[] = Array(6).fill({
-    _id: Math.random().toString(),
-    isStatic: true,
-    tag1: "PRESS",
-    tag2: "HERO CHARGE PLUS",
-    publishedAt: "2026-07-01T00:00:00.000Z",
-    title: "Depot Deployment Case Study — Commercial Fleet Electrification",
-    details: "PDF | 3.8 MB\nv1.2 - Uploaded 16 Jun 2026",
-    contentCol1: (
-      <>
-        <p className="mb-6">For the first time in the history of the MEIRIS platform, our latest high-power commercial charging module will take center stage at the global automotive expo. This debut marks a highly significant milestone for the brand on the world's most exclusive stage. This event is part of a broader celebration of MEIRIS's heritage in precision power electronics, highlighting the perfect balance between technical innovation and bespoke installation.</p>
-        <p className="mb-6 font-bold">The birth of a new standard</p>
-        <p className="mb-6">At the global expo, a sanctuary of technical excellence, MEIRIS presents the Hero Charge Plus, the system that redefines the charging landscape. Inspired by the intersection of robust engineering and sleek design, this specific infrastructure stands as proof of the excellence of our R&D program.</p>
-        <ul className="list-disc pl-5 space-y-3 mb-6 text-black/70">
-          <li><strong>Authenticity:</strong> Every component is inspected by our engineers, where necessary updated using advanced materials and techniques.</li>
-          <li><strong>Documentation:</strong> A dedicated book accompanies the system, certifying the installation process with original drawings and technical data.</li>
-          <li><strong>Historical continuity:</strong> The program ensures that the pioneering spirit remains intact.</li>
-        </ul>
-        <div className="aspect-video bg-black/5 w-full mb-6 flex flex-col items-center justify-center border border-black/10 rounded-sm">
-           <svg className="w-8 h-8 text-black/20 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-           </svg>
-           <span className="text-black/40 text-[10px] font-bold tracking-widest uppercase">CMS Image Slot</span>
-        </div>
-      </>
-    ),
-    contentCol2: (
-      <>
-        <p className="mb-6 font-bold">The Hero Charge Plus: the ultimate expression of power</p>
-        <p className="mb-6">At the same time, within the curated exhibition, MEIRIS is displaying a masterpiece embodying the spirit of the commercial fleet program. It represents the pinnacle of our tailor-made philosophy, far beyond simple customization.</p>
-        <ul className="list-disc pl-5 space-y-3 mb-6 text-black/70">
-          <li><strong>New bodywork and identity:</strong> The architecture features an entirely new bespoke body, where every panel and surface has been redesigned to reflect a unique aesthetic narrative.</li>
-          <li><strong>Technological evolution:</strong> Beneath its flowing lines, the unit has been upgraded with cutting-edge technology, including a newly developed thermal management system.</li>
-          <li><strong>The "Unico" philosophy:</strong> This project represents the pinnacle of the special projects department, a creative sanctuary where the customer becomes co-author.</li>
-        </ul>
-        <div className="aspect-video bg-black/5 w-full mb-6 flex flex-col items-center justify-center border border-black/10 rounded-sm">
-           <svg className="w-8 h-8 text-black/20 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-           </svg>
-           <span className="text-black/40 text-[10px] font-bold tracking-widest uppercase">CMS Image Slot</span>
-        </div>
-        <p className="mb-6 font-bold">A dialogue between eras</p>
-        <p className="mb-6">From the historical preservation of earlier iterations to the visionary personalization of the Hero Charge Plus, MEIRIS reaffirms its identity as a creative sanctuary.</p>
-        
-        <div className="mt-12 pt-8 border-t border-black/10 text-[11px] text-black/60 space-y-1 font-bold tracking-widest uppercase">
-          <p>Press Contacts</p>
-          <p>MEIRIS Public Relations</p>
-          <p>press@meiris.com</p>
-        </div>
-      </>
-    )
-  });
+export default function InsightsClient({ data }: { data?: any }) {
+  const searchParams = useSearchParams();
+  const postId = searchParams?.get('post');
 
-  const allPosts = [...defaultCards, ...initialPosts];
+  const categories: string[] = data?.tabCategories || [];
+  
+  const allPosts = data?.insightsItems || [];
 
+  const [activeTab, setActiveTab] = useState<string>("All");
   const [selectedArticle, setSelectedArticle] = useState<any | null>(null);
   const [isClosing, setIsClosing] = useState(false);
+
+  // Automatically open article if URL param is present
+  useEffect(() => {
+    if (postId && allPosts.length > 0) {
+      const article = allPosts.find((p: any) => p._key === postId);
+      if (article) {
+        setSelectedArticle(article);
+      }
+    }
+  }, [postId, allPosts]);
+
+  const filteredPosts =
+    activeTab === "All"
+      ? allPosts
+      : allPosts.filter((p: any) => p.postCategory === activeTab);
 
   // Lock body scroll when article is open
   useEffect(() => {
@@ -107,7 +87,7 @@ export default function InsightsClient({ initialPosts = [] }: { initialPosts?: S
     setTimeout(() => {
       setSelectedArticle(null);
       setIsClosing(false);
-    }, 280); // Wait just under the 300ms fade-out duration to prevent blinking
+    }, 280);
   };
 
   return (
@@ -115,33 +95,53 @@ export default function InsightsClient({ initialPosts = [] }: { initialPosts?: S
       <main className="mx-auto max-w-[1400px] px-6 md:px-12 pt-[120px] pb-32 overflow-hidden">
         {/* Hero Text */}
         <ScrollReveal className="max-w-4xl mb-16 md:mb-20">
-          <h1 className="text-[clamp(2.5rem,4vw,4rem)] font-bold tracking-tight text-black mb-5">Insights Page</h1>
-          <p className="text-[16px] md:text-[18px] text-black/80 leading-relaxed font-medium">
-            A unified page with clear segmentation for Blogs, Press Releases and Announcements. All three content types are accessible from this single page via a persistent tab or filter row.
-          </p>
+          <h1 className="text-[clamp(2.5rem,4vw,4rem)] font-bold tracking-tight text-black mb-5">
+            {data?.pageTitle || "Insights"}
+          </h1>
+          {data?.pageSubtitle && (
+            <p className="text-[16px] md:text-[18px] text-black/80 leading-relaxed font-medium">
+              {data.pageSubtitle}
+            </p>
+          )}
         </ScrollReveal>
 
         {/* Tab Filters */}
-        <ScrollReveal delay={100} className="flex flex-wrap items-center gap-4 md:gap-10 border-b border-black/10 mb-16 px-2">
-          <button className="pb-4 text-[13px] md:text-[14px] font-bold text-[#00E573] border-b-2 border-[#00E573] mb-[-1px] uppercase tracking-widest">
-            All
-          </button>
-          <button className="pb-4 text-[13px] md:text-[14px] font-bold text-black/50 hover:text-black/80 transition-colors mb-[-1px] uppercase tracking-widest">
-            Press Releases
-          </button>
-          <button className="pb-4 text-[13px] md:text-[14px] font-bold text-black/50 hover:text-black/80 transition-colors mb-[-1px] uppercase tracking-widest">
-            Announcement
-          </button>
-        </ScrollReveal>
+        {categories.length > 0 && (
+          <ScrollReveal delay={100} className="flex flex-wrap items-center gap-4 md:gap-10 border-b border-black/10 mb-16 px-2">
+            <button
+              onClick={() => setActiveTab("All")}
+              className={`pb-4 text-[13px] md:text-[14px] font-bold transition-colors mb-[-1px] uppercase tracking-widest ${
+                activeTab === "All"
+                  ? "text-[#00E573] border-b-2 border-[#00E573]"
+                  : "text-black/50 hover:text-black/80"
+              }`}
+            >
+              All
+            </button>
+            {categories.map((cat, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveTab(cat)}
+                className={`pb-4 text-[13px] md:text-[14px] font-bold transition-colors mb-[-1px] uppercase tracking-widest ${
+                  activeTab === cat
+                    ? "text-[#00E573] border-b-2 border-[#00E573]"
+                    : "text-black/50 hover:text-black/80"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </ScrollReveal>
+        )}
 
         {/* Card Grid */}
-        <ScrollReveal staggerChildren={true} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-          {allPosts.length === 0 && (
+        <ScrollReveal key={activeTab} staggerChildren={true} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+          {filteredPosts.length === 0 && (
             <div className="col-span-full py-20 text-center text-black/40 font-medium">
-              No posts found. Add some in the Sanity Studio!
+              No posts found in this category.
             </div>
           )}
-          {allPosts.map((card, i) => (
+          {filteredPosts.map((card: any, i: number) => (
             <div key={card._id || i} className="animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out flex flex-col border border-black/10 shadow-sm hover:shadow-xl hover:-translate-y-1 bg-[#fcfcfc] overflow-hidden">
               {/* Image Area */}
               <div className="aspect-square w-full bg-white relative border-b border-black/10">
@@ -157,8 +157,7 @@ export default function InsightsClient({ initialPosts = [] }: { initialPosts?: S
                 {/* Top Row: Tags + Date */}
                 <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                   <div className="flex flex-wrap gap-2">
-                    {card.tag1 && <span className="bg-white/20 text-[9px] md:text-[10px] font-bold tracking-widest px-2 md:px-3 py-1.5 uppercase rounded-sm">{card.tag1}</span>}
-                    {card.tag2 && <span className="bg-white text-black text-[9px] md:text-[10px] font-bold tracking-widest px-2 md:px-3 py-1.5 uppercase rounded-sm">{card.tag2}</span>}
+                    {card.postCategory && <span className="bg-white/20 text-[9px] md:text-[10px] font-bold tracking-widest px-2 md:px-3 py-1.5 uppercase rounded-sm">{card.postCategory}</span>}
                   </div>
                   <span className="text-[9px] md:text-[10px] font-semibold tracking-widest uppercase text-white/50">
                     {card.isStatic 
@@ -214,7 +213,7 @@ export default function InsightsClient({ initialPosts = [] }: { initialPosts?: S
             {/* Header / Title */}
             <header className="mb-16 md:mb-24 text-center max-w-5xl mx-auto pt-8 md:pt-0">
               <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
-                {selectedArticle.tag1 && <span className="text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1 border border-black/20 rounded-full">{selectedArticle.tag1}</span>}
+                {selectedArticle.postCategory && <span className="text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1 border border-black/20 rounded-full">{selectedArticle.postCategory}</span>}
                 {selectedArticle.publishedAt && <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-black/50">{new Date(selectedArticle.publishedAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase()}</span>}
               </div>
               <h1 className="text-[clamp(1.5rem,3vw,2.5rem)] font-bold tracking-widest uppercase leading-[1.4] text-black">
