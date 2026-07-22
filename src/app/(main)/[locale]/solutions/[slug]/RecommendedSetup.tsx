@@ -6,10 +6,22 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import solCharge from "@/assets/sol-charge.jpg";
 import solDepot from "@/assets/sol-depot.jpg";
 import solCustom from "@/assets/sol-custom.jpg";
+import solHospitality from "@/assets/sol-hospitality.jpg";
+import solResidential from "@/assets/sol-residential.jpg";
+
+const LOCAL_IMAGES: Record<string, any> = {
+  solCharge,
+  solDepot,
+  solCustom,
+  solHospitality,
+  solResidential,
+};
 
 type Feature = {
   title: string;
-  image: any;
+  image?: any;
+  imageUrl?: string;
+  localImageRef?: string;
   text: string;
 };
 
@@ -19,71 +31,7 @@ type Fleet = {
   features: Feature[];
 };
 
-const fleetsData: Fleet[] = [
-  {
-    id: "bus",
-    label: "Bus Fleet",
-    features: [
-      {
-        title: "Recommended Charger",
-        image: solCharge,
-        text: "MEIRIS CHARGE Plus – SiC-based DC fast/ultra-fast charger, 120–240 kW, for high-power overnight bulk charging of buses"
-      },
-      {
-        title: "Software",
-        image: solDepot,
-        text: "OCPP-compliant CMS for monitoring, access control and billing"
-      },
-      {
-        title: "Services & Support",
-        image: solCustom,
-        text: "Turnkey EPC. Up to 98% uptime, Multi-year warranty"
-      }
-    ]
-  },
-  {
-    id: "truck",
-    label: "Truck Fleet",
-    features: [
-      {
-        title: "Recommended Charger",
-        image: solCharge,
-        text: "MEIRIS CHARGE Plus – SiC-based DC fast/ultra-fast charger, 120–240 kW, for overnight and layover charging of trucks"
-      },
-      {
-        title: "Software",
-        image: solDepot,
-        text: "OCPP-compliant CMS for monitoring, access control and billing"
-      },
-      {
-        title: "Services & Support",
-        image: solCustom,
-        text: "Turnkey EPC. Up to 98% uptime, Multi-year warranty"
-      }
-    ]
-  },
-  {
-    id: "cab",
-    label: "Cab aggregator hub",
-    features: [
-      {
-        title: "Recommended Charger",
-        image: solCharge,
-        text: "MEIRIS CHARGE Standard – Si IGBT-based DC charger, 30–60 kW, suited to lower-battery EVs such as cabs"
-      },
-      {
-        title: "Software",
-        image: solDepot,
-        text: "OCPP-compliant CMS for monitoring, access control and billing"
-      },
-      {
-        title: "Services & Support",
-        image: solCustom,
-        text: "Turnkey EPC. Up to 98% uptime, Multi-year warranty"
-      }
-    ]
-  }
-];
+
 
 export default function RecommendedSetup({ setupData }: { setupData?: any }) {
   const [activeTab, setActiveTab] = useState("bus");
@@ -91,15 +39,22 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
   // Determine which features to show
   let featuresToDisplay: Feature[] = [];
   let showTabs = false;
+  let fleetsData: any[] = setupData?.fleetsSetup || [];
   
   if (setupData?.setupForm) {
     showTabs = false;
-  } else if (setupData?.setupFeaturesOnly) {
-    featuresToDisplay = setupData.setupFeaturesOnly;
-  } else {
+  } else if (setupData?.setupFeaturesOnly && setupData.setupFeaturesOnly.length > 0) {
+    featuresToDisplay = setupData.setupFeaturesOnly.map((feat: any) => ({
+      ...feat,
+      image: feat.imageUrl || (feat.localImageRef && LOCAL_IMAGES[feat.localImageRef]) || solCharge
+    }));
+  } else if (fleetsData.length > 0) {
     showTabs = true;
-    const activeFleet = fleetsData.find(f => f.id === activeTab) || fleetsData[0];
-    featuresToDisplay = activeFleet.features;
+    const activeFleet = fleetsData.find((f: any) => f.id === activeTab) || fleetsData[0];
+    featuresToDisplay = activeFleet.features.map((feat: any) => ({
+      ...feat,
+      image: feat.imageUrl || (feat.localImageRef && LOCAL_IMAGES[feat.localImageRef]) || solCharge
+    }));
   }
 
   const headingText = setupData?.setupHeading || "Recommended for your setup";

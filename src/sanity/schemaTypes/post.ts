@@ -20,7 +20,7 @@ export const post = defineType({
     }),
     defineField({
       name: 'slug',
-      title: 'Slug',
+      title: 'URL Path',
       type: 'slug',
       options: { source: 'title', maxLength: 96 },
       validation: (Rule) => Rule.required(),

@@ -4,6 +4,9 @@ import { getLocale } from 'next-intl/server';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://meiris.com'),
+  other: {
+    google: 'notranslate',
+  },
 };
 import { DM_Sans, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 
@@ -34,7 +37,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   }
   
   return (
-    <html lang={locale} className={`${dmSans.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable}`}>
+    <html lang={locale} translate="no" className={`${dmSans.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable}`}>
       <body>{children}</body>
     </html>
   );

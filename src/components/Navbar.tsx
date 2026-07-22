@@ -7,7 +7,7 @@ import styles from './Navbar.module.css';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 
-export default function Navbar() {
+export default function Navbar({ data }: { data?: any }) {
   const progressBarRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -16,6 +16,9 @@ export default function Navbar() {
   const t = useTranslations('Navbar');
   const currentLocale = useLocale();
   let rafId: number | null = null;
+
+  const navLinks = data?.navLinks || [];
+  const ctaBtn = data?.ctaBtn || t('contact');
 
   const switchLanguage = (newLocale: string) => {
     // Save preference in cookie for next-intl middleware (1 year expiry)
@@ -81,68 +84,33 @@ export default function Navbar() {
 
         {/* Nav links */}
         <ul className={`${styles.navLinks} ${isMenuOpen ? styles.active : ''}`}>
-          <li><Link href={localePath('/')}>Home</Link></li>
-          <li><Link href={localePath('/platform')}>{t('platform')}</Link></li>
-
-          <li className={`${styles.dropdown} ${activeDropdown === 'products' ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown('products')}>
-            <span className={styles.dropdownTrigger}>
-              {t('products')}
-              <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-              </svg>
-            </span>
-            <div className={styles.dropdownPanel}>
-              <Link href={localePath('/products')} className={styles.dropdownItem}>MEIRIS Charge</Link>
-            </div>
-          </li>
-
-          <li className={`${styles.dropdown} ${activeDropdown === 'solutions' ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown('solutions')}>
-            <span className={styles.dropdownTrigger}>
-              {t('solutions')}
-              <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-              </svg>
-            </span>
-            <div className={styles.dropdownPanel}>
-              <Link href={localePath('/solutions/depot-infrastructure')} className={styles.dropdownItem}>Depot Infrastructure</Link>
-              <Link href={localePath('/solutions/charge-point-operators')} className={styles.dropdownItem}>Charge Point Operators</Link>
-              <Link href={localePath('/solutions/hospitality-workplace')} className={styles.dropdownItem}>Hospitality &amp; Workplace</Link>
-              <Link href={localePath('/solutions/residential')} className={styles.dropdownItem}>Residential</Link>
-              <Link href={localePath('/solutions/custom-solutions')} className={styles.dropdownItem}>Custom Solutions</Link>
-            </div>
-          </li>
-
-          <li className={`${styles.dropdown} ${activeDropdown === 'insights' ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown('insights')}>
-            <span className={styles.dropdownTrigger}>
-              {t('insights')}
-              <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-              </svg>
-            </span>
-            <div className={styles.dropdownPanel}>
-              <Link href={localePath('/insights')} className={styles.dropdownItem}>Press Releases &amp; Announcements</Link>
-              <Link href={localePath('/resources')} className={styles.dropdownItem}>Resources</Link>
-            </div>
-          </li>
-
-          <li className={`${styles.dropdown} ${activeDropdown === 'about' ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown('about')}>
-            <span className={styles.dropdownTrigger}>
-              {t('about')}
-              <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-              </svg>
-            </span>
-            <div className={styles.dropdownPanel}>
-              <Link href={localePath('/about')} className={styles.dropdownItem}>About Us</Link>
-              <Link href={localePath('/team')} className={styles.dropdownItem}>Team</Link>
-              <Link href={localePath('/careers')} className={styles.dropdownItem}>Career</Link>
-              <Link href={localePath('/contact')} className={styles.dropdownItem}>Contact Us</Link>
-            </div>
-          </li>
+          {navLinks.map((link: any, index: number) => {
+            const hasDropdown = link.dropdownItems && link.dropdownItems.length > 0;
+            if (hasDropdown) {
+              return (
+                <li key={index} className={`${styles.dropdown} ${activeDropdown === link.label ? styles.dropdownActive : ''}`} onClick={() => toggleDropdown(link.label)}>
+                  <span className={styles.dropdownTrigger}>
+                    {link.label}
+                    <svg className={styles.chevronIcon} viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+                    </svg>
+                  </span>
+                  <div className={styles.dropdownPanel}>
+                    {link.dropdownItems.map((item: any, i: number) => (
+                      <Link key={i} href={localePath(item.path)} className={styles.dropdownItem}>{item.label}</Link>
+                    ))}
+                  </div>
+                </li>
+              );
+            }
+            return (
+              <li key={index}><Link href={localePath(link.path)}>{link.label}</Link></li>
+            );
+          })}
           
           <li className={styles.mobileCta}>
             <Link href={localePath('/contact')} className={styles.contactBtn}>
-              Get in touch
+              {ctaBtn}
             </Link>
           </li>
         </ul>
@@ -164,7 +132,7 @@ export default function Navbar() {
             </button>
           </div>
           <Link href={localePath('/contact')} className={`${styles.contactBtnWrapper} ${styles.contactBtn}`}>
-            {t('contact')}
+            {ctaBtn}
           </Link>
           <button className={styles.hamburger} onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.hamburgerIcon}>

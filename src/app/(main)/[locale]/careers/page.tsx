@@ -4,6 +4,7 @@ import Image from "next/image";
 import ctaEngineers from "@/assets/cta-engineers.jpg";
 
 import { getLocalizedMetadata } from "@/lib/seo";
+import { client } from "@/sanity/lib/client";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   return getLocalizedMetadata({
@@ -14,92 +15,89 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   });
 }
 
-const navItems = [
-  { label: "Platform", to: "/platform" },
-  { label: "Products", to: "/products" },
-  { label: "Solutions", to: "/solutions" },
-  { label: "Insights", to: "/insights" },
-  { label: "About", to: "/about" },
-];
+export const revalidate = 0; // Disable caching to fetch live data from Sanity
 
-function Logo() {
-  return (
-    <Link href="/" className="flex items-center gap-2 text-white">
-      <svg width={28} height={28} viewBox="0 0 40 40" fill="none" aria-hidden>
-        <circle cx="20" cy="20" r="2" fill="white" />
-        {Array.from({ length: 12 }).map((_, i) => {
-          const a = (i * Math.PI * 2) / 12;
-          return (
-            <line
-              key={i}
-              x1={20 + Math.cos(a) * 6}
-              y1={20 + Math.sin(a) * 6}
-              x2={20 + Math.cos(a) * 18}
-              y2={20 + Math.sin(a) * 18}
-              stroke="white"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          );
-        })}
-      </svg>
-      <span className="text-xs font-semibold tracking-[0.25em]">MEIRIS</span>
-    </Link>
+export default async function CareersPage({ params: { locale } }: { params: { locale: string } }) {
+  // Fetch the careers page document for this locale. Fallback to English if not found.
+  const careersPage = await client.fetch(
+    `*[_type == "careersPage" && language == $locale][0] {
+      ...,
+      "imageUrl": hero.image.asset->url
+    }`,
+    { locale }
+  ) || await client.fetch(
+    `*[_type == "careersPage" && language == "en"][0] {
+      ...,
+      "imageUrl": hero.image.asset->url
+    }`
   );
-}
 
+  if (!careersPage) {
+    return (
+      <div className="relative min-h-screen bg-white text-black flex items-center justify-center">
+        <p>Careers page content not found.</p>
+      </div>
+    );
+  }
 
-export default function CareersPage() {
+  const { hero, cvUpload, imageUrl } = careersPage;
+
   return (
     <div className="relative min-h-screen bg-white text-black selection:bg-[#00E573] selection:text-black">
       
-
       {/* Hero Section */}
       <section className="bg-white pt-36 md:pt-44 lg:pt-48 pb-12 md:pb-16 lg:pb-20">
         <div className="mx-auto max-w-[1400px] px-6 md:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-[1fr_1.1fr] gap-16 items-center">
           <div className="max-w-xl">
             <p className="text-[10px] font-bold tracking-[0.2em] text-[#00E573] uppercase mb-6">
-              WORK WITH US
+              {hero?.eyebrow || "WORK WITH US"}
             </p>
             <h1 className="text-[clamp(2.5rem,5vw,4.5rem)] font-bold leading-[1.05] tracking-tight text-black">
-              Powering the Future of Mobility
+              {hero?.title || "Powering the Future of Mobility"}
             </h1>
             <p className="mt-8 text-[14px] leading-relaxed text-black/60">
-              At MEIRIS, we aren't just building chargers; we're architecting the backbone of sustainable transportation. Join a culture defined by technical precision, environmental consciousness, and the drive to disrupt the energy landscape.
+              {hero?.description}
             </p>
           </div>
           <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl">
-            <Image 
-              src={ctaEngineers} 
-              alt="Engineers reviewing data" 
-              className="absolute inset-0 w-full h-full object-cover" 
-              placeholder="blur" 
-            />
+            {imageUrl ? (
+              <Image 
+                src={imageUrl} 
+                alt={hero?.title || "Careers Hero"} 
+                className="absolute inset-0 w-full h-full object-cover" 
+                fill
+              />
+            ) : (
+              <Image 
+                src={ctaEngineers} 
+                alt="Engineers reviewing data" 
+                className="absolute inset-0 w-full h-full object-cover" 
+                placeholder="blur" 
+              />
+            )}
           </div>
         </div>
       </section>
-
-
 
       {/* CV Upload Section */}
       <section className="bg-[#111111] py-16 md:py-24 lg:py-32 text-white">
         <div className="mx-auto max-w-[1200px] px-6 md:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-16 items-center">
           <div>
             <h2 className="text-[clamp(2.5rem,4vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-white">
-              Don't see a fit?
+              {cvUpload?.headingLine1 || "Don't see a fit?"}
             </h2>
             <h2 className="text-[clamp(2.5rem,4vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-[#00E573]">
-              Send us your CV
+              {cvUpload?.headingLine2 || "Send us your CV"}
             </h2>
             <p className="mt-6 text-[12px] leading-relaxed text-white/70 max-w-md">
-              We're always looking for visionary talent. Submit your details and our talent acquisition team will contact you when a suitable role opens up.
+              {cvUpload?.description}
             </p>
             <div className="mt-12 flex items-center gap-3 text-white/90">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00E573" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="4" width="20" height="16" rx="2"></rect>
                 <path d="M2 4l10 8 10-8"></path>
               </svg>
-              <span className="text-[12px] font-medium tracking-wide">careers@meiris.energy</span>
+              <span className="text-[12px] font-medium tracking-wide">{cvUpload?.email || "careers@meiris.energy"}</span>
             </div>
           </div>
           
@@ -131,14 +129,13 @@ export default function CareersPage() {
               </div>
 
               <button type="button" className="cursor-pointer w-full bg-[#0a0a0a] text-white py-4 rounded-full text-[12px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center justify-center gap-2 tracking-wide mt-2">
-                SUBMIT APPLICATION
+                {locale === 'es-419' ? 'ENVIAR SOLICITUD' : 'SUBMIT APPLICATION'}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
               </button>
             </form>
           </div>
         </div>
       </section>
-
 
     </div>
   );

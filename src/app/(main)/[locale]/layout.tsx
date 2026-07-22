@@ -21,6 +21,8 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
+import { client } from "@/sanity/lib/client";
+
 export default async function LocaleLayout({
   children,
   params: { locale }
@@ -37,17 +39,26 @@ export default async function LocaleLayout({
 
   // Providing all messages to the client
   const messages = await getMessages();
-
+  
   // Detect GeoIP Country for Spanish Prompt
   const country = headers().get('x-vercel-ip-country') || '';
   const WHITELIST = ['AR', 'BO', 'CL', 'CO', 'CR', 'CU', 'DO', 'EC', 'SV', 'GT', 'HN', 'MX', 'NI', 'PA', 'PY', 'PE', 'PR', 'UY', 'VE'];
   const hasSeenPrompt = cookies().get('lang-prompt-seen')?.value === 'true';
   const showPrompt = !hasSeenPrompt && WHITELIST.includes(country);
 
+  const mappedLocale = locale === 'en' ? 'en' : locale;
+
+  // Fetch navbar and footer configuration based on current locale
+  const navbarQuery = `*[_type == "navbar" && language == $locale][0]`;
+  const navbarData = await client.fetch(navbarQuery, { locale: mappedLocale });
+
+  const footerQuery = `*[_type == "footer" && (language == $locale || ($locale == "en" && !defined(language)))][0]`;
+  const footerData = await client.fetch(footerQuery, { locale: mappedLocale });
+
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <LenisProvider>
-        <ClientLayout>{children}</ClientLayout>
+        <ClientLayout navbarData={navbarData} footerData={footerData}>{children}</ClientLayout>
         {showPrompt && <LanguagePrompt />}
       </LenisProvider>
     </NextIntlClientProvider>
