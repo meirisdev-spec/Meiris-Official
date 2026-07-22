@@ -10,6 +10,8 @@ import { contactPageType } from './contactPageType'
 import { solutionType } from './solutionType'
 import { footerType } from './footerType'
 import { navbarType } from './navbarType'
+import { resourcesPageType } from './resourcesPageType'
+import { resourceCategoryType } from './resourceCategoryType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -23,5 +25,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     teamMember,
     footerType,
     navbarType,
+    resourcesPageType,
+    resourceCategoryType,
   ],
 }
