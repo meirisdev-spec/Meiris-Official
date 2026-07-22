@@ -59,11 +59,13 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
 
   const headingText = setupData?.setupHeading || "Recommended for your setup";
 
+  const isForm = !!setupData?.setupForm;
+
   return (
-    <section className="bg-white py-16 md:py-32 px-6 md:px-12 lg:px-24">
+    <section className={`bg-white px-6 md:px-12 lg:px-24 ${isForm ? "py-12 md:py-16" : "py-16 md:py-32"}`}>
       <div className="max-w-[1440px] mx-auto w-full">
         {/* Header & Tabs */}
-        <ScrollReveal className="mb-16 md:mb-24">
+        <ScrollReveal className={isForm ? "mb-6 md:mb-8 text-center" : "mb-16 md:mb-24"}>
           {headingText && (
             <h2 className="text-[clamp(2.5rem,4vw,3.5rem)] font-bold text-[#1f2937] mb-8 tracking-tight font-[family-name:var(--font-primary)]">
               {headingText}
@@ -90,25 +92,48 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
         </ScrollReveal>
         
         {setupData?.setupForm ? (
-          <ScrollReveal className="max-w-4xl mx-auto bg-white">
-            <p className="text-gray-500 mb-8">{setupData.setupForm.subtitle}</p>
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-              {setupData.setupForm.fields.map((field: any, idx: number) => (
-                <div key={idx} className={field.fullWidth ? "md:col-span-2" : ""}>
-                  <label className="block text-sm font-bold text-gray-800 mb-2">{field.label}</label>
-                  <input 
-                    type="text" 
-                    placeholder={field.placeholder} 
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:border-[#00E573]"
-                  />
+          <ScrollReveal className="flex flex-col items-center relative w-full mt-4 md:mt-8">
+            {setupData.setupForm.subtitle && (
+              <p className="text-gray-500 mb-8 md:mb-10 text-center max-w-2xl">{setupData.setupForm.subtitle}</p>
+            )}
+            
+            <div className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] w-full max-w-[800px] p-10 md:p-14 border border-gray-100">
+              <form className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.appDomain || "Application domain"}</label>
+                    <input type="text" placeholder={setupData.setupForm.placeholders?.appDomain || "e.g. BESS, Drone, Railway, OEM Onboard Charger, Grid Edge, Other"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.powerRating || "Power rating range (kW)"}</label>
+                    <input type="text" placeholder={setupData.setupForm.placeholders?.powerRating || "e.g. 10–500 kW, or 'to be defined'"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
+                  </div>
                 </div>
-              ))}
-              <div className="md:col-span-2 mt-4">
-                <button type="button" className="bg-[#126b53] hover:bg-white hover:text-black text-white px-6 py-3 text-[13px] rounded-sm font-bold tracking-wide transition-all">
-                  Talk to our expert
-                </button>
-              </div>
-            </form>
+                
+                <div className="flex flex-col gap-2">
+                  <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.constraints || "Key constraints"}</label>
+                  <textarea rows={3} placeholder={setupData.setupForm.placeholders?.constraints || "Size / weight / operating environment / certifications required"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all resize-none"></textarea>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.orgContact || "Organisation & contact"}</label>
+                    <input type="text" placeholder={setupData.setupForm.placeholders?.orgContact || "Name, organisation, email or phone"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.timeline || "Timeline"}</label>
+                    <input type="text" placeholder={setupData.setupForm.placeholders?.timeline || "Prototype required by / production volumes expected"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
+                  </div>
+                </div>
+
+                <div className="flex justify-center pt-6">
+                  <button type="submit" className="cursor-pointer bg-[#0a0a0a] text-white px-8 py-4 rounded-full text-[12px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5 tracking-wide">
+                    {setupData.setupForm.labels?.submitBtn || "Talk to our expert"}
+                    <span>→</span>
+                  </button>
+                </div>
+              </form>
+            </div>
           </ScrollReveal>
         ) : (
           <ScrollReveal staggerChildren={true} className={`grid gap-10 md:gap-12 lg:gap-16 ${

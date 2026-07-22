@@ -23,37 +23,37 @@ export default function CustomSection2({ data }: { data: any }) {
         {/* 8 Cards Grid */}
         <ScrollReveal staggerChildren={true} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {data.apps.map((app: any) => (
-            <div 
-              key={app.id} 
-              onClick={() => setActiveTab(app.id)}
-              className={`animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out border rounded-xl p-6 cursor-pointer ${
-                activeTab === app.id 
-                  ? "bg-[#137861] text-white border-[#137861]" 
-                  : "bg-white text-gray-800 border-gray-200 hover:border-[#137861] hover:bg-gray-50"
-              }`}
-            >
+            <div key={app.id} className="animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out">
+              <div 
+                onClick={() => setActiveTab(app.id)}
+                className={`h-full border rounded-xl p-6 cursor-pointer transition-all duration-300 ${
+                  activeTab === app.id 
+                    ? "bg-white text-black border-[#00E573] shadow-[0_0_15px_rgba(0,229,115,0.15)]" 
+                    : "bg-[#f0f1f3] text-black border-transparent hover:bg-[#e6e8eb]"
+                }`}
+              >
               <div className="flex items-center gap-3 mb-3">
-                <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                  activeTab === app.id ? "border-white" : "border-[#137861]"
+                <div className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
+                  activeTab === app.id ? "bg-[#00E573] shadow-[0_0_10px_rgba(0,229,115,0.4)]" : "bg-gray-300"
                 }`}>
-                  {activeTab === app.id && <div className="w-2 h-2 rounded-full bg-white" />}
                 </div>
-                <h4 className="font-bold text-base">{app.title}</h4>
+                <h4 className="font-bold text-[15px]">{app.title}</h4>
               </div>
-              <p className={`text-sm ${activeTab === app.id ? "text-white/90" : "text-gray-500"}`}>
+              <p className="text-[13px] text-black/60 font-medium">
                 {app.desc}
               </p>
+              </div>
             </div>
           ))}
         </ScrollReveal>
 
         {/* Active Tab Green Card */}
         <ScrollReveal>
-          <div className="w-full bg-[#eefaf3] rounded-xl p-6 md:p-8 border border-[#cbeadd] shadow-sm mb-24">
-            <h3 className="text-[#0d6447] font-bold text-sm md:text-[13px] tracking-[0.1em] mb-3 uppercase">
+          <div className="w-full bg-[#f0f1f3] rounded-xl p-6 md:p-8 border-l-4 border-l-[#00E573] shadow-sm mb-24">
+            <h3 className="text-black font-bold text-sm md:text-[13px] tracking-[0.1em] mb-3 uppercase">
               {activeApp.title}
             </h3>
-            <p className="text-[#374151] text-[14px] md:text-[15px] leading-relaxed max-w-5xl">
+            <p className="text-black/70 text-[14px] md:text-[15px] font-medium leading-relaxed max-w-5xl">
               {activeApp.details}
             </p>
           </div>
@@ -62,17 +62,17 @@ export default function CustomSection2({ data }: { data: any }) {
         {/* Pain Points */}
         <div className="mt-16">
           <ScrollReveal>
-            <p className="text-gray-500 text-sm mb-4">Reference Image — Custom Solutions Pain-point Card</p>
             <h3 className="text-xl md:text-2xl font-bold text-[#1f2937] mb-8">{data.painPointsHeading}</h3>
           </ScrollReveal>
           
           <ScrollReveal staggerChildren={true} className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {data.painPoints.map((pp: any, idx: number) => (
-              <div key={idx} className="animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out w-full bg-[#eefaf3] rounded-xl p-6 md:p-8 border border-[#cbeadd] shadow-sm flex flex-col justify-start">
-                <h4 className="text-[#0d6447] font-bold text-sm md:text-[14px] tracking-[0.1em] mb-4">
+              <div key={idx} className="animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out w-full bg-[#f0f1f3] rounded-xl p-6 md:p-8 flex flex-col justify-start hover:bg-[#e6e8eb]">
+                <h4 className="text-black font-bold text-[16px] mb-3 flex items-center gap-3">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#00E573] shadow-[0_0_8px_rgba(0,229,115,0.4)]"></div>
                   {pp.title}
                 </h4>
-                <p className="text-[#374151] text-[14px] md:text-[15px] leading-relaxed">
+                <p className="text-black/60 text-[13px] leading-relaxed font-medium">
                   {pp.desc}
                 </p>
               </div>

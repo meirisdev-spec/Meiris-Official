@@ -56,13 +56,13 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
   let content = await client.fetch(
     `*[_type == "solution" && slug.current == $slug && language == $locale][0] {
       ...,
-      "recommendedSetup": {
+      "recommendedSetup": recommendedSetup {
         ...,
-        "setupFeaturesOnly": recommendedSetup.setupFeaturesOnly[] {
+        "setupFeaturesOnly": setupFeaturesOnly[] {
           ...,
           "imageUrl": image.asset->url
         },
-        "fleetsSetup": recommendedSetup.fleetsSetup[] {
+        "fleetsSetup": fleetsSetup[] {
           ...,
           "features": features[] {
             ...,
@@ -75,13 +75,13 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
   ) || await client.fetch(
     `*[_type == "solution" && slug.current == $slug && language == "en"][0] {
       ...,
-      "recommendedSetup": {
+      "recommendedSetup": recommendedSetup {
         ...,
-        "setupFeaturesOnly": recommendedSetup.setupFeaturesOnly[] {
+        "setupFeaturesOnly": setupFeaturesOnly[] {
           ...,
           "imageUrl": image.asset->url
         },
-        "fleetsSetup": recommendedSetup.fleetsSetup[] {
+        "fleetsSetup": fleetsSetup[] {
           ...,
           "features": features[] {
             ...,
@@ -98,13 +98,13 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
     content = await client.fetch(
       `*[_type == "solution" && slug.current == "depot-infrastructure" && language == $locale][0] {
         ...,
-        "recommendedSetup": {
+        "recommendedSetup": recommendedSetup {
           ...,
-          "setupFeaturesOnly": recommendedSetup.setupFeaturesOnly[] {
+          "setupFeaturesOnly": setupFeaturesOnly[] {
             ...,
             "imageUrl": image.asset->url
           },
-          "fleetsSetup": recommendedSetup.fleetsSetup[] {
+          "fleetsSetup": fleetsSetup[] {
             ...,
             "features": features[] {
               ...,
@@ -117,13 +117,13 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
     ) || await client.fetch(
       `*[_type == "solution" && slug.current == "depot-infrastructure" && language == "en"][0] {
         ...,
-        "recommendedSetup": {
+        "recommendedSetup": recommendedSetup {
           ...,
-          "setupFeaturesOnly": recommendedSetup.setupFeaturesOnly[] {
+          "setupFeaturesOnly": setupFeaturesOnly[] {
             ...,
             "imageUrl": image.asset->url
           },
-          "fleetsSetup": recommendedSetup.fleetsSetup[] {
+          "fleetsSetup": fleetsSetup[] {
             ...,
             "features": features[] {
               ...,
@@ -267,7 +267,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
       <RecommendedSetup setupData={recommendedSetup} />
 
       {/* Uptime Section */}
-      <section className="bg-white py-16 md:py-32 px-6 md:px-20 relative border-t border-black/5">
+      <section className="bg-white pt-8 pb-16 md:pt-12 md:pb-32 px-6 md:px-20 relative border-t border-black/5">
         <div className="mx-auto max-w-[1000px]">
           <ScrollReveal>
             <h2 className="text-[clamp(2rem,3vw,2.5rem)] font-bold text-black mb-16 text-center tracking-tight leading-tight">
