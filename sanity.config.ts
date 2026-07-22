@@ -31,7 +31,7 @@ export default defineConfig({
       // The two locales required by the contract (Section 6.1)
       supportedLanguages: SUPPORTED_LANGUAGES,
       // Document types that need per-language variants
-      schemaTypes: ['post', 'teamMember', 'solution', 'homePage', 'productsPage', 'aboutPage', 'careersPage', 'contactPage', 'footer'],
+      schemaTypes: ['post', 'teamMember', 'solution', 'homePage', 'productsPage', 'aboutPage', 'careersPage', 'contactPage', 'footer', 'resourcesPage'],
       // The field that stores the language on each document
       languageField: 'language',
       // Weakly referenced so deleting a translation doesn't cascade-delete all
