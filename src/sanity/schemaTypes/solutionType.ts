@@ -250,18 +250,28 @@ export const solutionType = defineType({
             defineField({ name: 'title', type: 'string', title: 'Form Title' }),
             defineField({ name: 'subtitle', type: 'text', title: 'Form Subtitle' }),
             defineField({
-              name: 'fields',
-              title: 'Form Fields',
-              type: 'array',
-              of: [
-                {
-                  type: 'object',
-                  fields: [
-                    defineField({ name: 'label', type: 'string', title: 'Label' }),
-                    defineField({ name: 'placeholder', type: 'string', title: 'Placeholder' }),
-                    defineField({ name: 'fullWidth', type: 'boolean', title: 'Full Width', initialValue: false }),
-                  ],
-                },
+              name: 'labels',
+              title: 'Form Labels',
+              type: 'object',
+              fields: [
+                defineField({ name: 'appDomain', type: 'string', title: 'Application Domain Label' }),
+                defineField({ name: 'powerRating', type: 'string', title: 'Power Rating Label' }),
+                defineField({ name: 'constraints', type: 'string', title: 'Key Constraints Label' }),
+                defineField({ name: 'orgContact', type: 'string', title: 'Organisation & Contact Label' }),
+                defineField({ name: 'timeline', type: 'string', title: 'Timeline Label' }),
+                defineField({ name: 'submitBtn', type: 'string', title: 'Submit Button Text' }),
+              ],
+            }),
+            defineField({
+              name: 'placeholders',
+              title: 'Form Placeholders',
+              type: 'object',
+              fields: [
+                defineField({ name: 'appDomain', type: 'string', title: 'Application Domain Placeholder' }),
+                defineField({ name: 'powerRating', type: 'string', title: 'Power Rating Placeholder' }),
+                defineField({ name: 'constraints', type: 'string', title: 'Key Constraints Placeholder' }),
+                defineField({ name: 'orgContact', type: 'string', title: 'Organisation & Contact Placeholder' }),
+                defineField({ name: 'timeline', type: 'string', title: 'Timeline Placeholder' }),
               ],
             }),
           ],
