@@ -70,7 +70,7 @@ export default function LatestNews({ data, locale }: { data: any, locale: string
                   <h3 className={styles.newsTitle}>{item.title}</h3>
                   <div className={styles.meta}>
                     <span className={styles.date}>{date}</span>
-                    <a href={`/${locale}/insights/${item.slug}`} className={styles.readMore}>{data.readMore}</a>
+                    <a href={`/${locale}/insights?post=${item.slug}`} className={styles.readMore}>{data.readMore}</a>
                   </div>
                 </div>
               </div>

@@ -1,41 +1,19 @@
 import type { StructureResolver } from 'sanity/structure'
+import PreviewIFrame from './components/PreviewIFrame'
 
 const LANGUAGES = [
   { id: 'en', title: '🇬🇧 International English' },
   { id: 'es-419', title: 'Español (Latinoamérica)' },
 ]
 
-const I18N_TYPES = ['post', 'teamMember', 'solution', 'homePage', 'productsPage', 'aboutPage', 'careersPage', 'contactPage', 'footer', 'navbar', 'resourcesPage']
+const I18N_TYPES = ['teamMember', 'solution', 'homePage', 'productsPage', 'aboutPage', 'careersPage', 'contactPage', 'footer', 'navbar', 'resourcesPage', 'insightsPage']
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Meiris Content')
     .items([
-      // ── Insights / Blog Posts (multilingual) ──────────────────────────────
-      S.listItem()
-        .title('Insights & Posts')
-        .child(
-          S.list()
-            .title('Insights & Posts')
-            .items(
-              LANGUAGES.map((lang) =>
-                S.listItem()
-                  .title(lang.title)
-                  .child(
-                    S.documentList()
-                      .title(`${lang.title} — Posts`)
-                      .filter('_type == "post" && (language == $lang || ($lang == "en" && !defined(language)))')
-                      .params({ lang: lang.id })
-                      .initialValueTemplates([
-                        S.initialValueTemplateItem(`post-${lang.id}`)
-                      ])
-                  )
-              )
-            )
-        ),
 
-      S.divider(),
 
       // ── Solutions (multilingual) ──────────────────────────────────────────
       S.listItem()
@@ -52,6 +30,7 @@ export const structure: StructureResolver = (S) =>
                       .title(`${lang.title} — Solutions`)
                       .filter('_type == "solution" && (language == $lang || ($lang == "en" && !defined(language)))')
                       .params({ lang: lang.id })
+                      .apiVersion('2023-01-01')
                       .initialValueTemplates([
                         S.initialValueTemplateItem(`solution-${lang.id}`)
                       ])
@@ -77,6 +56,7 @@ export const structure: StructureResolver = (S) =>
                       .title(`${lang.title} — Team`)
                       .filter('_type == "teamMember" && (language == $lang || ($lang == "en" && !defined(language)))')
                       .params({ lang: lang.id })
+                      .apiVersion('2023-01-01')
                       .initialValueTemplates([
                         S.initialValueTemplateItem(`teamMember-${lang.id}`)
                       ])
@@ -102,6 +82,7 @@ export const structure: StructureResolver = (S) =>
                       .title(`${lang.title} — Home Page`)
                       .filter('_type == "homePage" && (language == $lang || ($lang == "en" && !defined(language)))')
                       .params({ lang: lang.id })
+                      .apiVersion('2023-01-01')
                       .initialValueTemplates([
                         S.initialValueTemplateItem(`homePage-${lang.id}`)
                       ])
@@ -127,6 +108,7 @@ export const structure: StructureResolver = (S) =>
                       .title(`${lang.title} — Products Page`)
                       .filter('_type == "productsPage" && (language == $lang || ($lang == "en" && !defined(language)))')
                       .params({ lang: lang.id })
+                      .apiVersion('2023-01-01')
                       .initialValueTemplates([
                         S.initialValueTemplateItem(`productsPage-${lang.id}`)
                       ])
@@ -152,6 +134,7 @@ export const structure: StructureResolver = (S) =>
                       .title(`${lang.title} — About Page`)
                       .filter('_type == "aboutPage" && (language == $lang || ($lang == "en" && !defined(language)))')
                       .params({ lang: lang.id })
+                      .apiVersion('2023-01-01')
                       .initialValueTemplates([
                         S.initialValueTemplateItem(`aboutPage-${lang.id}`)
                       ])
@@ -177,6 +160,7 @@ export const structure: StructureResolver = (S) =>
                       .title(`${lang.title} — Careers Page`)
                       .filter('_type == "careersPage" && (language == $lang || ($lang == "en" && !defined(language)))')
                       .params({ lang: lang.id })
+                      .apiVersion('2023-01-01')
                       .initialValueTemplates([
                         S.initialValueTemplateItem(`careersPage-${lang.id}`)
                       ])
@@ -202,6 +186,7 @@ export const structure: StructureResolver = (S) =>
                       .title(`${lang.title} — Contact Page`)
                       .filter('_type == "contactPage" && (language == $lang || ($lang == "en" && !defined(language)))')
                       .params({ lang: lang.id })
+                      .apiVersion('2023-01-01')
                       .initialValueTemplates([
                         S.initialValueTemplateItem(`contactPage-${lang.id}`)
                       ])
@@ -228,9 +213,45 @@ export const structure: StructureResolver = (S) =>
                       .title(`${lang.title} — Resources Page`)
                       .filter('_type == "resourcesPage" && (language == $lang || ($lang == "en" && !defined(language)))')
                       .params({ lang: lang.id })
+                      .apiVersion('2023-01-01')
                       .initialValueTemplates([
                         S.initialValueTemplateItem(`resourcesPage-${lang.id}`)
                       ])
+                  )
+              )
+            )
+        ),
+
+      S.divider(),
+
+      // ── Insights Page (multilingual singleton) ───────────────────────────────
+      S.listItem()
+        .title('Insights Page')
+        .child(
+          S.list()
+            .title('Insights Page')
+            .items(
+              LANGUAGES.map((lang) =>
+                S.listItem()
+                  .title(lang.title)
+                  .child(
+                    S.documentList()
+                      .title(`${lang.title} — Insights Page`)
+                      .filter('_type == "insightsPage" && (language == $lang || ($lang == "en" && !defined(language)))')
+                      .params({ lang: lang.id })
+                      .apiVersion('2023-01-01')
+                      .initialValueTemplates([
+                        S.initialValueTemplateItem(`insightsPage-${lang.id}`)
+                      ])
+                      .child((documentId) =>
+                        S.document()
+                          .documentId(documentId)
+                          .schemaType('insightsPage')
+                          .views([
+                            S.view.form(),
+                            S.view.component(PreviewIFrame).title('Live Preview')
+                          ])
+                      )
                   )
               )
             )
@@ -279,6 +300,7 @@ export const structure: StructureResolver = (S) =>
                       .title(`${lang.title} — Footer`)
                       .filter('_type == "footer" && (language == $lang || ($lang == "en" && !defined(language)))')
                       .params({ lang: lang.id })
+                      .apiVersion('2023-01-01')
                       .initialValueTemplates([
                         S.initialValueTemplateItem(`footer-${lang.id}`)
                       ])

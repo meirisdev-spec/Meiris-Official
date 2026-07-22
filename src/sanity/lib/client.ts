@@ -7,6 +7,10 @@ export const client = createClient({
   dataset,
   apiVersion,
   useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
+  stega: {
+    enabled: true,
+    studioUrl: '/studio',
+  },
   fetch: {
     cache: 'no-store'
   }

@@ -1,6 +1,5 @@
 import { type SchemaTypeDefinition } from 'sanity'
 
-import { post } from './post'
 import { teamMember } from './teamMember'
 import { homePageType } from './homePageType'
 import { productsPageType } from './productsPageType'
@@ -12,10 +11,10 @@ import { footerType } from './footerType'
 import { navbarType } from './navbarType'
 import { resourcesPageType } from './resourcesPageType'
 import { resourceCategoryType } from './resourceCategoryType'
+import { insightsPageType } from './insightsPageType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
-    post,
     solutionType,
     homePageType,
     aboutPageType,
@@ -27,5 +26,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     navbarType,
     resourcesPageType,
     resourceCategoryType,
+    insightsPageType,
   ],
 }

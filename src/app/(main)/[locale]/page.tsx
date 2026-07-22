@@ -55,16 +55,27 @@ export default async function Home({ params: { locale } }: { params: { locale: s
     }`
   );
 
-  // Fetch the latest 3 posts dynamically
-  const latestPosts = await client.fetch(
-    `*[_type == "post" && (!defined(language) || language == $locale)] | order(publishedAt desc)[0...3] {
+  // Fetch the latest 3 posts dynamically from the insightsPage singleton
+  let latestPosts = await client.fetch(
+    `*[_type == "insightsPage" && language == $locale][0].insightsItems[] | order(publishedAt desc)[0...3] {
       title,
       publishedAt,
-      "slug": slug.current,
-      "imageUrl": image.asset->url
+      "slug": _key,
+      "imageUrl": image.asset->url + "?w=800&h=450&fit=crop"
     }`,
     { locale }
   );
+
+  if (!latestPosts || latestPosts.length === 0) {
+    latestPosts = await client.fetch(
+      `*[_type == "insightsPage" && language == "en"][0].insightsItems[] | order(publishedAt desc)[0...3] {
+        title,
+        publishedAt,
+        "slug": _key,
+        "imageUrl": image.asset->url + "?w=800&h=450&fit=crop"
+      }`
+    );
+  }
 
 
   if (!homePage) {
