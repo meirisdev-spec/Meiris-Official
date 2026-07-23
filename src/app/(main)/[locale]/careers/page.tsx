@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import ctaEngineers from "@/assets/cta-engineers.jpg";
+<<<<<<< HEAD
+=======
+import CareersForm from "./CareersForm";
+>>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
 
 import { getLocalizedMetadata } from "@/lib/seo";
 import { client } from "@/sanity/lib/client";
@@ -101,6 +105,7 @@ export default async function CareersPage({ params: { locale } }: { params: { lo
             </div>
           </div>
           
+<<<<<<< HEAD
           <div className="bg-white rounded-xl p-10 md:p-12 shadow-2xl text-black">
             <form className="flex flex-col gap-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -134,6 +139,9 @@ export default async function CareersPage({ params: { locale } }: { params: { lo
               </button>
             </form>
           </div>
+=======
+          <CareersForm locale={locale} />
+>>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
         </div>
       </section>
 
