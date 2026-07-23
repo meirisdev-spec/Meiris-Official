@@ -10,7 +10,6 @@ import { solutionType } from './solutionType'
 import { footerType } from './footerType'
 import { navbarType } from './navbarType'
 import { resourcesPageType } from './resourcesPageType'
-import { resourceCategoryType } from './resourceCategoryType'
 import { insightsPageType } from './insightsPageType'
 import { insightPostType } from './insightPostType'
 import { resourcePostType } from './resourcePostType'
@@ -27,7 +26,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     footerType,
     navbarType,
     resourcesPageType,
-    resourceCategoryType,
     insightsPageType,
     insightPostType,
     resourcePostType,
