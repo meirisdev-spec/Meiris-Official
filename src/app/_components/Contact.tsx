@@ -1,11 +1,5 @@
 "use client";
 import { useEffect, useRef } from 'react';
-<<<<<<< HEAD
-import styles from './Contact.module.css';
-export default function Contact({ data }: { data: any }) {
-  const sectionRef = useRef(null);
-
-=======
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -37,7 +31,6 @@ export default function Contact({ data }: { data: any }) {
     form.reset();
   }
 
->>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
@@ -61,16 +54,6 @@ export default function Contact({ data }: { data: any }) {
             <p className={styles.description}>
               {data.description}
             </p>
-<<<<<<< HEAD
-            <form className={styles.form}>
-              <div className={styles.inputGroup}>
-                <input type="text" placeholder={data.namePlaceholder} className={styles.input} required />
-                <input type="email" placeholder={data.emailPlaceholder} className={styles.input} required />
-              </div>
-              <textarea placeholder={data.messagePlaceholder} className={styles.textarea} rows={4} required></textarea>
-              <button type="submit" className={styles.submitBtn}>{data.submitBtn}</button>
-            </form>
-=======
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className={styles.form}>
                 <div className={styles.inputGroup}>
@@ -114,7 +97,6 @@ export default function Contact({ data }: { data: any }) {
                 <button type="submit" className={styles.submitBtn}>{data.submitBtn}</button>
               </form>
             </Form>
->>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
           </div>
           <div className={styles.imageContent}>
             <img src={data.imageUrl || "https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"} alt="Contact" className={styles.image} />

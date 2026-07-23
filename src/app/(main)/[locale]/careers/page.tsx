@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import ctaEngineers from "@/assets/cta-engineers.jpg";
-<<<<<<< HEAD
-=======
 import CareersForm from "./CareersForm";
->>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
 
 import { getLocalizedMetadata } from "@/lib/seo";
 import { client } from "@/sanity/lib/client";
@@ -105,43 +102,7 @@ export default async function CareersPage({ params: { locale } }: { params: { lo
             </div>
           </div>
           
-<<<<<<< HEAD
-          <div className="bg-white rounded-xl p-10 md:p-12 shadow-2xl text-black">
-            <form className="flex flex-col gap-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">Full Name</label>
-                  <input type="text" placeholder="John Doe" className="w-full bg-transparent border border-black/20 rounded-md px-4 py-3.5 text-[13px] outline-none focus:border-[#00E573] transition-colors" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">Email Address</label>
-                  <input type="email" placeholder="john@example.com" className="w-full bg-transparent border border-black/20 rounded-md px-4 py-3.5 text-[13px] outline-none focus:border-[#00E573] transition-colors" />
-                </div>
-              </div>
-              
-              <div className="flex flex-col gap-2">
-                <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">Attach CV/Resume</label>
-                <div className="w-full border-[1.5px] border-dashed border-black/40 rounded-xl p-10 flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-[#f9f9f9] transition-colors">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00E573" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="12" y1="18" x2="12" y2="12"></line>
-                    <line x1="9" y1="15" x2="15" y2="15"></line>
-                  </svg>
-                  <span className="text-[13px] font-medium text-black">Drop file or click to browse</span>
-                  <span className="text-[9px] text-black/40 font-medium">PDF, DOCX (Max 10MB)</span>
-                </div>
-              </div>
-
-              <button type="button" className="cursor-pointer w-full bg-[#0a0a0a] text-white py-4 rounded-full text-[12px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center justify-center gap-2 tracking-wide mt-2">
-                {locale === 'es-419' ? 'ENVIAR SOLICITUD' : 'SUBMIT APPLICATION'}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              </button>
-            </form>
-          </div>
-=======
           <CareersForm locale={locale} />
->>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
         </div>
       </section>
 

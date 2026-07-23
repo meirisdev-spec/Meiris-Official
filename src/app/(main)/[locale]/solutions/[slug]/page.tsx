@@ -3,7 +3,7 @@ import Link from "next/link";
 import RecommendedSetup from "./RecommendedSetup";
 import CustomSection2 from "./CustomSection2";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-
+import PersistentContactPrompt from "@/components/ui/PersistentContactPrompt";
 import { getLocalizedMetadata } from "@/lib/seo";
 import { client } from "@/sanity/lib/client";
 
@@ -152,7 +152,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
       {/* Hero Section */}
       <section className="relative flex flex-col md:flex-row h-auto md:h-screen min-h-[100dvh] md:min-h-[700px] pt-[68px] bg-[#0c0c0c] w-full">
         {/* Left Content */}
-        <div className="w-full md:w-1/2 px-6 md:pl-20 md:pr-12 pb-16 pt-20 md:pt-[15vh] z-10 flex flex-col justify-start md:justify-center">
+        <div className="w-full md:w-1/2 px-6 md:pl-20 md:pr-12 py-12 z-10 flex flex-col flex-1 justify-center">
           <ScrollReveal>
             <h1 className="text-[clamp(2.5rem,4.5vw,4.5rem)] font-bold text-white leading-[1.05] tracking-tight mb-6 max-w-xl">
               {hero?.heroTitle}
@@ -298,6 +298,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ slug
         </div>
       </section>
 
+      <PersistentContactPrompt segmentName={hero?.heroTitle || urlSlug} />
     </div>
   );
 }

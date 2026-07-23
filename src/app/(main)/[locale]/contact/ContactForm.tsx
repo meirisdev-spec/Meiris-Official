@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-<<<<<<< HEAD
-=======
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -16,7 +14,6 @@ const formSchema = z.object({
   phone: z.string().min(8, { message: "Please enter a valid phone number." }),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 });
->>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
 
 type FormProps = {
   heading: string;
@@ -39,11 +36,6 @@ type FormProps = {
 };
 
 export default function ContactForm({ data }: { data?: FormProps }) {
-<<<<<<< HEAD
-  // Use a default category, fallback to an empty string if data or categories is missing
-  const [inquiryType, setInquiryType] = useState(data?.categories?.[0] || "");
-
-=======
   const [inquiryType, setInquiryType] = useState(data?.categories?.[0] || "");
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -57,22 +49,18 @@ export default function ContactForm({ data }: { data?: FormProps }) {
     },
   });
 
->>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
   if (!data) {
     return <div>Form data not found.</div>;
   }
 
   const { heading, categories, labels, placeholders } = data;
 
-<<<<<<< HEAD
-=======
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log({ ...values, inquiryType });
     toast.success("Thank you! Your message has been sent successfully.");
     form.reset();
   }
 
->>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
   return (
     <div className="flex flex-col items-center relative w-full">
       <h2 className="text-[1.75rem] font-bold text-black mb-12 self-start absolute left-0 top-0 hidden lg:block">{heading}</h2>
@@ -100,43 +88,6 @@ export default function ContactForm({ data }: { data?: FormProps }) {
 
       {/* Form Card */}
       <div className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] w-full max-w-[800px] p-10 md:p-14">
-<<<<<<< HEAD
-        <form className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.name}</label>
-              <input type="text" placeholder={placeholders?.name} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.company}</label>
-              <input type="text" placeholder={placeholders?.company} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.email}</label>
-              <input type="email" placeholder={placeholders?.email} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.phone}</label>
-              <input type="tel" placeholder={placeholders?.phone} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.message}</label>
-            <textarea rows={5} placeholder={placeholders?.message} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all resize-none"></textarea>
-          </div>
-
-          <div className="flex justify-center pt-6">
-            <button type="submit" className="cursor-pointer bg-[#0a0a0a] text-white px-8 py-4 rounded-full text-[12px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5 tracking-wide">
-              {labels?.submitBtn}
-              <span>→</span>
-            </button>
-          </div>
-        </form>
-=======
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -219,7 +170,6 @@ export default function ContactForm({ data }: { data?: FormProps }) {
             </div>
           </form>
         </Form>
->>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
       </div>
     </div>
   );

@@ -2,14 +2,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-<<<<<<< HEAD
-=======
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { toast } from "sonner";
->>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
 
 import solCharge from "@/assets/sol-charge.jpg";
 import solDepot from "@/assets/sol-depot.jpg";
@@ -41,11 +38,6 @@ type Fleet = {
 
 
 
-<<<<<<< HEAD
-export default function RecommendedSetup({ setupData }: { setupData?: any }) {
-  const [activeTab, setActiveTab] = useState("bus");
-
-=======
 const formSchema = z.object({
   appDomain: z.string().min(2, { message: "Application domain is required." }),
   powerRating: z.string().min(2, { message: "Power rating is required." }),
@@ -74,7 +66,6 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
     form.reset();
   }
 
->>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
   // Determine which features to show
   let featuresToDisplay: Feature[] = [];
   let showTabs = false;
@@ -137,43 +128,6 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
             )}
             
             <div className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] w-full max-w-[800px] p-10 md:p-14 border border-gray-100">
-<<<<<<< HEAD
-              <form className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.appDomain || "Application domain"}</label>
-                    <input type="text" placeholder={setupData.setupForm.placeholders?.appDomain || "e.g. BESS, Drone, Railway, OEM Onboard Charger, Grid Edge, Other"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.powerRating || "Power rating range (kW)"}</label>
-                    <input type="text" placeholder={setupData.setupForm.placeholders?.powerRating || "e.g. 10–500 kW, or 'to be defined'"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
-                  </div>
-                </div>
-                
-                <div className="flex flex-col gap-2">
-                  <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.constraints || "Key constraints"}</label>
-                  <textarea rows={3} placeholder={setupData.setupForm.placeholders?.constraints || "Size / weight / operating environment / certifications required"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all resize-none"></textarea>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.orgContact || "Organisation & contact"}</label>
-                    <input type="text" placeholder={setupData.setupForm.placeholders?.orgContact || "Name, organisation, email or phone"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.timeline || "Timeline"}</label>
-                    <input type="text" placeholder={setupData.setupForm.placeholders?.timeline || "Prototype required by / production volumes expected"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
-                  </div>
-                </div>
-
-                <div className="flex justify-center pt-6">
-                  <button type="submit" className="cursor-pointer bg-[#0a0a0a] text-white px-8 py-4 rounded-full text-[12px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5 tracking-wide">
-                    {setupData.setupForm.labels?.submitBtn || "Talk to our expert"}
-                    <span>→</span>
-                  </button>
-                </div>
-              </form>
-=======
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -256,7 +210,6 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
                   </div>
                 </form>
               </Form>
->>>>>>> 787f409bb4eb7f44a75dfb3c23bbef6ec02b550c
             </div>
           </ScrollReveal>
         ) : (

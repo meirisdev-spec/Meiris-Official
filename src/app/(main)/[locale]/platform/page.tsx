@@ -25,11 +25,11 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 
 const GREEN = "oklch(0.78 0.19 155)";
 
-export default function PlatformPage() {
+export default function PlatformPage({ params: { locale } }: { params: { locale: string } }) {
   return (
     <div className="relative bg-black text-white">
       {/* Parallax scrolling sections 1–8 */}
-      <PlatformParallax platformModule={platformModule} />
+      <PlatformParallax platformModule={platformModule} locale={locale} />
     </div>
   );
 }
