@@ -30,6 +30,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 import VisualEditingWrapper from '@/components/VisualEditingWrapper';
+import { Toaster } from '@/components/ui/sonner';
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   let locale = 'en';
@@ -46,8 +47,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <body>
         {children}
         {isDraft && <VisualEditingWrapper />}
+        <Toaster />
       </body>
     </html>
   );
 }
-

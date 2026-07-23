@@ -1,6 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { toast } from "sonner";
+
+const formSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  company: z.string().min(2, { message: "Company name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  phone: z.string().min(8, { message: "Please enter a valid phone number." }),
+  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+});
 
 type FormProps = {
   heading: string;
@@ -23,14 +36,30 @@ type FormProps = {
 };
 
 export default function ContactForm({ data }: { data?: FormProps }) {
-  // Use a default category, fallback to an empty string if data or categories is missing
   const [inquiryType, setInquiryType] = useState(data?.categories?.[0] || "");
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      company: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+  });
 
   if (!data) {
     return <div>Form data not found.</div>;
   }
 
   const { heading, categories, labels, placeholders } = data;
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log({ ...values, inquiryType });
+    toast.success("Thank you! Your message has been sent successfully.");
+    form.reset();
+  }
 
   return (
     <div className="flex flex-col items-center relative w-full">
@@ -59,41 +88,88 @@ export default function ContactForm({ data }: { data?: FormProps }) {
 
       {/* Form Card */}
       <div className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] w-full max-w-[800px] p-10 md:p-14">
-        <form className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.name}</label>
-              <input type="text" placeholder={placeholders?.name} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col gap-2">
+                    <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.name}</label>
+                    <FormControl>
+                      <input type="text" placeholder={placeholders?.name} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" {...field} />
+                    </FormControl>
+                    <FormMessage className="text-red-500 font-medium text-xs" />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="company"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col gap-2">
+                    <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.company}</label>
+                    <FormControl>
+                      <input type="text" placeholder={placeholders?.company} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" {...field} />
+                    </FormControl>
+                    <FormMessage className="text-red-500 font-medium text-xs" />
+                  </FormItem>
+                )}
+              />
             </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.company}</label>
-              <input type="text" placeholder={placeholders?.company} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col gap-2">
+                    <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.email}</label>
+                    <FormControl>
+                      <input type="email" placeholder={placeholders?.email} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" {...field} />
+                    </FormControl>
+                    <FormMessage className="text-red-500 font-medium text-xs" />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col gap-2">
+                    <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.phone}</label>
+                    <FormControl>
+                      <input type="tel" placeholder={placeholders?.phone} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" {...field} />
+                    </FormControl>
+                    <FormMessage className="text-red-500 font-medium text-xs" />
+                  </FormItem>
+                )}
+              />
             </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.email}</label>
-              <input type="email" placeholder={placeholders?.email} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.phone}</label>
-              <input type="tel" placeholder={placeholders?.phone} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
-            </div>
-          </div>
 
-          <div className="flex flex-col gap-2">
-            <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.message}</label>
-            <textarea rows={5} placeholder={placeholders?.message} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all resize-none"></textarea>
-          </div>
+            <FormField
+              control={form.control}
+              name="message"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-2">
+                  <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{labels?.message}</label>
+                  <FormControl>
+                    <textarea rows={5} placeholder={placeholders?.message} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all resize-none" {...field}></textarea>
+                  </FormControl>
+                  <FormMessage className="text-red-500 font-medium text-xs" />
+                </FormItem>
+              )}
+            />
 
-          <div className="flex justify-center pt-6">
-            <button type="submit" className="cursor-pointer bg-[#0a0a0a] text-white px-8 py-4 rounded-full text-[12px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5 tracking-wide">
-              {labels?.submitBtn}
-              <span>→</span>
-            </button>
-          </div>
-        </form>
+            <div className="flex justify-center pt-6">
+              <button type="submit" className="cursor-pointer bg-[#0a0a0a] text-white px-8 py-4 rounded-full text-[12px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5 tracking-wide">
+                {labels?.submitBtn}
+                <span>→</span>
+              </button>
+            </div>
+          </form>
+        </Form>
       </div>
     </div>
   );
