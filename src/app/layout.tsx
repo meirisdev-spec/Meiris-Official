@@ -7,8 +7,8 @@ import { draftMode } from 'next/headers';
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.siriem.com'),
   title: {
-    default: "Meiris (formerly SIRIEM) | Innovative Electrification Solutions",
-    template: "%s | Meiris (formerly SIRIEM)"
+    default: "Meiris | Innovative Electrification Solutions",
+    template: "%s | Meiris"
   },
   description: "Meiris, previously known as SIRIEM, provides cutting-edge electrification solutions, power infrastructure, and technological innovation.",
   keywords: ["Meiris", "SIRIEM", "SIRI", "Electrification", "Power Solutions", "Infrastructure", "Technology"],
@@ -48,7 +48,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   }
 
   const isDraft = draftMode().isEnabled;
-  
+
   return (
     <html lang={locale} translate="no" className={`${dmSans.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable}`}>
       <body>
