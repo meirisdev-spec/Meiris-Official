@@ -10,7 +10,7 @@ import { toast } from "sonner";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  contactInfo: z.string().min(5, { message: "Please enter a valid phone or email." }),
+  contactInfo: z.string().email({ message: "Please enter a valid email address." }),
   segment: z.string().min(2, { message: "Segment is required." }),
   preferredTime: z.string().optional(),
 });
@@ -25,6 +25,7 @@ export default function PersistentContactPrompt({ segmentName }: { segmentName: 
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onTouched",
     defaultValues: {
       name: "",
       contactInfo: "",
@@ -122,7 +123,7 @@ export default function PersistentContactPrompt({ segmentName }: { segmentName: 
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <input {...field} type="text" placeholder="Full Name" className="w-full bg-[#f9f9f9] rounded-xl px-5 py-3.5 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
+                    <input {...field} type="text" placeholder="Full Name" className="w-full bg-[#f9f9f9] text-gray-900 rounded-xl px-5 py-3.5 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-500 transition-all" />
                   </FormControl>
                   <FormMessage className="text-[11px] text-red-500" />
                 </FormItem>
@@ -135,7 +136,7 @@ export default function PersistentContactPrompt({ segmentName }: { segmentName: 
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <input {...field} type="text" placeholder="Phone or email" className="w-full bg-[#f9f9f9] rounded-xl px-5 py-3.5 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
+                    <input {...field} type="email" placeholder="Email address" className="w-full bg-[#f9f9f9] text-gray-900 rounded-xl px-5 py-3.5 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-500 transition-all" />
                   </FormControl>
                   <FormMessage className="text-[11px] text-red-500" />
                 </FormItem>
@@ -148,7 +149,7 @@ export default function PersistentContactPrompt({ segmentName }: { segmentName: 
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <input {...field} type="text" placeholder="Segment" className="w-full bg-[#f9f9f9] rounded-xl px-5 py-3.5 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all text-black/60" />
+                    <input {...field} type="text" placeholder="Segment" className="w-full bg-[#f9f9f9] text-gray-900 rounded-xl px-5 py-3.5 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-500 transition-all" />
                   </FormControl>
                   <FormMessage className="text-[11px] text-red-500" />
                 </FormItem>
@@ -161,7 +162,17 @@ export default function PersistentContactPrompt({ segmentName }: { segmentName: 
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <input {...field} type="text" placeholder="Preferred time (optional)" className="w-full bg-[#f9f9f9] rounded-xl px-5 py-3.5 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" />
+                    <input 
+                      {...field} 
+                      type="text" 
+                      placeholder="Preferred time (optional)" 
+                      onFocus={(e) => (e.target.type = "datetime-local")}
+                      onBlur={(e) => {
+                        field.onBlur();
+                        if (!e.target.value) e.target.type = "text";
+                      }}
+                      className="w-full bg-[#f9f9f9] text-gray-900 rounded-xl px-5 py-3.5 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-500 transition-all" 
+                    />
                   </FormControl>
                   <FormMessage className="text-[11px] text-red-500" />
                 </FormItem>

@@ -31,6 +31,7 @@ export default function CareersForm({ locale }: { locale: string }) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onTouched",
     defaultValues: {
       name: "",
       email: "",

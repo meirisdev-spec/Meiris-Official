@@ -97,6 +97,11 @@
   outline: 1.5px solid #00D384;
 }
 
+.input[aria-invalid="true"],
+.textarea[aria-invalid="true"] {
+  outline: 1.5px solid #ef4444; /* Tailwind red-500 */
+}
+
 .submitBtn {
   font-family: var(--font-button);
   font-weight: 700;

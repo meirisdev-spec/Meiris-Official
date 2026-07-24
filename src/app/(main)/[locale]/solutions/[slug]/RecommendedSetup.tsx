@@ -42,7 +42,7 @@ const formSchema = z.object({
   appDomain: z.string().min(2, { message: "Application domain is required." }),
   powerRating: z.string().min(2, { message: "Power rating is required." }),
   constraints: z.string().optional(),
-  orgContact: z.string().min(5, { message: "Contact information is required." }),
+  orgContact: z.string().email({ message: "Please enter a valid email address." }),
   timeline: z.string().min(2, { message: "Timeline is required." }),
 });
 
@@ -51,6 +51,7 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onTouched",
     defaultValues: {
       appDomain: "",
       powerRating: "",
@@ -136,7 +137,7 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
                         <FormItem className="flex flex-col gap-2">
                           <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.appDomain || "Application domain"}</label>
                           <FormControl>
-                            <input type="text" placeholder={setupData.setupForm.placeholders?.appDomain || "e.g. BESS, Drone, Railway, OEM Onboard Charger, Grid Edge, Other"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" {...field} />
+                            <input type="text" placeholder={setupData.setupForm.placeholders?.appDomain || "e.g. BESS, Drone, Railway, OEM Onboard Charger, Grid Edge, Other"} className="w-full bg-[#f9f9f9] text-gray-900 rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-500 transition-all" {...field} />
                           </FormControl>
                           <FormMessage className="text-red-500 font-medium text-xs" />
                         </FormItem>
@@ -149,7 +150,7 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
                         <FormItem className="flex flex-col gap-2">
                           <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.powerRating || "Power rating range (kW)"}</label>
                           <FormControl>
-                            <input type="text" placeholder={setupData.setupForm.placeholders?.powerRating || "e.g. 10–500 kW, or 'to be defined'"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" {...field} />
+                            <input type="text" placeholder={setupData.setupForm.placeholders?.powerRating || "e.g. 10–500 kW, or 'to be defined'"} className="w-full bg-[#f9f9f9] text-gray-900 rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-500 transition-all" {...field} />
                           </FormControl>
                           <FormMessage className="text-red-500 font-medium text-xs" />
                         </FormItem>
@@ -164,7 +165,7 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
                       <FormItem className="flex flex-col gap-2">
                         <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.constraints || "Key constraints"}</label>
                         <FormControl>
-                          <textarea rows={3} placeholder={setupData.setupForm.placeholders?.constraints || "Size / weight / operating environment / certifications required"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all resize-none" {...field}></textarea>
+                          <textarea rows={3} placeholder={setupData.setupForm.placeholders?.constraints || "Size / weight / operating environment / certifications required"} className="w-full bg-[#f9f9f9] text-gray-900 rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-500 transition-all resize-none" {...field}></textarea>
                         </FormControl>
                         <FormMessage className="text-red-500 font-medium text-xs" />
                       </FormItem>
@@ -177,9 +178,9 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
                       name="orgContact"
                       render={({ field }) => (
                         <FormItem className="flex flex-col gap-2">
-                          <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.orgContact || "Organisation & contact"}</label>
+                          <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.orgContact || "Email Address"}</label>
                           <FormControl>
-                            <input type="text" placeholder={setupData.setupForm.placeholders?.orgContact || "Name, organisation, email or phone"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" {...field} />
+                            <input type="email" placeholder={setupData.setupForm.placeholders?.orgContact || "name@company.com"} className="w-full bg-[#f9f9f9] text-gray-900 rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-500 transition-all" {...field} />
                           </FormControl>
                           <FormMessage className="text-red-500 font-medium text-xs" />
                         </FormItem>
@@ -192,7 +193,17 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
                         <FormItem className="flex flex-col gap-2">
                           <label className="text-[10px] uppercase tracking-widest text-black/50 font-bold">{setupData.setupForm.labels?.timeline || "Timeline"}</label>
                           <FormControl>
-                            <input type="text" placeholder={setupData.setupForm.placeholders?.timeline || "Prototype required by / production volumes expected"} className="w-full bg-[#f9f9f9] rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] transition-all" {...field} />
+                            <input 
+                              {...field} 
+                              type="text" 
+                              placeholder={setupData.setupForm.placeholders?.timeline || "Prototype required by / production volumes expected"} 
+                              onFocus={(e) => (e.target.type = "date")}
+                              onBlur={(e) => {
+                                field.onBlur();
+                                if (!e.target.value) e.target.type = "text";
+                              }}
+                              className="w-full bg-[#f9f9f9] text-gray-900 rounded-xl px-5 py-4 text-[13px] outline-none focus:ring-1 focus:ring-[#00E573] aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-500 transition-all" 
+                            />
                           </FormControl>
                           <FormMessage className="text-red-500 font-medium text-xs" />
                         </FormItem>
