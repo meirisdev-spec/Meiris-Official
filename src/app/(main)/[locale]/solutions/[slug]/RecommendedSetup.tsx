@@ -61,7 +61,6 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     toast.success("Thank you! Our expert will be in touch shortly.");
     form.reset();
   }
@@ -70,7 +69,7 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
   let featuresToDisplay: Feature[] = [];
   let showTabs = false;
   let fleetsData: any[] = setupData?.fleetsSetup || [];
-  
+
   if (setupData?.setupForm) {
     showTabs = false;
   } else if (setupData?.setupFeaturesOnly && setupData.setupFeaturesOnly.length > 0) {
@@ -101,18 +100,17 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
               {headingText}
             </h2>
           )}
-          
+
           {showTabs && (
             <div className="flex flex-wrap items-center gap-2 md:gap-4 text-[12px] font-bold uppercase tracking-widest font-[family-name:var(--font-secondary)]">
               {fleetsData.map((fleet) => (
-                <button 
+                <button
                   key={fleet.id}
                   onClick={() => setActiveTab(fleet.id)}
-                  className={`px-6 py-3 rounded-full transition-all duration-300 ${
-                    activeTab === fleet.id 
-                      ? "bg-[#00D384] text-black shadow-md" 
-                      : "text-black hover:bg-gray-100"
-                  }`}
+                  className={`px-6 py-3 rounded-full transition-all duration-300 ${activeTab === fleet.id
+                    ? "bg-[#00D384] text-black shadow-md"
+                    : "text-black hover:bg-gray-100"
+                    }`}
                 >
                   {fleet.label}
                 </button>
@@ -120,13 +118,13 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
             </div>
           )}
         </ScrollReveal>
-        
+
         {setupData?.setupForm ? (
           <ScrollReveal className="flex flex-col items-center relative w-full mt-4 md:mt-8">
             {setupData.setupForm.subtitle && (
               <p className="text-gray-500 mb-8 md:mb-10 text-center max-w-2xl">{setupData.setupForm.subtitle}</p>
             )}
-            
+
             <div className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] w-full max-w-[800px] p-10 md:p-14 border border-gray-100">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -158,7 +156,7 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
                       )}
                     />
                   </div>
-                  
+
                   <FormField
                     control={form.control}
                     name="constraints"
@@ -172,7 +170,7 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
                       </FormItem>
                     )}
                   />
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <FormField
                       control={form.control}
@@ -213,17 +211,16 @@ export default function RecommendedSetup({ setupData }: { setupData?: any }) {
             </div>
           </ScrollReveal>
         ) : (
-          <ScrollReveal staggerChildren={true} className={`grid gap-10 md:gap-12 lg:gap-16 ${
-            featuresToDisplay.length === 4 
-              ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4" 
-              : "grid-cols-1 md:grid-cols-3"
-          }`}>
+          <ScrollReveal staggerChildren={true} className={`grid gap-10 md:gap-12 lg:gap-16 ${featuresToDisplay.length === 4
+            ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+            : "grid-cols-1 md:grid-cols-3"
+            }`}>
             {featuresToDisplay.map((feature: any, idx: number) => (
               <div key={idx} className="animate-on-scroll opacity-0 translate-y-10 transition-all duration-700 ease-out flex flex-col items-center">
                 <div className="w-full aspect-[4/3] bg-gray-100 rounded-[2rem] overflow-hidden relative shadow-sm mb-8 transition-transform duration-500 hover:scale-[1.02]">
-                  <Image 
-                    src={feature.image} 
-                    alt={feature.title} 
+                  <Image
+                    src={feature.image}
+                    alt={feature.title}
                     fill
                     className="object-cover"
                   />

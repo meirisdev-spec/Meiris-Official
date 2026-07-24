@@ -56,7 +56,6 @@ export default function ContactForm({ data }: { data?: FormProps }) {
   const { heading, categories, labels, placeholders } = data;
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log({ ...values, inquiryType });
     toast.success("Thank you! Your message has been sent successfully.");
     form.reset();
   }

@@ -254,7 +254,7 @@ export default function ProductsPage({ data }: { data?: any }) {
             </button>
 
             <div className="hidden lg:flex gap-3 xl:gap-10 text-[10px] lg:text-[11px] font-bold tracking-wide overflow-x-auto scrollbar-hide px-2 lg:px-4 mx-auto">
-              {currentModels.map((model, idx) => (
+              {currentModels.map((model: any, idx: number) => (
                 <button
                   key={model.id}
                   onClick={() => handleModelChange(idx)}

@@ -1,32 +1,7 @@
 "use client";
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './LatestNews.module.css';
-import { useTranslations } from 'next-intl';
-import { useLocale } from 'next-intl';
 
-const mockNews = [
-  {
-    category: "Press Release",
-    title: "MEIRIS Secures Series A to Scale Depot-Grade Charging Infrastructure Across India",
-    date: "12 June 2025",
-    link: "#",
-    image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    category: "Blog",
-    title: "How SiC-Based Power Conversion is Redefining Fleet Electrification Economics",
-    date: "5 June 2025",
-    link: "#",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    category: "Announcement",
-    title: "MEIRIS Joins National EV Mission as Technology Partner for Public Infrastructure Rollout",
-    date: "28 May 2025",
-    link: "#",
-    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80"
-  }
-];
 
 export default function LatestNews({ data, locale }: { data: any, locale: string }) {
   const sectionRef = useRef<HTMLElement>(null);

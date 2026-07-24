@@ -26,7 +26,6 @@ export default function Contact({ data }: { data: any }) {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     toast.success("Thank you! Your message has been sent successfully.");
     form.reset();
   }

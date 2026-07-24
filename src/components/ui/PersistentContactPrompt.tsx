@@ -83,7 +83,6 @@ export default function PersistentContactPrompt({ segmentName }: { segmentName: 
   }, [isOpen]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("Contact Form Submitted:", values);
     toast.success("Thank you! Our expert will be in touch shortly.");
     setIsOpen(false);
     form.reset({ ...form.getValues(), name: "", contactInfo: "", preferredTime: "" });

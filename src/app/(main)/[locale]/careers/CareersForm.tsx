@@ -41,7 +41,6 @@ export default function CareersForm({ locale }: { locale: string }) {
   const fileName = cvFileValue?.[0]?.name;
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     toast.success("Thank you! Your application has been submitted.");
     form.reset();
   }
@@ -93,10 +92,14 @@ export default function CareersForm({ locale }: { locale: string }) {
                     <input 
                       type="file" 
                       className="hidden" 
-                      ref={fileInputRef}
                       accept=".pdf,.doc,.docx"
                       onChange={(e) => onChange(e.target.files)}
                       {...field}
+                      ref={(e) => {
+                        field.ref(e);
+                        // @ts-ignore - assigning to readonly or mutable ref works
+                        fileInputRef.current = e;
+                      }}
                     />
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00E573" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>

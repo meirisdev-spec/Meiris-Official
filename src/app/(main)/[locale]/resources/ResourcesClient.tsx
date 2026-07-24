@@ -5,10 +5,11 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import Image from "next/image";
 
 type ResourceCard = {
-  title: string;
-  category: string;
-  version?: string;
-  uploadDate?: string;
+  _id?: string;
+  cardTitle?: string;
+  cardCategory?: string;
+  cardVersion?: string;
+  cardUploadDate?: string;
   thumbnailUrl?: string;
   fileUrl?: string;
   fileExtension?: string;

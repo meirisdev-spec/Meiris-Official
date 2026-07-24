@@ -116,7 +116,7 @@ export const solutionType = defineType({
       title: 'Custom Section 2',
       type: 'object',
       group: 'customSection2',
-      hidden: ({ document }) => document?.slug?.current !== 'custom-solutions',
+      hidden: ({ document }) => (document?.slug as any)?.current !== 'custom-solutions',
       description: 'Used for the dynamic Application/Pain Points grid in Custom Solutions.',
       fields: [
         defineField({ name: 'heading', type: 'string', title: 'Heading' }),
@@ -167,7 +167,7 @@ export const solutionType = defineType({
           name: 'setupFleets',
           title: 'Use Fleets Layout?',
           type: 'boolean',
-          hidden: ({ document }) => document?.slug?.current !== 'depot-infrastructure',
+          hidden: ({ document }) => (document?.slug as any)?.current !== 'depot-infrastructure',
           description: 'Check this to use the specialized Fleets/Depot layout.',
           initialValue: false,
         }),
@@ -175,7 +175,7 @@ export const solutionType = defineType({
           name: 'fleetsSetup',
           title: 'Fleets Setup (Depot Page Only)',
           type: 'array',
-          hidden: ({ document }) => document?.slug?.current !== 'depot-infrastructure',
+          hidden: ({ document }) => (document?.slug as any)?.current !== 'depot-infrastructure',
           of: [
             {
               type: 'object',
@@ -217,7 +217,7 @@ export const solutionType = defineType({
           name: 'setupFeaturesOnly',
           title: 'Setup Features (Cards)',
           type: 'array',
-          hidden: ({ document }) => document?.slug?.current === 'custom-solutions' || document?.slug?.current === 'depot-infrastructure',
+          hidden: ({ document }) => (document?.slug as any)?.current === 'custom-solutions' || (document?.slug as any)?.current === 'depot-infrastructure',
           of: [
             {
               type: 'object',
@@ -245,7 +245,7 @@ export const solutionType = defineType({
           name: 'setupForm',
           title: 'Setup Form (Custom Solutions)',
           type: 'object',
-          hidden: ({ document }) => document?.slug?.current !== 'custom-solutions',
+          hidden: ({ document }) => (document?.slug as any)?.current !== 'custom-solutions',
           fields: [
             defineField({ name: 'title', type: 'string', title: 'Form Title' }),
             defineField({ name: 'subtitle', type: 'text', title: 'Form Subtitle' }),

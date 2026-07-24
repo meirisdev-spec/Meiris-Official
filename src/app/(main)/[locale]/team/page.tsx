@@ -53,8 +53,6 @@ export const revalidate = 0;
 
 export default async function TeamPage({ params: { locale } }: { params: { locale: string } }) {
   const teamMembers = await client.fetch(`*[_type == "teamMember" && (!defined(language) || language == $locale)] | order(order asc)`, { locale });
-  console.log(`[TeamPage] locale: ${locale}, teamMembers count: ${teamMembers.length}`);
-  teamMembers.forEach((m: any) => console.log(` - ${m.name} (${m.language})`));
 
   return (
     <div className="relative min-h-screen bg-white text-black selection:bg-[#00E573] selection:text-black">

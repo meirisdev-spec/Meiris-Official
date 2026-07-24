@@ -59,6 +59,7 @@ export default function VisualEditingWrapper() {
       history={history}
       refresh={handleRefresh}
       zIndex={999999}
+      portal={false}
     />
   );
 }
