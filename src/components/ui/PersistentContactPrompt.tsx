@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { toast } from "sonner";
+import { sendEmail } from "@/actions/sendEmail";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -18,6 +19,7 @@ const formSchema = z.object({
 export default function PersistentContactPrompt({ segmentName }: { segmentName: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [showNudge, setShowNudge] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const idleTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const nudgeFadeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const IDLE_TIME = 8000; // 8 seconds
@@ -83,10 +85,34 @@ export default function PersistentContactPrompt({ segmentName }: { segmentName: 
     };
   }, [isOpen]);
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast.success("Thank you! Our expert will be in touch shortly.");
-    setIsOpen(false);
-    form.reset({ ...form.getValues(), name: "", contactInfo: "", preferredTime: "" });
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    
+    const formData = new FormData();
+    Object.entries(values).forEach(([key, value]) => {
+      formData.append(key, value || "");
+    });
+    
+    // Add honeypot value manually if we were using a native form submission, 
+    // but since we are using react-hook-form, we grab it from a ref or just let the form handle it.
+    // Actually, it's easier to just pass the hidden field value if we add it to the DOM.
+    // We'll get it from the DOM element.
+    const botField = document.querySelector<HTMLInputElement>('input[name="bot-field"]');
+    if (botField?.value) {
+      formData.append("bot-field", botField.value);
+    }
+
+    const result = await sendEmail(formData);
+    
+    setIsSubmitting(false);
+
+    if (result.success) {
+      toast.success("Thank you! Our expert will be in touch shortly.");
+      setIsOpen(false);
+      form.reset({ ...form.getValues(), name: "", contactInfo: "", preferredTime: "" });
+    } else {
+      toast.error(result.error || "Failed to submit. Please try again.");
+    }
   }
 
   return (
@@ -117,6 +143,7 @@ export default function PersistentContactPrompt({ segmentName }: { segmentName: 
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <input type="text" name="bot-field" className="hidden" tabIndex={-1} autoComplete="off" />
             <FormField
               control={form.control}
               name="name"
@@ -179,8 +206,8 @@ export default function PersistentContactPrompt({ segmentName }: { segmentName: 
               )}
             />
 
-            <button type="submit" className="w-full mt-2 cursor-pointer bg-[#0a0a0a] text-white py-3.5 rounded-full text-[13px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center justify-center gap-2">
-              Talk to our expert
+            <button type="submit" disabled={isSubmitting} className="w-full mt-2 cursor-pointer bg-[#0a0a0a] text-white py-3.5 rounded-full text-[13px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed">
+              {isSubmitting ? "Sending..." : "Talk to our expert"}
             </button>
           </form>
         </Form>

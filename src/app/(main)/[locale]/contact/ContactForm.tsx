@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { toast } from "sonner";
+import { sendEmail } from "@/actions/sendEmail";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -37,6 +38,7 @@ type FormProps = {
 
 export default function ContactForm({ data }: { data?: FormProps }) {
   const [inquiryType, setInquiryType] = useState(data?.categories?.[0] || "");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,9 +58,26 @@ export default function ContactForm({ data }: { data?: FormProps }) {
 
   const { heading, categories, labels, placeholders } = data;
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast.success("Thank you! Your message has been sent successfully.");
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    const formData = new FormData();
+    Object.entries(values).forEach(([key, value]) => {
+      formData.append(key, value || "");
+    });
+    formData.append("inquiryType", inquiryType);
+    
+    const botField = document.querySelector<HTMLInputElement>('#contact-form-page-bot');
+    if (botField?.value) formData.append("bot-field", botField.value);
+
+    const result = await sendEmail(formData);
+    setIsSubmitting(false);
+
+    if (result.success) {
+      toast.success("Thank you! Your message has been sent successfully.");
+      form.reset();
+    } else {
+      toast.error(result.error || "Failed to submit. Please try again.");
+    }
   }
 
   return (
@@ -90,6 +109,7 @@ export default function ContactForm({ data }: { data?: FormProps }) {
       <div className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] w-full max-w-[800px] p-10 md:p-14">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <input type="text" name="bot-field" id="contact-form-page-bot" className="hidden" tabIndex={-1} autoComplete="off" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <FormField
                 control={form.control}
@@ -163,8 +183,8 @@ export default function ContactForm({ data }: { data?: FormProps }) {
             />
 
             <div className="flex justify-center pt-6">
-              <button type="submit" className="cursor-pointer bg-[#0a0a0a] text-white px-8 py-4 rounded-full text-[12px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5 tracking-wide">
-                {labels?.submitBtn}
+              <button type="submit" disabled={isSubmitting} className="cursor-pointer bg-[#0a0a0a] text-white px-8 py-4 rounded-full text-[12px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5 tracking-wide disabled:opacity-70 disabled:cursor-not-allowed">
+                {isSubmitting ? "Sending..." : labels?.submitBtn}
                 <span>→</span>
               </button>
             </div>

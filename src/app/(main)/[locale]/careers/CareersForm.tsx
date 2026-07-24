@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { toast } from "sonner";
+import { sendEmail } from "@/actions/sendEmail";
 import { useRef } from "react";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
@@ -28,6 +29,7 @@ const formSchema = z.object({
 
 export default function CareersForm({ locale }: { locale: string }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,15 +43,40 @@ export default function CareersForm({ locale }: { locale: string }) {
   const cvFileValue = form.watch("cvFile");
   const fileName = cvFileValue?.[0]?.name;
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast.success("Thank you! Your application has been submitted.");
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    const formData = new FormData();
+    Object.entries(values).forEach(([key, value]) => {
+      if (key === 'cvFile') {
+        formData.append(key, value[0]);
+      } else {
+        formData.append(key, value || "");
+      }
+    });
+
+    const botField = document.querySelector<HTMLInputElement>('#careers-form-bot');
+    if (botField?.value) formData.append("bot-field", botField.value);
+
+    try {
+      const result = await sendEmail(formData);
+      if (result?.success) {
+        toast.success("Thank you! Your application has been submitted.");
+        form.reset();
+      } else {
+        toast.error(result?.error || "Failed to submit. Please try again.");
+      }
+    } catch (error) {
+      toast.error("An unexpected error occurred.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
     <div className="bg-white rounded-xl p-10 md:p-12 shadow-2xl text-black">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-8">
+          <input type="text" name="bot-field" id="careers-form-bot" className="hidden" tabIndex={-1} autoComplete="off" />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <FormField
               control={form.control}
@@ -119,8 +146,8 @@ export default function CareersForm({ locale }: { locale: string }) {
             )}
           />
 
-          <button type="submit" className="cursor-pointer w-full bg-[#0a0a0a] text-white py-4 rounded-full text-[12px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center justify-center gap-2 tracking-wide mt-2">
-            {locale === 'es-419' ? 'ENVIAR SOLICITUD' : 'SUBMIT APPLICATION'}
+          <button type="submit" disabled={isSubmitting} className="cursor-pointer w-full bg-[#0a0a0a] text-white py-4 rounded-full text-[12px] font-bold shadow-lg hover:bg-[#00E573] hover:text-black hover:shadow-[0_0_18px_rgba(0,211,132,0.35)] transition-all duration-300 flex items-center justify-center gap-2 tracking-wide mt-2 disabled:opacity-70 disabled:cursor-not-allowed">
+            {isSubmitting ? "SENDING..." : (locale === 'es-419' ? 'ENVIAR SOLICITUD' : 'SUBMIT APPLICATION')}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
           </button>
         </form>

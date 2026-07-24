@@ -1,11 +1,12 @@
 "use client";
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { toast } from 'sonner';
+import { sendEmail } from "@/actions/sendEmail";
 import styles from './Contact.module.css';
 
 const formSchema = z.object({
@@ -16,6 +17,7 @@ const formSchema = z.object({
 
 export default function Contact({ data }: { data: any }) {
   const sectionRef = useRef(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -27,9 +29,25 @@ export default function Contact({ data }: { data: any }) {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast.success("Thank you! Your message has been sent successfully.");
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    const formData = new FormData();
+    Object.entries(values).forEach(([key, value]) => {
+      formData.append(key, value || "");
+    });
+    
+    const botField = document.querySelector<HTMLInputElement>('#contact-form-bot');
+    if (botField?.value) formData.append("bot-field", botField.value);
+
+    const result = await sendEmail(formData);
+    setIsSubmitting(false);
+
+    if (result.success) {
+      toast.success("Thank you! Your message has been sent successfully.");
+      form.reset();
+    } else {
+      toast.error(result.error || "Failed to submit. Please try again.");
+    }
   }
 
   useEffect(() => {
@@ -57,6 +75,7 @@ export default function Contact({ data }: { data: any }) {
             </p>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className={styles.form}>
+                <input type="text" name="bot-field" id="contact-form-bot" className="hidden" tabIndex={-1} autoComplete="off" />
                 <div className={styles.inputGroup}>
                   <FormField
                     control={form.control}
@@ -95,7 +114,10 @@ export default function Contact({ data }: { data: any }) {
                     </FormItem>
                   )}
                 />
-                <button type="submit" className={styles.submitBtn}>{data.submitBtn}</button>
+                <button type="submit" disabled={isSubmitting} className={`${styles.submitBtn} disabled:opacity-70 disabled:cursor-not-allowed`}>
+                  {isSubmitting ? "Sending..." : data.submitBtn}
+                  <span className={styles.arrow}>→</span>
+                </button>
               </form>
             </Form>
           </div>
