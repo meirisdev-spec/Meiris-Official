@@ -1,10 +1,17 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { getLocale } from 'next-intl/server';
 import { draftMode } from 'next/headers';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://meiris.com'),
+  metadataBase: new URL('https://www.siriem.com'),
+  title: {
+    default: "Meiris (formerly SIRIEM) | Innovative Electrification Solutions",
+    template: "%s | Meiris (formerly SIRIEM)"
+  },
+  description: "Meiris, previously known as SIRIEM, provides cutting-edge electrification solutions, power infrastructure, and technological innovation.",
+  keywords: ["Meiris", "SIRIEM", "SIRI", "Electrification", "Power Solutions", "Infrastructure", "Technology"],
   other: {
     google: 'notranslate',
   },
@@ -48,6 +55,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         {children}
         {isDraft && <VisualEditingWrapper />}
         <Toaster />
+        <GoogleAnalytics gaId="G-XXXXXXXXXX" />
       </body>
     </html>
   );
