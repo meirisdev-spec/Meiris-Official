@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import ProductsClient from "./ProductsClient";
+import dynamic from 'next/dynamic';
+
+const ProductsClient = dynamic(() => import('./ProductsClient'));
 import { client } from "@/sanity/lib/client";
 
 import { getLocalizedMetadata } from "@/lib/seo";

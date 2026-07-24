@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import styles from './LatestNews.module.css';
 
 
@@ -39,7 +40,7 @@ export default function LatestNews({ data, locale }: { data: any, locale: string
             return (
               <div key={index} className={styles.newsCard}>
                 <div className={styles.imageWrapper}>
-                  <img src={item.imageUrl} alt={item.title} className={styles.image} />
+                  <Image src={item.imageUrl} alt={item.title} fill className={styles.image} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 </div>
                 <div className={styles.content}>
                   <h3 className={styles.newsTitle}>{item.title}</h3>

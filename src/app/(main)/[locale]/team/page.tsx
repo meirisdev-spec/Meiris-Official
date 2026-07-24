@@ -3,6 +3,7 @@ import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from '@portabletext/react';
+import Image from 'next/image';
 
 import { getLocalizedMetadata } from "@/lib/seo";
 
@@ -49,7 +50,7 @@ function Logo({ small = false }: { small?: boolean }) {
   );
 }
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 export default async function TeamPage({ params: { locale } }: { params: { locale: string } }) {
   const teamMembers = await client.fetch(`*[_type == "teamMember" && (!defined(language) || language == $locale)] | order(order asc)`, { locale });
@@ -79,7 +80,7 @@ export default async function TeamPage({ params: { locale } }: { params: { local
                 {/* Image */}
                 <div className={`w-full aspect-[4/5] bg-[#e5e5e5] shadow-lg relative overflow-hidden ${isEven ? 'order-1' : 'order-1 md:order-2'}`}>
                   {member.image ? (
-                    <img src={urlFor(member.image).width(800).height(1000).url()} alt={member.name} className="absolute inset-0 w-full h-full object-cover" />
+                    <Image src={urlFor(member.image).width(800).height(1000).url()} alt={member.name} fill className="absolute inset-0 w-full h-full object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-black/30 font-semibold tracking-widest text-sm uppercase">
                       Image Placeholder

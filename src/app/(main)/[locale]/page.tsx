@@ -16,7 +16,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   });
 }
 
-export const revalidate = 0; // Disable caching to fetch live data from Sanity
+export const revalidate = 60; // Fetch fresh data from Sanity every 60s
 
 
 export default async function Home({ params: { locale } }: { params: { locale: string } }) {

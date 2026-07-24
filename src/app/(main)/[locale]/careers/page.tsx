@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import ctaEngineers from "@/assets/cta-engineers.jpg";
-import CareersForm from "./CareersForm";
+import dynamic from 'next/dynamic';
+const CareersForm = dynamic(() => import('./CareersForm'));
 
 import { getLocalizedMetadata } from "@/lib/seo";
 import { client } from "@/sanity/lib/client";
@@ -16,7 +17,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   });
 }
 
-export const revalidate = 0; // Disable caching to fetch live data from Sanity
+export const revalidate = 60; // Fetch fresh data from Sanity every 60s
 
 export default async function CareersPage({ params: { locale } }: { params: { locale: string } }) {
   // Fetch the careers page document for this locale. Fallback to English if not found.

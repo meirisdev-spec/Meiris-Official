@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import InsightsClient from "./InsightsClient";
+import dynamic from 'next/dynamic';
+const InsightsClient = dynamic(() => import('./InsightsClient'));
 import { sanityFetch } from "@/sanity/lib/sanityFetch";
 
 import { getLocalizedMetadata } from "@/lib/seo";
@@ -15,7 +16,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 }
 
 // Revalidate the page every 30 seconds (or 0 for SSR)
-export const revalidate = 0;
+export const revalidate = 60;
 
 export default async function InsightsPage({ params: { locale } }: { params: { locale: string } }) {
   // Fetch the insights page singleton

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -98,7 +99,7 @@ export default function Contact({ data }: { data: any }) {
             </Form>
           </div>
           <div className={styles.imageContent}>
-            <img src={data.imageUrl || "https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"} alt="Contact" className={styles.image} />
+            <Image src={data.imageUrl || "https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"} alt="Contact" fill className={styles.image} sizes="(max-width: 768px) 100vw, 50vw" />
           </div>
         </div>
       </div>

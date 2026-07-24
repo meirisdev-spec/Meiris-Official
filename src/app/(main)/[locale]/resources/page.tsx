@@ -2,7 +2,8 @@
 import type { Metadata } from "next";
 import { getLocalizedMetadata } from "@/lib/seo";
 import { client } from "@/sanity/lib/client";
-import ResourcesClient from "./ResourcesClient";
+import dynamic from 'next/dynamic';
+const ResourcesClient = dynamic(() => import('./ResourcesClient'));
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 import { sanityFetch } from "@/sanity/lib/sanityFetch";
 
-export const revalidate = 0; // Disable caching to fetch live data from Sanity
+export const revalidate = 60; // Fetch fresh data from Sanity every 60s
 
 export default async function ResourcesPage({ params }: { params: Promise<{ locale: string }> }) {
   const resolvedParams = await params;

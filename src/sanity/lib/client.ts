@@ -12,6 +12,6 @@ export const client = createClient({
     studioUrl: '/studio',
   },
   fetch: {
-    cache: 'no-store'
+    next: { revalidate: 60 }
   }
 })

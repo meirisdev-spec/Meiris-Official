@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { PortableText } from '@portabletext/react';
+import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
 
 export type SanityPost = {
@@ -29,7 +30,7 @@ const portableTextComponents = {
       if (!value?.asset?._ref) return null;
       return (
         <div className="mb-6 relative w-full aspect-video border border-black/10 rounded-sm overflow-hidden bg-black/5">
-          <img src={urlFor(value).width(800).url()} alt={value.alt || " " } className="w-full h-full object-cover" />
+          <Image src={urlFor(value).width(800).url()} alt={value.alt || " " } fill className="w-full h-full object-cover" sizes="(max-width: 768px) 100vw, 800px" />
         </div>
       );
     }
@@ -147,7 +148,7 @@ export default function InsightsClient({ data }: { data?: any }) {
               {/* Image Area */}
               <div className="aspect-square w-full bg-white relative border-b border-black/10">
                 {card.image ? (
-                  <img src={urlFor(card.image).width(800).height(800).url()} alt={card.title} className="absolute inset-0 w-full h-full object-cover" />
+                  <Image src={urlFor(card.image).width(800).height(800).url()} alt={card.title} fill className="absolute inset-0 w-full h-full object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 ) : (
                   <div className="absolute inset-0 bg-black/5 opacity-50" />
                 )}

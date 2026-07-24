@@ -126,7 +126,7 @@ export default function ProductsPage({ data }: { data?: any }) {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0">
             {data?.hero?.imageUrl ? (
-              <img src={data.hero.imageUrl} alt="Hero Background" className="h-full w-full object-cover" />
+              <Image src={data.hero.imageUrl} alt="Hero Background" fill className="h-full w-full object-cover" sizes="100vw" />
             ) : (
               <Image src={solCharge} alt="Hero Background" className="h-full w-full object-cover" placeholder="blur" />
             )}
@@ -168,7 +168,7 @@ export default function ProductsPage({ data }: { data?: any }) {
             >
               <div className="relative aspect-square w-full overflow-hidden bg-black border border-white/5">
                 {data?.categories?.acCard?.imageUrl ? (
-                  <img src={data.categories.acCard.imageUrl} alt="AC Chargers Module" className="absolute inset-0 h-full w-full object-cover opacity-40 grayscale transition-transform duration-700 group-hover:scale-105" />
+                  <Image src={data.categories.acCard.imageUrl} alt="AC Chargers Module" fill className="absolute inset-0 h-full w-full object-cover opacity-40 grayscale transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
                 ) : (
                   <Image src={platformModule} alt="AC Chargers Module" className="absolute inset-0 h-full w-full object-cover opacity-40 grayscale transition-transform duration-700 group-hover:scale-105" placeholder="blur" />
                 )}
@@ -200,7 +200,7 @@ export default function ProductsPage({ data }: { data?: any }) {
             >
               <div className="relative aspect-square w-full overflow-hidden bg-black border border-white/5">
                 {data?.categories?.dcCard?.imageUrl ? (
-                  <img src={data.categories.dcCard.imageUrl} alt="DC Fast Chargers Module" className="absolute inset-0 h-full w-full object-cover opacity-40 grayscale transition-transform duration-700 group-hover:scale-105" />
+                  <Image src={data.categories.dcCard.imageUrl} alt="DC Fast Chargers Module" fill className="absolute inset-0 h-full w-full object-cover opacity-40 grayscale transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
                 ) : (
                   <Image src={platformModule} alt="DC Fast Chargers Module" className="absolute inset-0 h-full w-full object-cover opacity-40 grayscale transition-transform duration-700 group-hover:scale-105" placeholder="blur" />
                 )}

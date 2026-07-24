@@ -45,7 +45,7 @@ function Marker({ num, top, left, labelOnTop = true }: { num: number; top: strin
   );
 }
 
-export const revalidate = 0; // Disable caching to fetch live data from Sanity
+export const revalidate = 60; // Disable caching to fetch live data from Sanity
 
 export default async function SolutionsPage({ params }: { params: Promise<{ slug: string, locale: string }> }) {
   const resolvedParams = await params;
